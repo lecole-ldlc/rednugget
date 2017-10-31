@@ -44,7 +44,7 @@
 
     <div class="row">
         <div class="col s6">
-            <p>bar chart One</p>
+            <p>bar chart One1</p>
             <svg width="960" height="500"></svg>
             <script>
 		// Chart initialization
@@ -85,7 +85,7 @@
       // Draw rect
       g.selectAll("rect")
     	.data(nested_data)
-    	.enter().append("rect")
+    	.enter().append("rect"
       .attr("x", function(d) { return x(d.key); })
       .attr("y", function(d) { return y(d.values.length); })
       .attr("height", function(d) { return height - y(d.values.length);})
