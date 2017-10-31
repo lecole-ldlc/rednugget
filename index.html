@@ -91,12 +91,13 @@
 </div>
 
 </body>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <script>
-    function draw_barchart(data, element, total) {
+    function draw_barchart(element, total) {
 
         // Chart initialization
         //var user = $('#user').val();
@@ -132,6 +133,7 @@
                 .key(function (d) {
                     return d.priority;
                 })
+
                 .entries(data);
         }
 
@@ -188,12 +190,12 @@
 </script>
 
 <script>
-    function generate_tree(data, element) {
+    function generate_tree(data_full) {
         // Initialize SV
 
         var user = $('#user').val();
-        $("#treemap").html("");
-        var svg = d3.select(element),
+        $("svg").html("");
+        var svg = d3.select("#treemap"),
             margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom,
@@ -225,6 +227,13 @@
             .size([width, height])
             .padding(1)
             .round(true);
+
+        data = [];
+        data_full.forEach(function (d) {
+            if (d.who == user || user == 'all') {
+                data.push(d);
+            }
+        });
 
 
         var root = d3.hierarchy({
@@ -345,17 +354,10 @@
 
 <script>
     function regen() {
-        d3.csv($("#dataset").val(), function (d) {
-            var user = $("#user").val();
-            if (d.who == user || user == 'all')
-                return d;
-        }, function (data) {
-
-
-            generate_tree(data, '#treemap');
-            draw_barchart(data, "#barchart1", true);
-            draw_barchart(data, "#barchart2", false);
-
+        d3.csv(dataset, function (data_full) {
+            generate_tree(data_full);
+            draw_barchart(data_full, "#barchart1", true);
+            draw_barchart(data_full, "#barchart2", false);
 
         });
     }
@@ -363,7 +365,8 @@
 
     $(document).ready(function () {
 
-        regen();
+        var dataset = $('#dataset').val();
+
         $('select').material_select();
 
     });
