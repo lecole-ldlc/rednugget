@@ -114,8 +114,17 @@
                         .round(true);
 
                     // Load data
-                    d3.csv(dataset, function(data){
+                    d3.csv(dataset, function(data_full){
                         // Convert our data structure into a tree structure
+
+                        data = [];
+                        data_full.forEach(function (d) {
+                            if (d.who == user || user == 'all') {
+                                data.push(d);
+                            }
+                        });
+
+
                         var root = d3.hierarchy({
                             values: nest.entries(data)
                         }, function(d) { return d.values; })
