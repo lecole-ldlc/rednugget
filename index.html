@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +31,11 @@
 
         <p>User</p>
         <div class="input-field col s12">
-            <select onchange="regen();" class ="user" id="user">
+            <select onchange="regen();" class="user" id="user">
                 <option value="All" selected="selected">All</option>
                 <option value="Mike">Mike</option>
                 <option value="Natasha">Natasha</option>
-                <option value="Joea">Joea</option>
+                <option value="Joe">Joe</option>
             </select>
             <label>Select User</label>
         </div>
@@ -65,15 +64,19 @@
                     .axis .domain {
                         display: none;
                     }
+
                     form {
                         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
                     }
+
                     svg {
                         font: 10px sans-serif;
                     }
+
                     .legend {
                         font-size: 12px;
                     }
+
                     rect {
                         stroke-width: 2;
                     }
@@ -319,6 +322,7 @@
             draw_barchart(data, "#barchart2", false);
         });
     }
+
     $(document).ready(function () {
         regen();
         $('select').material_select();
