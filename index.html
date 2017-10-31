@@ -87,12 +87,44 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col s12">
+                <h2>Surprise pour Mr. Scherrer</h2>
+                <style>
+                    .axis .domain {
+                        display: none;
+                    }
+
+                    form {
+                        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    }
+
+                    svg {
+                        font: 10px sans-serif;
+                    }
+
+                    .legend {
+                        font-size: 12px;
+                    }
+
+                    rect {
+                        stroke-width: 2;
+                    }
+                </style>
+                <svg id="surprise" width="400" height="400" font-family="sans-serif" font-size="10"
+                     text-anchor="middle"></svg>
+
+
+            </div>
+        </div>
+
 </div>
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
 
 <script>
     function draw_barchart(data, element, total) {
@@ -310,16 +342,76 @@
 </script>
 
 <script>
+
+    function surprise(tasks, element) {
+        $("#surprise").html("");
+
+        var svg = d3.select("#surprise"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+
+        var format = d3.format(",d");
+
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        var pack = d3.pack()
+            .size([width, height])
+            .padding(1.5);
+
+        var root = d3.hierarchy({children: tasks})
+            .sum(function (d) {
+                return d.time;
+            });
+
+        var node = svg.selectAll(".node")
+            .data(pack(root).leaves())
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+
+        node.append("circle")
+            .attr("id", function (d) {
+                return d.data.id;
+            })
+            .attr("r", function (d) {
+                return d.r;
+            })
+            .style("fill", function (d) {
+                return color(d.data.status);
+            });
+
+        node.append("text")
+            .attr("x", 0)
+            .attr("y", 0)
+            .text(function (d) {
+                console.log(d);
+                return d.data.id;
+            });
+
+
+        node.append("title")
+            .text(function (d) {
+                return d.data.id + "\n" + d.data.priority;
+            })
+    };
+
+
+</script>
+
+<script>
     function regen() {
         d3.csv($("#dataset").val(), function (d) {
+            d.time = +d.time;
             var user = $("#user").val();
             if (d.who == user || user == 'All')
                 return d;
         }, function (data) {
-            console.log(data);
             generate_tree(data, '#treemap');
             draw_barchart(data, "#barchart1", true);
             draw_barchart(data, "#barchart2", false);
+            surprise(data, '#surprise');
         });
     }
 
