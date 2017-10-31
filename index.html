@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,11 +32,11 @@
 
         <p>User</p>
         <div class="input-field col s12">
-            <select id="user">
-                <option value="all">ALL</option>
-                <option value="mike">Mike</option>
-                <option value="natasha">Natasha</option>
-                <option value="joea">Joea</option>
+            <select onchange="regen();" class ="user" id="user">
+                <option value="All" selected="selected">All</option>
+                <option value="Mike">Mike</option>
+                <option value="Natasha">Natasha</option>
+                <option value="Joea">Joea</option>
             </select>
             <label>Select User</label>
         </div>
@@ -61,23 +62,18 @@
             <div class="col s12">
                 <h2>Treemap</h2>
                 <style>
-
                     .axis .domain {
                         display: none;
                     }
-
                     form {
                         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
                     }
-
                     svg {
                         font: 10px sans-serif;
                     }
-
                     .legend {
                         font-size: 12px;
                     }
-
                     rect {
                         stroke-width: 2;
                     }
@@ -91,14 +87,12 @@
 </div>
 
 </body>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <script>
-    function draw_barchart(element, total) {
-
+    function draw_barchart(data, element, total) {
         // Chart initialization
         //var user = $('#user').val();
         $(element).html("");
@@ -107,19 +101,14 @@
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom,
             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
         // X axis
         var x = d3.scaleBand()
             .rangeRound([0, width])
             .paddingInner(0.1);
-
         // y axis
         var y = d3.scaleLinear()
             .rangeRound([height, 0]);
-
         //load data
-
-
         if (!total) {
             // Group by status
             var nested_data = d3.nest()
@@ -133,16 +122,11 @@
                 .key(function (d) {
                     return d.priority;
                 })
-
                 .entries(data);
         }
-
-
         //console.log(nested_data);
-
         // Color scale
         var z = d3.scaleOrdinal(d3.schemeCategory10);
-
         // Set domains of axes scales
         x.domain(nested_data.map(function (d) {
             return d.key;
@@ -153,7 +137,6 @@
         z.domain(nested_data.map(function (d) {
             return d.key;
         }))
-
         // Draw rect
         g.selectAll("rect")
             .data(nested_data)
@@ -172,38 +155,30 @@
             .attr("fill", function (d, i) {
                 return z(d.key);
             })
-
         // Draw x axis
         g.append("g")
             .attr("class", "axis")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
-
         // Draw y axis
         g.append("g")
             .attr("class", "axis")
             .call(d3.axisLeft(y).ticks(null, "s"))
-
-
     }
-
 </script>
 
 <script>
-    function generate_tree(data_full) {
+    function generate_tree(data, element) {
         // Initialize SV
-
         var user = $('#user').val();
-        $("svg").html("");
-        var svg = d3.select("#treemap"),
+        $("#treemap").html("");
+        var svg = d3.select(element),
             margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom,
             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
         // Color scale for categories
         var color = d3.scaleOrdinal(d3.schemeCategory10);
-
         // Prepare aggregation
         var nest = d3.nest()
             .key(function (d) {
@@ -221,21 +196,11 @@
                     })
                 }
             });
-
         // Prepare treemap
         var treemap = d3.treemap()
             .size([width, height])
             .padding(1)
             .round(true);
-
-        data = [];
-        data_full.forEach(function (d) {
-            if (d.who == user || user == 'all') {
-                data.push(d);
-            }
-        });
-
-
         var root = d3.hierarchy({
             values: nest.entries(data)
         }, function (d) {
@@ -256,10 +221,8 @@
                 return b.value.total_time - a.value.total_time;
             });
         //console.log(root)
-
         // Do generate the treemap
         treemap(root);
-
         // Prepare each rectangle
         var cell = g.selectAll("g")
         // We do not draw the priority rectangles, only the leaves of the tree
@@ -269,7 +232,6 @@
             .attr("transform", function (d) {
                 return "translate(" + d.x0 + "," + d.y0 + ")";
             });
-
         // Draw the rectangle
         cell.append("rect")
             .attr("id", function (d) {
@@ -285,7 +247,6 @@
             .attr("fill", function (d) {
                 return color(d.parent.data.key);
             });
-
         // Draw the text (use a clipping path to deal with long strings)
         cell.append("clipPath")
             .attr("id", function (d) {
@@ -304,7 +265,6 @@
             })
             .attr("x", 4)
             .attr("y", 10);
-
         // Append a title (shown on mouse hover)
         cell.append("title")
             .text(function (d) {
@@ -314,7 +274,6 @@
         var svgLeg = d3.select("#legend").append("svg")
             .attr("width", width)
             .attr("height", heightL)
-
         // Draw the legend
         var legendRectSize = 18;
         var legendSpacing = 4;
@@ -331,14 +290,12 @@
                 //horz = 0;
                 return 'translate(' + horz + ',' + vert + ')';
             });
-
         // These are the rectangles
         legend.append('rect')
             .attr('width', legendRectSize)
             .attr('height', legendRectSize)
             .style('fill', color)
             .style('stroke', color);
-
         // These are the texts
         legend.append('text')
             .attr('x', legendRectSize + 5)
@@ -346,29 +303,25 @@
             .text(function (d) {
                 return d
             })
-
-
     }
-
 </script>
 
 <script>
     function regen() {
-        d3.csv(dataset, function (data_full) {
-            generate_tree(data_full);
-            draw_barchart(data_full, "#barchart1", true);
-            draw_barchart(data_full, "#barchart2", false);
-
+        d3.csv($("#dataset").val(), function (d) {
+            var user = $("#user").val();
+            if (d.who == user || user == 'All')
+                return d;
+        }, function (data) {
+            console.log(data);
+            generate_tree(data, '#treemap');
+            draw_barchart(data, "#barchart1", true);
+            draw_barchart(data, "#barchart2", false);
         });
     }
-
-
     $(document).ready(function () {
-
-        var dataset = $('#dataset').val();
-
+        regen();
         $('select').material_select();
-
     });
 </script>
 </html>
