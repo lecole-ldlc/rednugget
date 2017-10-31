@@ -96,7 +96,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <script>
-    function draw_barchart(element, total) {
+    function draw_barchart(data, element, total) {
 
         // Chart initialization
         //var user = $('#user').val();
@@ -119,70 +119,68 @@
         //load data
 
 
-            if (!total) {
-                // Group by status
-                var nested_data = d3.nest()
-                    .key(function (d) {
-                        return d.status;
-                    })
-                    .entries(data);
-            } else {
-                // Group by priority
-                var nested_data = d3.nest()
-                    .key(function (d) {
-                        return d.priority;
-                    })
-
-                    .entries(data);
-            }
-
-
-            //console.log(nested_data);
-
-            // Color scale
-            var z = d3.scaleOrdinal(d3.schemeCategory10);
-
-            // Set domains of axes scales
-            x.domain(nested_data.map(function (d) {
-                return d.key;
-            }));
-            y.domain([0, d3.max(nested_data, function (d) {
-                return d.values.length;
-            })]);
-            z.domain(nested_data.map(function (d) {
-                return d.key;
-            }))
-
-            // Draw rect
-            g.selectAll("rect")
-                .data(nested_data)
-                .enter().append("rect")
-                .attr("x", function (d) {
-                    return x(d.key);
+        if (!total) {
+            // Group by status
+            var nested_data = d3.nest()
+                .key(function (d) {
+                    return d.status;
                 })
-                .attr("y", function (d) {
-                    return y(d.values.length);
+                .entries(data);
+        } else {
+            // Group by priority
+            var nested_data = d3.nest()
+                .key(function (d) {
+                    return d.priority;
                 })
-                .attr("height", function (d) {
-                    return height - y(d.values.length);
-                })
-                .attr("width", x.bandwidth())
-                //.attr("fill", "red")
-                .attr("fill", function (d, i) {
-                    return z(d.key);
-                })
+                .entries(data);
+        }
 
-            // Draw x axis
-            g.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
 
-            // Draw y axis
-            g.append("g")
-                .attr("class", "axis")
-                .call(d3.axisLeft(y).ticks(null, "s"))
+        //console.log(nested_data);
 
+        // Color scale
+        var z = d3.scaleOrdinal(d3.schemeCategory10);
+
+        // Set domains of axes scales
+        x.domain(nested_data.map(function (d) {
+            return d.key;
+        }));
+        y.domain([0, d3.max(nested_data, function (d) {
+            return d.values.length;
+        })]);
+        z.domain(nested_data.map(function (d) {
+            return d.key;
+        }))
+
+        // Draw rect
+        g.selectAll("rect")
+            .data(nested_data)
+            .enter().append("rect")
+            .attr("x", function (d) {
+                return x(d.key);
+            })
+            .attr("y", function (d) {
+                return y(d.values.length);
+            })
+            .attr("height", function (d) {
+                return height - y(d.values.length);
+            })
+            .attr("width", x.bandwidth())
+            //.attr("fill", "red")
+            .attr("fill", function (d, i) {
+                return z(d.key);
+            })
+
+        // Draw x axis
+        g.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        // Draw y axis
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y).ticks(null, "s"))
 
 
     }
@@ -190,12 +188,12 @@
 </script>
 
 <script>
-    function generate_tree(data_full) {
+    function generate_tree(data, element) {
         // Initialize SV
 
         var user = $('#user').val();
         $("#treemap").html("");
-        var svg = d3.select("#treemap"),
+        var svg = d3.select(element),
             margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom,
@@ -227,13 +225,6 @@
             .size([width, height])
             .padding(1)
             .round(true);
-
-        data = [];
-        data_full.forEach(function (d) {
-            if (d.who == user || user == 'all') {
-                data.push(d);
-            }
-        });
 
 
         var root = d3.hierarchy({
@@ -353,21 +344,28 @@
 </script>
 
 <script>
-    function regen(){
-        d3.csv(dataset, function (data_full) {
-        generate_tree(data_full);
-        draw_barchart(data_full, "#barchart1", true);
-        draw_barchart(data_full, "#barchart2", false);
+    function regen() {
+        d3.csv($("#dataset").val(), function (d) {
+            var user = $("#user").val();
+            if (d.who == user || user == 'all')
+                return d;
+        }, function (data) {
 
-    });}
+
+            generate_tree(data, '#treemap');
+            draw_barchart(data, "#barchart1", true);
+            draw_barchart(data, "#barchart2", false);
+
+
+        });
+    }
 
 
     $(document).ready(function () {
 
-    var dataset = $('#dataset').val();
+        regen();
+        $('select').material_select();
 
-    $('select').material_select();
-
-});
+    });
 </script>
 </html>
