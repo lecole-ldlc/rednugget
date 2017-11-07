@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,9 +62,6 @@
             <div class="col s12">
                 <h2>Treemap</h2>
                 <style>
-                    .axis .domain {
-                        display: none;
-                    }
 
                     form {
                         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -89,7 +87,7 @@
 
         <div class="row">
             <div class="col s12">
-                <h2>Surprise pour Mr. Scherrer</h2>
+                <h2>Surprise pour M. Scherrer</h2>
                 <style>
                     .axis .domain {
                         display: none;
@@ -111,7 +109,7 @@
                         stroke-width: 2;
                     }
                 </style>
-                <svg id="surprise" width="400" height="400" font-family="sans-serif" font-size="10"
+                <svg id="surprise" width="800" height="800" font-family="sans-serif" font-size="10"
                      text-anchor="middle"></svg>
 
 
@@ -382,20 +380,63 @@
                 return color(d.data.status);
             });
 
-        node.append("text")
+        /*node.append("text")
             .attr("x", 0)
             .attr("y", 0)
             .text(function (d) {
                 console.log(d);
                 return d.data.id;
-            });
+            });*/
+
 
 
         node.append("title")
             .text(function (d) {
                 return d.data.id + "\n" + d.data.priority;
+            });
+
+//        var heightL = 100;
+//        var svgLeg = d3.select("#legend").append("svg")
+//            .attr("width", width)
+//            .attr("height", heightL)
+        // Draw the legend
+        var legendRectSize = 18;
+        var legendSpacing = 4;
+        var legend = svg.selectAll('.legend')
+            .data(color.domain())
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', function (d, i) {
+                var offset = 20 * color.domain().length / 2;
+                var horz = 30 + i * 100 + 10;
+                var vert = 0;
+                //vert = 0;
+                //horz = 0;
+                return 'translate(' + horz + ',' + vert + ')';
+            });
+        // These are the rectangles
+        legend.append('rect')
+//            .attr("cy", function(d,i){
+//                return i * 30;
+//            })
+//        .attr("cx", function(d,i){
+//                return i * 30;
+//            })
+        // On voulait faire des cercles mais on a pas réussi :(
+
+            .attr('width', legendRectSize)
+            .attr('height', legendRectSize)
+            .style('fill', color)
+            .style('stroke', color);
+        // These are the texts
+        legend.append('text')
+            .attr('x', 45)
+            .attr('y', 10)
+            .text(function (d) {
+                return d
             })
-    };
+    }
 
 
 </script>
@@ -408,6 +449,7 @@
             if (d.who == user || user == 'All')
                 return d;
         }, function (data) {
+            console.log(data);
             generate_tree(data, '#treemap');
             draw_barchart(data, "#barchart1", true);
             draw_barchart(data, "#barchart2", false);
@@ -421,3 +463,5 @@
     });
 </script>
 </html>
+
+<!--TODO: Grouped bar chart & légender le bubble chart pour mardi -->
