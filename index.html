@@ -410,23 +410,16 @@
             .attr('transform', function (d, i) {
                 var offset = 20 * color.domain().length / 2;
                 var horz = 30 + i * 100 + 10;
-                var vert = 0;
+                var vert = 20;
                 //vert = 0;
                 //horz = 0;
                 return 'translate(' + horz + ',' + vert + ')';
             });
         // These are the rectangles
-        legend.append('rect')
-//            .attr("cy", function(d,i){
-//                return i * 30;
-//            })
-//        .attr("cx", function(d,i){
-//                return i * 30;
-//            })
-        // On voulait faire des cercles mais on a pas réussi :(
+        legend.append('circle')
 
-            .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
+
+            .attr('r', legendRectSize)
             .style('fill', color)
             .style('stroke', color);
         // These are the texts
