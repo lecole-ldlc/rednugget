@@ -94,7 +94,7 @@ function RadarChart(id, data, options) {
 	   .data(d3.range(1,(cfg.levels+1)).reverse())
 	   .enter().append("text")
 	   .attr("class", "axisLabel")
-	   .attr("x", 4)
+	   .attr("x", 2)
 	   .attr("y", function(d){return -d*radius/cfg.levels;})
 	   .attr("dy", "0.4em")
 	   .style("font-size", "10px")
