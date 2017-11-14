@@ -1,98 +1,98 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
-		<title>Smoothed D3.js Radar Chart</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Smoothed D3.js Radar Chart</title>
 
-		<!-- Google fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
-		<!-- D3.js -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
-		<style>
-			body {
-				font-family: 'Open Sans', sans-serif;
-				font-size: 11px;
-				font-weight: 300;
-				fill: #242424;
-				text-align: center;
-				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-				cursor: default;
-			}
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 300;
+            fill: #242424;
+            text-align: center;
+            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+            cursor: default;
+        }
 
-			.legend {
-				font-family: 'Raleway', sans-serif;
-				fill: #333333;
-			}
+        .legend {
+            font-family: 'Raleway', sans-serif;
+            fill: #333333;
+        }
 
-			.tooltip {
-				fill: #333333;
-			}
-		</style>
+        .tooltip {
+            fill: #333333;
+        }
+    </style>
 
-	</head>
-	<body>
+</head>
+<body>
 
-		<div class="radarChart"></div>
+<div class="radarChart"></div>
 
-		<script src="radarChart.js"></script>
-		<script>
+<script src="radarChart.js"></script>
+<script>
 
-      /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
-			//////////////////////////////////////////////////////////////
-			//////////////////////// Set-Up //////////////////////////////
-			//////////////////////////////////////////////////////////////
-			var margin = {top: 100, right: 100, bottom: 100, left: 100},
-				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-			//////////////////////////////////////////////////////////////
-			////////////////////////// Data //////////////////////////////
-			//////////////////////////////////////////////////////////////
-	  		var data = [
-					  [//HHE
-						{axis:"Humour",value:0.47},
-						{axis:"Durée moyenne",value:0.20},
-						{axis:"Abonnés",value:0.60},
-						{axis:"Fréquence",value:0.40},
-						{axis:"Réflexion",value:0.70},
-						{axis:"Originalité",value:0.83}
-					  ],[//Cocovoit
-						{axis:"Humour",value:0.77},
-						{axis:"Durée moyenne",value:0.20},
-						{axis:"Abonnés",value:0.10},
-						{axis:"Fréquence",value:0.70},
-						{axis:"Réflexion",value:0.27},
-						{axis:"Originalité",value:0.67}
-					  ],[//This Place
-						{axis:"Humour",value:0.53},
-						{axis:"Durée moyenne",value:0.40},
-						{axis:"Abonnés",value:0.60},
-						{axis:"Fréquence",value:0.20},
-						{axis:"Réflexion",value:0.83},
-						{axis:"Originalité",value:0.70}
-					  ]
-					];
-			//////////////////////////////////////////////////////////////
-			//////////////////// Draw the Chart //////////////////////////
-			//////////////////////////////////////////////////////////////
-			var color = d3.scale.ordinal()
-				.range(["#f43131","#353535","#f9f9f9"]);
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var data = [
+        [//HHE
+            {axis: "Humour", value: 0.47},
+            {axis: "Durée moyenne", value: 0.20},
+            {axis: "Abonnés", value: 0.60},
+            {axis: "Fréquence", value: 0.40},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.83}
+        ], [//Cocovoit
+            {axis: "Humour", value: 0.77},
+            {axis: "Durée moyenne", value: 0.20},
+            {axis: "Abonnés", value: 0.10},
+            {axis: "Fréquence", value: 0.70},
+            {axis: "Réflexion", value: 0.27},
+            {axis: "Originalité", value: 0.67}
+        ], [//This Place
+            {axis: "Humour", value: 0.53},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.60},
+            {axis: "Fréquence", value: 0.20},
+            {axis: "Réflexion", value: 0.83},
+            {axis: "Originalité", value: 0.70}
+        ]
+    ];
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+    var color = d3.scale.ordinal()
+        .range(["#f43131", "#353535", "#f9f9f9"]);
 
-			var radarChartOptions = {
-			  w: width,
-			  h: height,
-			  margin: margin,
-			  maxValue: 0.5,
-			  levels: 5,
-			  roundStrokes: true,
-			  color: color
-			};
-			//Call function to draw the Radar chart
-			RadarChart(".radarChart", data, radarChartOptions);
-		</script>
-	</body>
+    var radarChartOptions = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart(".radarChart", data, radarChartOptions);
+</script>
+</body>
 </html>
