@@ -1,445 +1,143 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <title>RedNugget | Dataviz</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<title>Smoothed D3.js Radar Chart</title>
+
+	<!-- Google fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+	<!-- D3.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+	<style>
+		body {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 11px;
+			font-weight: 300;
+			fill: #242424;
+			text-align: center;
+			text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+			cursor: default;
+		}
+
+		.legend {
+			font-family: 'Raleway', sans-serif;
+			fill: #333333;
+		}
+
+		.tooltip {
+			fill: #333333;
+		}
+	</style>
+
 </head>
-
-
 <body>
-
-<div class="container" style="text-align: center">
-    <h1>RedNugget - TP Dataviz</h1>
-
-    <p>Dataset</p>
-    <div class="input-field col s12">
-        <form>
-            <select onchange="regen();" class="dataset" id="dataset">
-                <option value="data/data_task_10.csv" selected="selected">10 Tasks</option>
-                <option value="data/data_task_100.csv">100 Tasks</option>
-                <option value="data/data_task_1000.csv">1 000 Tasks</option>
-                <option value="data/data_task_10000.csv">10 000 Tasks</option>
-            </select>
-            <label>Select Dataset</label>
-
-        </form>
-    </div>
-    <form>
-
-        <p>User</p>
-        <div class="input-field col s12">
-            <select onchange="regen();" class="user" id="user">
-                <option value="All" selected="selected">All</option>
-                <option value="Mike">Mike</option>
-                <option value="Natasha">Natasha</option>
-                <option value="Joe">Joe</option>
-            </select>
-            <label>Select User</label>
-        </div>
-
-        <h2>Bar charts</h2>
-
-        <div class="row">
-            <div class="col s6">
-                <p>bar chart 1</p>
-                <svg width="300" height="300" id="barchart1"></svg>
-
-
-            </div>
-
-            <div class="col s6">
-                <p>bar chart 2</p>
-                <svg width="300" height="300" id="barchart2"></svg>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col s12">
-                <h2>Treemap</h2>
-                <style>
-
-                    form {
-                        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                    }
-
-                    svg {
-                        font: 15px sans-serif;
-                    }
-
-                    .legend {
-                        font-size: 12px;
-                    }
-
-                    rect {
-                        stroke-width: 2;
-                    }
-                </style>
-                <svg id="treemap" width="960" height="400"></svg>
-
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <h2>Surprise pour M. Scherrer</h2>
-                <style>
-                    .axis .domain {
-                        display: none;
-                    }
-
-                </style>
-                <svg id="surprise" width="800" height="800" font-family="sans-serif" font-size="10"
-                     text-anchor="middle"></svg>
-
-
-            </div>
-        </div>
-
+<div class="row">
+	<div class="radarChart col" id="radar1"></div>
+	<div class="radarChart col" id="radar2"></div>
+	<div class="radarChart col" id="radar3"></div>
+	<div class="radarChart col" id="radar4"></div>
+	<div class="radarChart col" id="radar5"></div>
+	<div class="radarChart col" id="radar6"></div>
 </div>
 
+<script src="radarChart.js"></script>
+<script>
+
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var margin = {top: 50, right: 25, bottom: 50, left: 25},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var data = [
+        [//HHE
+            {axis: "Humour", value: 0.47},
+            {axis: "Durée moyenne", value: 0.20},
+            {axis: "Abonnés", value: 0.60},
+            {axis: "Fréquence", value: 0.40},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.83}
+        ], [//Cocovoit
+            {axis: "Humour", value: 0.77},
+            {axis: "Durée moyenne", value: 0.20},
+            {axis: "Abonnés", value: 0.10},
+            {axis: "Fréquence", value: 0.70},
+            {axis: "Réflexion", value: 0.27},
+            {axis: "Originalité", value: 0.67}
+        ], [//This Place
+            {axis: "Humour", value: 0.53},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.60},
+            {axis: "Fréquence", value: 0.20},
+            {axis: "Réflexion", value: 0.83},
+            {axis: "Originalité", value: 0.70}
+        ], [//HugoDécrypte
+            {axis: "Humour", value: 0.23},
+            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Abonnés", value: 0.60},
+            {axis: "Fréquence", value: 0.60},
+            {axis: "Réflexion", value: 0.67},
+            {axis: "Originalité", value: 0.57}
+        ], [//Startup Heroes
+            {axis: "Humour", value: 0.10},
+            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Abonnés", value: 0.30},
+            {axis: "Fréquence", value: 0.10},
+            {axis: "Réflexion", value: 0.27},
+            {axis: "Originalité", value: 0.83}
+        ], [//Stupid Economics
+            {axis: "Humour", value: 0.20},
+            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Abonnés", value: 0.30},
+            {axis: "Fréquence", value: 0.40},
+            {axis: "Réflexion", value: 0.77},
+            {axis: "Originalité", value: 0.60}
+        ], [//Tu mourras moins bete
+            {axis: "Humour", value: 0.70},
+            {axis: "Durée moyenne", value: 0.20},
+            {axis: "Abonnés", value: 0.70},
+            {axis: "Fréquence", value: 0.60},
+            {axis: "Réflexion", value: 0.63},
+            {axis: "Originalité", value: 0.80}
+        ]
+    ];
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+    var color = d3.scale.ordinal()
+        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
+
+    var radarChartOptions = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart("#radar1", data, radarChartOptions);
+    RadarChart("#radar2", data, radarChartOptions);
+    RadarChart("#radar3", data, radarChartOptions);
+    RadarChart("#radar4", data, radarChartOptions);
+    RadarChart("#radar5", data, radarChartOptions);
+    RadarChart("#radar6", data, radarChartOptions);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-
-<script>
-    function draw_barchart(data, element, total) {
-        // Chart initialization
-        //var user = $('#user').val();
-        $(element).html("");
-        var svg = d3.select(element),
-            margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        // X axis
-        var x = d3.scaleBand()
-            .rangeRound([0, width])
-            .paddingInner(0.1);
-        // y axis
-        var y = d3.scaleLinear()
-            .rangeRound([height, 0]);
-        //load data
-        if (!total) {
-            // Group by status
-            var nested_data = d3.nest()
-                .key(function (d) {
-                    return d.status;
-                })
-                .entries(data);
-        } else {
-            // Group by priority
-            var nested_data = d3.nest()
-                .key(function (d) {
-                    return d.priority;
-                })
-                .entries(data);
-        }
-        //console.log(nested_data);
-        // Color scale
-        var z = d3.scaleOrdinal(d3.schemeCategory10);
-        // Set domains of axes scales
-        x.domain(nested_data.map(function (d) {
-            return d.key;
-        }));
-        y.domain([0, d3.max(nested_data, function (d) {
-            return d.values.length;
-        })]);
-        z.domain(nested_data.map(function (d) {
-            return d.key;
-        }))
-        // Draw rect
-        g.selectAll("rect")
-            .data(nested_data)
-            .enter().append("rect")
-            .attr("x", function (d) {
-                return x(d.key);
-            })
-            .attr("y", function (d) {
-                return y(d.values.length);
-            })
-            .attr("height", function (d) {
-                return height - y(d.values.length);
-            })
-            .attr("width", x.bandwidth())
-            //.attr("fill", "red")
-            .attr("fill", function (d, i) {
-                return z(d.key);
-            })
-        // Draw x axis
-        g.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-        // Draw y axis
-        g.append("g")
-            .attr("class", "axis")
-            .call(d3.axisLeft(y).ticks(null, "s"))
-    }
-</script>
-
-<script>
-    function generate_tree(data, element) {
-        // Initialize SV
-        var user = $('#user').val();
-        $("#treemap").html("");
-        var svg = d3.select(element),
-            margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        // Color scale for categories
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
-        // Prepare aggregation
-        var nest = d3.nest()
-            .key(function (d) {
-                return d.priority;
-            }) // First we aggregate by prority
-            .key(function (d) {
-                return d.status;
-            }) // Then by status
-            .rollup(function (leaves) {
-                return {
-                    "total_cpt": leaves.length, // Compute the number of tasks in each groupe
-                    // Compute the total time associated with the tasks in this group
-                    "total_time": d3.sum(leaves, function (d) {
-                        return parseFloat(d.time);
-                    })
-                }
-            });
-        // Prepare treemap
-        var treemap = d3.treemap()
-            .size([width, height])
-            .padding(1)
-            .round(true);
-        var root = d3.hierarchy({
-            values: nest.entries(data)
-        }, function (d) {
-            return d.values;
-        })
-        // This create a unique identifier of each leaf
-            .eachBefore(function (d) {
-                d.data.id = (d.parent ? d.parent.data.id + "." : "") + (d.data.key ? d.data.key : "");
-            })
-            // This is the value that will be used to draw the rectangles
-            .sum(function (d) {
-                if (d.value) {
-                    return d.value.total_time;
-                }
-            })
-            // This is to display first the bigger rectangles
-            .sort(function (a, b) {
-                return b.value.total_time - a.value.total_time;
-            });
-        //console.log(root)
-        // Do generate the treemap
-        treemap(root);
-        // Prepare each rectangle
-        var cell = g.selectAll("g")
-        // We do not draw the priority rectangles, only the leaves of the tree
-            .data(root.leaves())
-            .enter().append("g")
-            // Use x0 and y0 generated by the treemap function
-            .attr("transform", function (d) {
-                return "translate(" + d.x0 + "," + d.y0 + ")";
-            });
-        // Draw the rectangle
-        cell.append("rect")
-            .attr("id", function (d) {
-                return d.data.id;
-            })
-            .attr("width", function (d) {
-                return d.x1 - d.x0;
-            })
-            .attr("height", function (d) {
-                return d.y1 - d.y0;
-            })
-            // Use the parent attribute to set the color
-            .attr("fill", function (d) {
-                return color(d.parent.data.key);
-            });
-        // Draw the text (use a clipping path to deal with long strings)
-        cell.append("clipPath")
-            .attr("id", function (d) {
-                return "clip-" + d.data.id;
-            })
-            .append("use")
-            .attr("xlink:href", function (d) {
-                return "#" + d.data.id;
-            });
-        cell.append("text")
-            .attr("clip-path", function (d) {
-                return "url(#clip-" + d.data.id + ")";
-            })
-            .text(function (d) {
-                return d.data.key;
-            })
-            .attr("x", 4)
-            .attr("y", 10);
-        // Append a title (shown on mouse hover)
-        cell.append("title")
-            .text(function (d) {
-                return "Total time : " + d.data.value.total_time;
-            });
-        var heightL = 100;
-        var svgLeg = d3.select("#legend").append("svg")
-            .attr("width", width)
-            .attr("height", heightL)
-        // Draw the legend
-        var legendRectSize = 18;
-        var legendSpacing = 4;
-        var legend = svg.selectAll('.legend')
-            .data(color.domain())
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-            .attr('transform', function (d, i) {
-                var offset = 20 * color.domain().length / 2;
-                var horz = 30 + i * 100 + 10;
-                var vert = height + legendRectSize + 10;
-                //vert = 0;
-                //horz = 0;
-                return 'translate(' + horz + ',' + vert + ')';
-            });
-        // These are the rectangles
-        legend.append('rect')
-            .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
-            .style('fill', color)
-            .style('stroke', color);
-        // These are the texts
-        legend.append('text')
-            .attr('x', legendRectSize + 5)
-            .attr('y', 10)
-            .text(function (d) {
-                return d
-            })
-    }
-</script>
-
-<script>
-
-    function surprise(tasks, element) {
-        $("#surprise").html("");
-
-        var svg = d3.select("#surprise"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
-
-        var format = d3.format(",d");
-
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-        var pack = d3.pack()
-            .size([width, height])
-            .padding(1.5);
-
-        var root = d3.hierarchy({children: tasks})
-            .sum(function (d) {
-                return d.time;
-            });
-
-        var node = svg.selectAll(".node")
-            .data(pack(root).leaves())
-            .enter().append("g")
-            .attr("class", "node")
-            .attr("transform", function (d) {
-                return "translate(" + d.x + "," + d.y + ")";
-            });
-
-        node.append("circle")
-            .attr("id", function (d) {
-                return d.data.id;
-            })
-            .attr("r", function (d) {
-                return d.r;
-            })
-            .style("fill", function (d) {
-                return color(d.data.status);
-            });
-
-        /*node.append("text")
-            .attr("x", 0)
-            .attr("y", 0)
-            .text(function (d) {
-                console.log(d);
-                return d.data.id;
-            });*/
-
-
-
-        node.append("title")
-            .text(function (d) {
-                return d.data.id + "\n" + d.data.priority;
-            });
-
-//        var heightL = 100;
-//        var svgLeg = d3.select("#legend").append("svg")
-//            .attr("width", width)
-//            .attr("height", heightL)
-        // Draw the legend
-        var legendRectSize = 18;
-        var legendSpacing = 4;
-        var legend = svg.selectAll('.legend')
-            .data(color.domain())
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-            .attr('transform', function (d, i) {
-                var offset = 20 * color.domain().length / 2;
-                var horz = 30 + i * 100 + 10;
-                var vert = 20;
-                //vert = 0;
-                //horz = 0;
-                return 'translate(' + horz + ',' + vert + ')';
-            });
-        // These are the rectangles
-        legend.append('circle')
-
-
-            .attr('r', legendRectSize)
-            .style('fill', color)
-            .style('stroke', color);
-        // These are the texts
-        legend.append('text')
-            .attr('x', 45)
-            .attr('y', 10)
-            .text(function (d) {
-                return d
-            })
-    }
-
-
-</script>
-
-<script>
-    function regen() {
-        d3.csv($("#dataset").val(), function (d) {
-            d.time = +d.time;
-            var user = $("#user").val();
-            if (d.who == user || user == 'All')
-                return d;
-        }, function (data) {
-            console.log(data);
-            generate_tree(data, '#treemap');
-            draw_barchart(data, "#barchart1", true);
-            draw_barchart(data, "#barchart2", false);
-            surprise(data, '#surprise');
-        });
-    }
-
-    $(document).ready(function () {
-        regen();
-        $('select').material_select();
-    });
-</script>
 </html>
-
-<!--TODO: Grouped bar chart & légender le bubble chart pour mardi -->
