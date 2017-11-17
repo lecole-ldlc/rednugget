@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title>Smoothed D3.js Radar Chart</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<title>Smoothed D3.js Radar Chart</title>
 
-    <!-- Google fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<!-- Google fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <!-- D3.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	<!-- D3.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 300;
-            fill: #242424;
-            text-align: center;
-            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-            cursor: default;
-        }
+	<style>
+		body {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 11px;
+			font-weight: 300;
+			fill: #242424;
+			text-align: center;
+			text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+			cursor: default;
+		}
 
-        .legend {
-            font-family: 'Raleway', sans-serif;
-            fill: #333333;
-        }
+		.legend {
+			font-family: 'Raleway', sans-serif;
+			fill: #333333;
+		}
 
-        .tooltip {
-            fill: #333333;
-        }
-    </style>
+		.tooltip {
+			fill: #333333;
+		}
+	</style>
 
 </head>
 <body>
-
-<div class="radarChart"></div>
+<div class="row">
+	<div class="radarChart col" id="radar1"></div>
+	<div class="radarChart col" id="radar2"></div>
+	<div class="radarChart col" id="radar3"></div>
+	<div class="radarChart col" id="radar4"></div>
+	<div class="radarChart col" id="radar5"></div>
+	<div class="radarChart col" id="radar6"></div>
+</div>
 
 <script src="radarChart.js"></script>
 <script>
@@ -45,13 +52,14 @@
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
-    var margin = {top: 100, right: 100, bottom: 100, left: 100},
-        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+    var margin = {top: 50, right: 25, bottom: 50, left: 25},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
     //////////////////////////////////////////////////////////////
     ////////////////////////// Data //////////////////////////////
     //////////////////////////////////////////////////////////////
+
     var data = [
         [//HHE
             {axis: "Humour", value: 0.47},
@@ -74,7 +82,7 @@
             {axis: "Fréquence", value: 0.20},
             {axis: "Réflexion", value: 0.83},
             {axis: "Originalité", value: 0.70}
-        ], [//HugoDécrypt
+        ], [//HugoDécrypte
             {axis: "Humour", value: 0.23},
             {axis: "Durée moyenne", value: 0.30},
             {axis: "Abonnés", value: 0.60},
@@ -120,7 +128,16 @@
         color: color
     };
     //Call function to draw the Radar chart
-    RadarChart(".radarChart", data, radarChartOptions);
+    RadarChart("#radar1", data, radarChartOptions);
+    RadarChart("#radar2", data, radarChartOptions);
+    RadarChart("#radar3", data, radarChartOptions);
+    RadarChart("#radar4", data, radarChartOptions);
+    RadarChart("#radar5", data, radarChartOptions);
+    RadarChart("#radar6", data, radarChartOptions);
 </script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
