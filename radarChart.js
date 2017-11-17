@@ -5,7 +5,7 @@
 /////////// Inspired by the code of alangrafu ///////////
 /////////////////////////////////////////////////////////
 
-function RadarChart(id, data, options) {
+function RadarChart(id_sm, data, name, options) {
     var cfg = {
         w: 600,				//Width of the circle
         h: 600,				//Height of the circle
@@ -54,6 +54,10 @@ function RadarChart(id, data, options) {
     /////////////////////////////////////////////////////////
     //////////// Create the container SVG and g /////////////
     /////////////////////////////////////////////////////////
+
+    var id = "#radar_" + sm_ids;
+    $(id_sm).append('<div class="radar_chat col" id="radar_' + sm_ids + '"><h2>'+ name +'</h2></div>');
+    sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
     d3.select(id).select("svg").remove();
