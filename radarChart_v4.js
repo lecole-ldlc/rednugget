@@ -19,7 +19,8 @@ function RadarChart(id_sm, data, name, options) {
         opacityCircles: 0.1, 	//The opacity of the circles of each blob
         strokeWidth: 2, 		//The width of the stroke around each blob
         roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
-        color: d3.scale.category10()	//Color function
+        showAxisText: false,    //If true show the axis label
+        color: d3.scaleOrdinal(d3.schemeCategory10)	//Color function
     };
 
     //Put all of the options into a variable called cfg
@@ -47,7 +48,7 @@ function RadarChart(id_sm, data, name, options) {
         angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
 
     //Scale for the radius
-    var rScale = d3.scale.linear()
+    var rScale = d3.scaleLinear()
         .range([0, radius])
         .domain([0, 1]);
 
@@ -56,7 +57,7 @@ function RadarChart(id_sm, data, name, options) {
     /////////////////////////////////////////////////////////
 
     var id = "#radar_" + sm_ids;
-    $(id_sm).append('<div class="radar_chat col" id="radar_' + sm_ids + '"><h2>'+ name +'</h2></div>');
+    $(id_sm).append('<div class="radar_chat col" id="radar_' + sm_ids + '"><h2>' + name + '</h2></div>');
     sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
@@ -104,21 +105,23 @@ function RadarChart(id_sm, data, name, options) {
         .style("filter", "url(#glow)");
 
     //Text indicating at what % each level is
-    axisGrid.selectAll(".axisLabel")
-        .data(d3.range(1, (cfg.levels + 1)).reverse())
-        .enter().append("text")
-        .attr("class", "axisLabel")
-        .attr("x", 2)
-        .attr("y", function (d) {
-            return -d * radius / cfg.levels;
-        })
-        .attr("dy", "0.4em")
-        .style("font-size", "10px")
-        .attr("fill", "#737373")
-        .text(function (d, i) {
-            return Format(1 * d / cfg.levels);
-        }); // Replace 1 by maxValue to get back to defaults
+    if (cfg.showAxisText) {
 
+        axisGrid.selectAll(".axisLabel")
+            .data(d3.range(1, (cfg.levels + 1)).reverse())
+            .enter().append("text")
+            .attr("class", "axisLabel")
+            .attr("x", 2)
+            .attr("y", function (d) {
+                return -d * radius / cfg.levels;
+            })
+            .attr("dy", "0.4em")
+            .style("font-size", "10px")
+            .attr("fill", "#737373")
+            .text(function (d, i) {
+                return Format(1 * d / cfg.levels);
+            }); // Replace 1 by maxValue to get back to defaults
+    }
     /////////////////////////////////////////////////////////
     //////////////////// Draw the axes //////////////////////
     /////////////////////////////////////////////////////////
@@ -147,13 +150,13 @@ function RadarChart(id_sm, data, name, options) {
     axis.append("text")
         .attr("class", "legend")
         .style("font-size", "11px")
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "end")
         .attr("dy", "0.35em")
         .attr("x", function (d, i) {
-            return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+        return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
         })
         .attr("y", function (d, i) {
-            return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+        return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
         })
         .text(function (d) {
             return d
@@ -165,17 +168,17 @@ function RadarChart(id_sm, data, name, options) {
     /////////////////////////////////////////////////////////
 
     //The radial line function
-    var radarLine = d3.svg.line.radial()
-        .interpolate("linear-closed")
+    var radarLine = d3.lineRadial()
         .radius(function (d) {
             return rScale(d.value);
         })
         .angle(function (d, i) {
             return i * angleSlice;
-        });
+        })
+        .curve(d3.curveLinear);
 
     if (cfg.roundStrokes) {
-        radarLine.interpolate("cardinal-closed");
+        radarLine.curve(d3.curveCardinalClosed);
     }
 
     //Create a wrapper for the blobs
