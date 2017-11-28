@@ -11,8 +11,8 @@ function RadarChart(id_sm, data, name, options) {
         h: 600,				//Height of the circle
         margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
         levels: 3,				//How many levels or inner circles should there be drawn
-        maxValue: 0, 			//What is the value that the biggest circle will represent
-        labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
+        maxValue: 1, 			//What is the value that the biggest circle will represent
+        labelFactor: 1.01, 	//How much farther than the radius of the outer circle should the labels be placed
         wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
         opacityArea: 0.35, 	//The opacity of the area of the blob
         dotRadius: 4, 			//The size of the colored circles of each blog
@@ -149,14 +149,22 @@ function RadarChart(id_sm, data, name, options) {
     //Append the labels at each axis
     axis.append("text")
         .attr("class", "legend")
-        .style("font-size", "11px")
-        .attr("text-anchor", "end")
+        .style("font-size", "10px")
+        .attr("text-anchor", function(d, i){
+            if (i == 0 || i == 3) {
+                return "middle";
+            } else if (i == 1 || i == 2) {
+                return "start"
+            } else {
+                return "end"
+            }
+        })
         .attr("dy", "0.35em")
         .attr("x", function (d, i) {
-        return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+        return rScale(1.05 * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
         })
         .attr("y", function (d, i) {
-        return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+        return rScale(1.05 * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
         })
         .text(function (d) {
             return d
