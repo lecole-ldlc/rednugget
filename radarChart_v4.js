@@ -150,13 +150,13 @@ function RadarChart(id_sm, data, name, options) {
     axis.append("text")
         .attr("class", "legend")
         .style("font-size", "11px")
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "end")
         .attr("dy", "0.35em")
         .attr("x", function (d, i) {
-            return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+        return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
         })
         .attr("y", function (d, i) {
-            return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+        return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
         })
         .text(function (d) {
             return d
