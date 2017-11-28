@@ -1,0 +1,9 @@
+// This is the URL of the google sheet public export
+var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
+
+
+$.get(URL, function (textString) {
+        console.log("data loaded");
+        data_full = d3.csvParseRows(textString);
+        data = load_data(data_full);
+
