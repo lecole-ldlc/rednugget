@@ -36,8 +36,12 @@
     <div class="row">
         <div id="best_match"></div>
     </div>
+    <div class="row">
+        <div id="ratio"></div>
+    </div>
 </div>
 
+<br><br>
 
 <div class="row justify-content-start" id="small_multiple"></div>
 
@@ -135,7 +139,7 @@
                 }
             });
             $("#CYN").html("");
-            RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
+            RadarChart("#CYN", data_slider, " ", customRadarChartOptions);
             console.log("sliderValue= " + sliderValue);
             refresh_best_match();
         }
@@ -158,7 +162,7 @@
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var customMargin = {top: 80, right: 60, bottom: 80, left: 60},
+    var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
@@ -168,7 +172,7 @@
 
     var data1 = [
         [//HHE
-            {axis: "Humour", value: 0.47},
+            {axis: "Humour", value: 0.48},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.60},
             {axis: "Fréquence", value: 0.40},
@@ -179,12 +183,12 @@
 
     var data2 = [
         [//Cocovoit
-            {axis: "Humour", value: 0.77},
+            {axis: "Humour", value: 0.78},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.10},
             {axis: "Fréquence", value: 0.70},
-            {axis: "Réflexion", value: 0.27},
-            {axis: "Originalité", value: 0.67}
+            {axis: "Réflexion", value: 0.25},
+            {axis: "Originalité", value: 0.68}
         ]
     ];
 
@@ -205,18 +209,18 @@
             {axis: "Durée moyenne", value: 0.30},
             {axis: "Abonnés", value: 0.60},
             {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.67},
-            {axis: "Originalité", value: 0.57}
+            {axis: "Réflexion", value: 0.68},
+            {axis: "Originalité", value: 0.58}
         ]
     ];
 
     var data5 = [
         [//Startup Heroes
-            {axis: "Humour", value: 0.10},
-            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Humour", value: 0.75},
+            {axis: "Durée moyenne", value: 0.10},
             {axis: "Abonnés", value: 0.30},
             {axis: "Fréquence", value: 0.10},
-            {axis: "Réflexion", value: 0.27},
+            {axis: "Réflexion", value: 0.30},
             {axis: "Originalité", value: 0.83}
         ]
     ];
@@ -227,19 +231,63 @@
             {axis: "Durée moyenne", value: 0.30},
             {axis: "Abonnés", value: 0.30},
             {axis: "Fréquence", value: 0.40},
-            {axis: "Réflexion", value: 0.77},
+            {axis: "Réflexion", value: 0.75},
             {axis: "Originalité", value: 0.60}
         ]
     ];
 
     var data7 = [
         [//Tu mourras moins bete
-            {axis: "Humour", value: 0.70},
+            {axis: "Humour", value: 0.68},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.70},
             {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.63},
-            {axis: "Originalité", value: 0.80}
+            {axis: "Réflexion", value: 0.65},
+            {axis: "Originalité", value: 0.78}
+        ]
+    ];
+
+    var data8 = [
+        [//Leo Duff
+            {axis: "Humour", value: 0.53},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.50},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.65}
+        ]
+    ];
+
+    var data9 = [
+        [//ETLMSF
+            {axis: "Humour", value: 0.70},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.50},
+            {axis: "Réflexion", value: 0.80},
+            {axis: "Originalité", value: 0.78}
+        ]
+    ];
+
+    var data10 = [
+        [//Nicolas Meyrieux
+            {axis: "Humour", value: 0.68},
+            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.40},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.63}
+        ]
+    ];
+
+    var data11 = [
+        [//Le Sense of Wonder
+            {axis: "Humour", value: 0.28},
+            {axis: "Durée moyenne", value: 0.50},
+            {axis: "Abonnés", value: 0.40},
+            {axis: "Fréquence", value: 0.20},
+            {axis: "Réflexion", value: 0.85},
+            {axis: "Originalité", value: 0.68}
         ]
     ];
 
@@ -278,7 +326,27 @@
             name : "Tu mourras moins bete",
             url : "https://rednugget.fr/10-11-2017/tu-mourras-moins-bete/",
             data : data7
-        }
+        },
+        {
+            name : "Léo Duff",
+            url : "https://rednugget.fr/15-11-2017/leo-duff/",
+            data : data8
+        },
+        {
+            name : "Et tout le monde s'en fout",
+            url : "https://rednugget.fr/18-11-2017/et-tout-le-monde-s-en-fout/",
+            data : data9
+        },
+        {
+            name : "Nicolas Meyrieux",
+            url : "https://rednugget.fr/21-11-2017/nicolas-meyrieux/",
+            data : data10
+        },
+        {
+            name : "Le Sense of Wonder",
+            url : "https://rednugget.fr/25-11-2017/le-sense-of-wonder/",
+            data : data11
+        },
     ];
 
 
@@ -314,7 +382,7 @@
     data_full.forEach(function(d){
         RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
     });
-    RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
+    RadarChart("#CYN", data_slider, "", customRadarChartOptions);
 
     //Custom nugget drawn by user, stocked in data_slider
     nC = {
@@ -365,6 +433,7 @@
         // Store the best nugget's name
         var best_nugget = '';
         var best_nugget_url = '';
+        var nugget_ratio = 0;
         data_full.forEach(function(d){
             var n2 = {
                 'h':d["data"][0][0]["value"],
@@ -381,9 +450,12 @@
                 min_d = dist;
                 best_nugget = d.name;
                 best_nugget_url = d.url;
+                nugget_ratio = Math.round(100 - min_d*100).toFixed(2);
             }
         });
+
         $("#best_match").html("Meilleure pépite :  " + "<a target=_blank href= " + best_nugget_url + " >" + best_nugget + "</a>");
+        $("#ratio").html("Niveau de correspondance :  " + nugget_ratio + "%");
 
     }
 </script>

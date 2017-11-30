@@ -64,3 +64,13 @@ p {
 .slider_title {
     margin-bottom: 0rem!important;
 }
+
+#best_match{
+    font-size:20px!important;
+    text-align: center;
+}
+
+#ratio{
+    font-size:15px!important;
+    text-align: center;
+}
