@@ -81,15 +81,15 @@
 <div class="row" id="small_multiple"></div>
 <div class="row" id="CYN"></div>
 <div class="row">
-    <div class="col-sm"><h4>Réflexion</h4><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
-    <div class="col-sm"><h4>Originalité</h4><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
-    <div class="col-sm"><h4>Humour</h4><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
+    <div class="col"><h4>Réflexion</h4><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
+    <div class="col"><h4>Originalité</h4><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
+    <div class="col"><h4>Humour</h4><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
 </div>
 
 <div class="row">
-    <div class="col-sm"><h4>Durée moyenne</h4><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
-    <div class="col-sm"><h4>Abonnés</h4><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
-    <div class="col-sm"><h4>Fréquence</h4><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
+    <div class="col"><h4>Durée moyenne</h4><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
+    <div class="col"><h4>Abonnés</h4><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
+    <div class="col"><h4>Fréquence</h4><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -204,11 +204,11 @@
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
-    var margin = {top: 10, right: 25, bottom: 50, left: 25},
+    var margin = {top: 5, right: 20, bottom: 30, left: 20},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var customMargin = {top: 50, right: 25, bottom: 50, left: 25},
+    var customMargin = {top: 80, right: 60, bottom: 80, left: 60},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
@@ -332,13 +332,14 @@
         .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
 
     var radarChartOptions = {
-        w: width,
-        h: height,
+        w: width*0.5,
+        h: height*0.5,
         margin: margin,
         maxValue: 0.5,
         levels: 5,
         roundStrokes: true,
-        color: color
+        color: color,
+        showLabel: false
     };
 
     var customRadarChartOptions = {
@@ -348,7 +349,8 @@
         maxValue: 0.5,
         levels: 5,
         roundStrokes: true,
-        color: color
+        color: color,
+        showLabel: true
     };
 
     //Call function to draw the Radar chart
