@@ -98,7 +98,14 @@
                 <div><h6>Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
         </div>
     </div>
+
+    <div class="row">
+        <div id="best_match">
+
+        </div>
+    </div>
 </div>
+
 
 <div class="row justify-content-start" id="small_multiple"></div>
 
@@ -198,6 +205,7 @@
             $("#CYN").html("");
             RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
             console.log("sliderValue= " + sliderValue);
+            refresh_best_match();
         }
     }
 
@@ -403,6 +411,40 @@
     console.log("distance",distance(nC,n2));
     //forEach.....{oui = distance(nC,n2);dico.append(oui} Un truc comme ça pour intégrer chaque distance dans le dico
 
+    // Function that search for the best match among nuggets
+    function refresh_best_match(){
+        nC = {
+            'h':data_slider[0][0]["value"],
+            'd':data_slider[0][1]["value"],
+            'a':data_slider[0][2]["value"],
+            'f':data_slider[0][3]["value"],
+            'r':data_slider[0][4]["value"],
+            'o':data_slider[0][5]["value"]
+        };
+        // Initialize maximum distance (this should not exceed sqrt(6) but just in case...
+        var min_d = 100.0;
+        // Store the best nugget's name
+        var best_nugget = '';
+        data_full.forEach(function(d){
+           var n2 = {
+                'h':d["data"][0][0]["value"],
+                'd':d["data"][0][1]["value"],
+                'a':d["data"][0][2]["value"],
+                'f':d["data"][0][3]["value"],
+                'r':d["data"][0][4]["value"],
+                'o':d["data"][0][5]["value"]
+            };
+           var dist = distance(nC, n2);
+           console.log("User pattern is at distance ",dist, " of nugget ", d.name);
+           if (dist < min_d){
+               // Update best nugget
+               min_d = dist;
+               best_nugget = d.name;
+           }
+        });
+        $("#best_match").html("Meilleure pépite :  " + best_nugget);
+
+    }
 </script>
 
 
