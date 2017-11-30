@@ -57,7 +57,7 @@ function RadarChart(id_sm, data, name, options) {
     /////////////////////////////////////////////////////////
 
     var id = "#radar_" + sm_ids;
-    $(id_sm).append('<div class="radar_chat col" id="radar_' + sm_ids + '"><h2>' + name + '</h2></div>');
+    $(id_sm).append('<div class="radar_chat col" id="radar_' + sm_ids + '"><h5>' + name + '</h5></div>');
     sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
@@ -137,40 +137,42 @@ function RadarChart(id_sm, data, name, options) {
         .attr("x1", 0)
         .attr("y1", 0)
         .attr("x2", function (d, i) {
-            return rScale(maxValue * 1.1) * Math.cos(angleSlice * i - Math.PI / 2);
+            return rScale(1) * Math.cos(angleSlice * i - Math.PI / 2);
         })
         .attr("y2", function (d, i) {
-            return rScale(maxValue * 1.1) * Math.sin(angleSlice * i - Math.PI / 2);
+            return rScale(1) * Math.sin(angleSlice * i - Math.PI / 2);
         })
         .attr("class", "line")
         .style("stroke", "white")
         .style("stroke-width", "2px");
 
     //Append the labels at each axis
-    axis.append("text")
-        .attr("class", "legend")
-        .style("font-size", "10px")
-        .attr("text-anchor", function(d, i){
-            if (i == 0 || i == 3) {
-                return "middle";
-            } else if (i == 1 || i == 2) {
-                return "start"
-            } else {
-                return "end"
-            }
-        })
-        .attr("dy", "0.35em")
-        .attr("x", function (d, i) {
-        return rScale(1.05 * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
-        })
-        .attr("y", function (d, i) {
-        return rScale(1.05 * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
-        })
-        .text(function (d) {
-            return d
-        })
-        .call(wrap, cfg.wrapWidth);
-
+    if (cfg.showLabel)
+    {
+        axis.append("text")
+            .attr("class", "legend")
+            .style("font-size", "14px")
+            .attr("text-anchor", function (d, i) {
+                if (i == 0 || i == 3) {
+                    return "middle";
+                } else if (i == 1 || i == 2) {
+                    return "start"
+                } else {
+                    return "end"
+                }
+            })
+            .attr("dy", "0.35em")
+            .attr("x", function (d, i) {
+                return rScale(1.10 * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+            })
+            .attr("y", function (d, i) {
+                return rScale(1.10 * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+            })
+            .text(function (d) {
+                return d
+            })
+            .call(wrap, cfg.wrapWidth);
+    }
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
     /////////////////////////////////////////////////////////
