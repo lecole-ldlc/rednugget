@@ -13,7 +13,7 @@ $.get(URL, function (textString) {
 
             o = {
                 'name': line[0],
-                'humour': +line[1].replace(",","        .")
+                'humour': +line[1].replace(",",".")
                 'reflexion'= +line[1].replace(",",".")
                 'originalite'= +line[1].replace(",",".")
                 'dureemoyenne'= +line[1].replace(",",".")
