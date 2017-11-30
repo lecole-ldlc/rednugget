@@ -137,10 +137,10 @@ function RadarChart(id_sm, data, name, options) {
         .attr("x1", 0)
         .attr("y1", 0)
         .attr("x2", function (d, i) {
-            return rScale(maxValue * 1.1) * Math.cos(angleSlice * i - Math.PI / 2);
+            return rScale(1) * Math.cos(angleSlice * i - Math.PI / 2);
         })
         .attr("y2", function (d, i) {
-            return rScale(maxValue * 1.1) * Math.sin(angleSlice * i - Math.PI / 2);
+            return rScale(1) * Math.sin(angleSlice * i - Math.PI / 2);
         })
         .attr("class", "line")
         .style("stroke", "white")
