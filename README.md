@@ -1,4 +1,4 @@
-# RedNugget #
+# Nugget Builder #
 
 [![RedNugget Logo](https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png)](https://rednugget.fr/)
 
