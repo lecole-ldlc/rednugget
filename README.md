@@ -1,5 +1,8 @@
 # RedNugget #
 
+[![RedNugget Logo](https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png)](https://rednugget.fr/)
+
+
 ## Présentation du projet ##
 
 #### Trouve ta pépite parmi notre mine et compare-la avec les autres pépites. Peut-être que tu trouveras d’autres pépites qui te ressemblent ?! ####
