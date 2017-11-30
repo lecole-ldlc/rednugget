@@ -369,7 +369,39 @@
     });
     RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
 
+    //Custom nugget drawn by user, stocked in data_slider
+    nC = {
+        'h':data_slider[0][0]["value"],
+        'd':data_slider[0][1]["value"],
+        'a':data_slider[0][2]["value"],
+        'f':data_slider[0][3]["value"],
+        'r':data_slider[0][4]["value"],
+        'o':data_slider[0][5]["value"]
+    };
 
+    //This variable needs to go through all the nuggets to be compared with nC
+
+    n2 = {
+        'h':data_full[1]["data"][0][0]["value"],
+        'd':data_full[1]["data"][0][1]["value"],
+        'a':data_full[1]["data"][0][2]["value"],
+        'f':data_full[1]["data"][0][3]["value"],
+        'r':data_full[1]["data"][0][4]["value"],
+        'o':data_full[1]["data"][0][5]["value"]
+    };
+    //n2.forEach(function(d){ } En gros faudrait essayer de passer dans n2 autant de fois qu'il y a de pépites, ou alors passer dans data_full et foutre le résultat dans n2
+
+    function distance(nC, n2){
+        //n2 = data_full.forEach(function(d){})
+        var d = 0.0;
+        for(var prop in nC){
+            d += (nC[prop]-n2[prop])*(nC[prop]-n2[prop])
+        }
+        return Math.sqrt(d);
+    }
+
+    console.log("distance",distance(nC,n2));
+    //forEach.....{oui = distance(nC,n2);dico.append(oui} Un truc comme ça pour intégrer chaque distance dans le dico
 
 </script>
 
