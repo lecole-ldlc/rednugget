@@ -10,99 +10,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <!-- D3.js
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
- -->
+    <link href='main.css' rel='stylesheet' type='text/css'>
+
     <script src="https://d3js.org/d3.v4.min.js"></script>
-
-
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 300;
-            fill: #242424;
-            text-align: center;
-            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-            cursor: default;
-        }
-
-        .legend {
-            font-family: 'Raleway', sans-serif;
-            fill: #333333;
-        }
-
-        .tooltip {
-            fill: #333333;
-        }
-    </style>
-    <style>
-
-        .ticks {
-            font: 10px sans-serif;
-        }
-
-        .track,
-        .track-inset,
-        .track-overlay {
-            stroke-linecap: round;
-        }
-
-        .track {
-            stroke: #000;
-            stroke-opacity: 0.3;
-            stroke-width: 10px;
-        }
-
-        .track-inset {
-            stroke: #ddd;
-            stroke-width: 8px;
-        }
-
-        .track-overlay {
-            pointer-events: stroke;
-            stroke-width: 50px;
-            stroke: transparent;
-            cursor: crosshair;
-        }
-
-        .handle {
-            fill: #fff;
-            stroke: #000;
-            stroke-opacity: 0.5;
-            stroke-width: 1.25px;
-        }
-
-        .slider_svg {
-            margin-top: -20px;
-            margin-bottom: 50px;
-        }
-
-    </style>
-
 </head>
+
 <body>
 
 <h1>La mine des pépites</h1>
 
 <div class="container">
     <div class="row">
-        <div class="col-6" id="CYN">
+        <div class="col-md-6 " id="CYN">
         </div>
-        <div class="col-6">
-                <div><h6>Humour</h6><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
-                <div><h6>Durée moyenne</h6><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
-                <div><h6>Abonnés</h6><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
-                <div><h6>Fréquence</h6><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
-                <div><h6>Réflexion</h6><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
-                <div><h6>Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
+        <div class="col-md-6 ">
+            <div class="col"><p class="slider_title">Humour</p><svg class="slider_svg" id="slider3" width="500" height="60" data-slider="Humour"></svg></div>
+            <div class="col"><p class="slider_title">Durée moyenne</p><svg class="slider_svg" id="slider4" width="500" height="70" data-slider="Durée moyenne"></svg></div>
+            <div class="col"><p class="slider_title">Abonnés</p><svg class="slider_svg" id="slider5" width="500" height="70" data-slider="Abonnés"></svg></div>
+            <div class="col"><p class="slider_title">Fréquence</p><svg class="slider_svg" id="slider6" width="500" height="70" data-slider="Fréquence"></svg></div>
+            <div class="col"><p class="slider_title">Réflexion</p><svg class="slider_svg" id="slider1" width="500" height="70" data-slider="Réflexion"></svg></div>
+            <div class="col"><p class="slider_title">Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="70" data-slider="Originalité"></svg></div>
         </div>
     </div>
 
     <div class="row">
-        <div id="best_match">
-
-        </div>
+        <div id="best_match"></div>
     </div>
 </div>
 
@@ -175,17 +107,17 @@
                     sliderData(x.invert(d3.event.x));
                 }));
 
-        slider.insert("g", ".track-overlay")
-            .attr("class", "ticks")
-            .attr("transform", "translate(0," + 30 + ")")
-            .selectAll("text")
-            .data(x.ticks(10))
-            .enter().append("text")
-            .attr("x", x)
-            .attr("text-anchor", "middle")
-            .text(function (d) {
-                return d;
-            });
+//        slider.insert("g", ".track-overlay")
+//            .attr("class", "ticks")
+//            .attr("transform", "translate(0," + 30 + ")")
+//            .selectAll("text")
+//            .data(x.ticks(10))
+//            .enter().append("text")
+//            .attr("x", x)
+//            .attr("text-anchor", "middle")
+//            .text(function (d) {
+//                return d;
+//            });
 
         var handle = slider.insert("circle", ".track-overlay")
             .attr("class", "handle")
@@ -314,30 +246,37 @@
     var data_full = [
         {
             name : "Horror Humanum Est",
+            url : "https://rednugget.fr/21-10-2017/horror-humanum-est/",
             data : data1
         },
         {
             name : "Cocovoit",
+            url : "https://rednugget.fr/25-10-2017/cocovoit/",
             data : data2
         },
         {
             name : "This Place",
+            url : "https://rednugget.fr/28-10-2017/this-place/",
             data : data3
         },
         {
             name : "Hugo Décrypte",
+            url : "https://rednugget.fr/01-11-2017/hugodecrypte/",
             data : data4
         },
         {
             name : "Startup Heroes",
+            url : "https://rednugget.fr/03-11-2017/startup-heroes/",
             data : data5
         },
         {
             name : "Stupid Economics",
+            url : "https://rednugget.fr/08-11-2017/stupid-economics/",
             data : data6
         },
         {
             name : "Tu mourras moins bete",
+            url : "https://rednugget.fr/10-11-2017/tu-mourras-moins-bete/",
             data : data7
         }
     ];
@@ -425,8 +364,9 @@
         var min_d = 100.0;
         // Store the best nugget's name
         var best_nugget = '';
+        var best_nugget_url = '';
         data_full.forEach(function(d){
-           var n2 = {
+            var n2 = {
                 'h':d["data"][0][0]["value"],
                 'd':d["data"][0][1]["value"],
                 'a':d["data"][0][2]["value"],
@@ -434,15 +374,16 @@
                 'r':d["data"][0][4]["value"],
                 'o':d["data"][0][5]["value"]
             };
-           var dist = distance(nC, n2);
-           console.log("User pattern is at distance ",dist, " of nugget ", d.name);
-           if (dist < min_d){
-               // Update best nugget
-               min_d = dist;
-               best_nugget = d.name;
-           }
+            var dist = distance(nC, n2);
+            console.log("User pattern is at distance ",dist, " of nugget ", d.name);
+            if (dist < min_d){
+                // Update best nugget
+                min_d = dist;
+                best_nugget = d.name;
+                best_nugget_url = d.url;
+            }
         });
-        $("#best_match").html("Meilleure pépite :  " + best_nugget);
+        $("#best_match").html("Meilleure pépite :  " + "<a target=_blank href= " + best_nugget_url + " >" + best_nugget + "</a>");
 
     }
 </script>
