@@ -90,15 +90,17 @@
         <div class="col-6" id="CYN">
         </div>
         <div class="col-6">
-                <div><h6>Humour</h6><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
-                <div><h6>Durée moyenne</h6><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
-                <div><h6>Abonnés</h6><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
-                <div><h6>Fréquence</h6><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
-                <div><h6>Réflexion</h6><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
-                <div><h6>Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
+            <div><h6>Humour</h6><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
+            <div><h6>Durée moyenne</h6><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
+            <div><h6>Abonnés</h6><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
+            <div><h6>Fréquence</h6><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
+            <div><h6>Réflexion</h6><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
+            <div><h6>Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
         </div>
     </div>
 </div>
+
+<button onclick="whowins()">Oui</button>
 
 <div class="row justify-content-start" id="small_multiple"></div>
 
@@ -197,7 +199,9 @@
             });
             $("#CYN").html("");
             RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
-            console.log("sliderValue= " + sliderValue);
+            //whowins();
+
+            //console.log("sliderValue= " + sliderValue);
         }
     }
 
@@ -370,38 +374,53 @@
     RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
 
     //Custom nugget drawn by user, stocked in data_slider
-    nC = {
-        'h':data_slider[0][0]["value"],
-        'd':data_slider[0][1]["value"],
-        'a':data_slider[0][2]["value"],
-        'f':data_slider[0][3]["value"],
-        'r':data_slider[0][4]["value"],
-        'o':data_slider[0][5]["value"]
-    };
+
 
     //This variable needs to go through all the nuggets to be compared with nC
 
-    n2 = {
-        'h':data_full[1]["data"][0][0]["value"],
-        'd':data_full[1]["data"][0][1]["value"],
-        'a':data_full[1]["data"][0][2]["value"],
-        'f':data_full[1]["data"][0][3]["value"],
-        'r':data_full[1]["data"][0][4]["value"],
-        'o':data_full[1]["data"][0][5]["value"]
-    };
-    //n2.forEach(function(d){ } En gros faudrait essayer de passer dans n2 autant de fois qu'il y a de pépites, ou alors passer dans data_full et foutre le résultat dans n2
+    function whowins () {
+        var i=0;
+        var t=0;
+        var result=1.5;
+        var winner = "";
+
+        for (n=0;n<15;n++){
+
+            nC = {
+                'h':data_slider[0][0]["value"],
+                'd':data_slider[0][1]["value"],
+                'a':data_slider[0][2]["value"],
+                'f':data_slider[0][3]["value"],
+                'r':data_slider[0][4]["value"],
+                'o':data_slider[0][5]["value"]
+            };
+            n2 = {
+                'h':data_full[i]["data"][0][0]["value"],
+                'd':data_full[i]["data"][0][1]["value"],
+                'a':data_full[i]["data"][0][2]["value"],
+                'f':data_full[i]["data"][0][3]["value"],
+                'r':data_full[i]["data"][0][4]["value"],
+                'o':data_full[i]["data"][0][5]["value"]
+            };
+
+            t=distance(nC,n2);
+            if (result>t){
+                result = t;
+                winner = data_full[i]["name"]
+            }
+            i++;
+            console.log(n2, result, winner);
+            //console.log(n2);
+        }
+    }
 
     function distance(nC, n2){
-        //n2 = data_full.forEach(function(d){})
         var d = 0.0;
         for(var prop in nC){
             d += (nC[prop]-n2[prop])*(nC[prop]-n2[prop])
         }
         return Math.sqrt(d);
     }
-
-    console.log("distance",distance(nC,n2));
-    //forEach.....{oui = distance(nC,n2);dico.append(oui} Un truc comme ça pour intégrer chaque distance dans le dico
 
 </script>
 
