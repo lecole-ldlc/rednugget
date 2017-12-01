@@ -167,8 +167,8 @@
                 }
             });
             $("#CYN").html("");
-            RadarChart("#CYN", data_slider, " ", customRadarChartOptions);
-            console.log("sliderValue= " + sliderValue);
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
+            //console.log("sliderValue= " + sliderValue);
             whowins();
         }
     }
@@ -228,9 +228,9 @@
 
         //Call function to draw the Radar chart
         data_full.forEach(function (d) {
-            RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
+            RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
         });
-        RadarChart("#CYN", data_slider, "", customRadarChartOptions);
+        RadarChart("#CYN", data_slider, "", null, customRadarChartOptions);
     });
 
 
@@ -268,9 +268,9 @@
 
     //Call function to draw the Radar chart
     data_full.forEach(function(d){
-        RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
+        RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
     });
-    RadarChart("#CYN", data_slider, "", customRadarChartOptions);
+    RadarChart("#CYN", data_slider, null,  null, customRadarChartOptions);
 
     //Custom nugget drawn by user, stocked in data_slider
 
