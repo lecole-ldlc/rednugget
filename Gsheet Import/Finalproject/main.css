@@ -1,0 +1,81 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    fill: #242424;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+    cursor: default;
+}
+
+p {
+    margin-bottom: 0rem!important;
+}
+
+.legend {
+    font-family: 'Raleway', sans-serif;
+    fill: #333333;
+}
+
+.tooltip {
+    fill: #333333;
+}
+
+.ticks {
+    font: 10px sans-serif;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+    stroke-linecap: round;
+}
+
+.track {
+    stroke: #000;
+    stroke-opacity: 0.3;
+    stroke-width: 10px;
+}
+
+.track-inset {
+    stroke: #ddd;
+    stroke-width: 8px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    stroke: transparent;
+    cursor: crosshair;
+}
+
+.handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+}
+
+.slider_svg {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.slider_title {
+    margin-bottom: 0rem!important;
+}
+
+#best_match{
+    font-size:20px!important;
+    text-align: center;
+}
+
+#result{
+    font-size:20px!important;
+    text-align: center;
+}
+
+#ratio{
+    font-size:15px!important;
+    text-align: center;
+}
