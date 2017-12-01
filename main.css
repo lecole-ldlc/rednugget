@@ -76,6 +76,11 @@ p {
 }
 
 #ratio{
-    font-size:15px!important;
+    font-size:20px!important;
+    text-align: center;
+}
+
+#reaction{
+    font-size: 20px;
     text-align: center;
 }

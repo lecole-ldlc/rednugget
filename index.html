@@ -24,8 +24,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6" id="CYN"></div>
-        <div class="col-md-6 ">
+        <div class="col-sm-12 col-lg-6" id="CYN">
+        </div>
+        <div class="col-sm-12 col-lg-6 ">
             <div class="col"><p class="slider_title">Humour</p><svg class="slider_svg" id="slider3" width="500" height="60" data-slider="Humour"></svg></div>
             <div class="col"><p class="slider_title">Durée moyenne</p><svg class="slider_svg" id="slider4" width="500" height="70" data-slider="Durée moyenne"></svg></div>
             <div class="col"><p class="slider_title">Abonnés</p><svg class="slider_svg" id="slider5" width="500" height="70" data-slider="Abonnés"></svg></div>
@@ -39,6 +40,7 @@
 <!--<button onclick="whowins()">Oui</button>-->
 <p id="result"></p>
 <p id="ratio"></p>
+<p id="reaction"></p>
 <br><br>
 <div class="row justify-content-start" id="small_multiple"></div>
 
@@ -123,7 +125,7 @@
         var handle = slider.insert("circle", ".track-overlay")
             .attr("class", "handle")
             .attr("cx", x(sliderValue))
-            .attr("r", 15);
+            .attr("r", 10);
 
         function sliderData(h) {
             handle.attr("cx", x(h));
@@ -366,8 +368,8 @@
         .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
 
     var radarChartOptions = {
-        w: width*0.5,
-        h: height*0.5,
+        w: width*0.4,
+        h: height*0.4,
         margin: margin,
         maxValue: 0.5,
         levels: 5,
@@ -427,18 +429,33 @@
             };
 
             t=distance(nC,n2);
-            if (result>t){
+            if (result>t) {
                 result = t;
                 winner = data_full[i]["name"];
                 winner_url = data_full[i]["url"];
                 winner_urlimg = data_full[i]["urlimg"];
-                nugget_ratio = Math.round(100 - result*100).toFixed(2);
+                nugget_ratio = Math.round(100 - result*100);
             }
             i++;
             console.log(n2, result, winner);
             //console.log(n2);
             $("#result").html("La pépite la plus proche :  " + " <a target=_blank href= " + winner_url + " ><img src=" + winner_urlimg + " " + winner + "</a>");
             $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
+            if (result>1){
+                $("#reaction").html("Mais... arrêtes de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.")
+            }
+            else if (result<1 && result>0.7){
+                $("#reaction").html("Bon ça correspond mais pas trop, je te garantis rien !")
+            }
+            else if (result<0.7 && result>0.4){
+                $("#reaction").html("Pas mal ta pépite, tu devrais trouver ton bonheur sur cette chaine.")
+            }
+            else if (result<0.4 && result>0.1){
+                $("#reaction").html("On a trouvé une pépite qui ressemble beaucoup à la tienne. ;)")
+            }
+            else if (result<0.1){
+                $("#reaction").html("OK on a trouvé la pépite de tes rêves ! :o")
+            }
         }
     }
 
