@@ -31,7 +31,7 @@
             <div class="col"><p class="slider_title">Abonnés</p><svg class="slider_svg" id="slider5" width="500" height="70" data-slider="Abonnés"></svg></div>
             <div class="col"><p class="slider_title">Fréquence</p><svg class="slider_svg" id="slider6" width="500" height="70" data-slider="Fréquence"></svg></div>
             <div class="col"><p class="slider_title">Réflexion</p><svg class="slider_svg" id="slider1" width="500" height="70" data-slider="Réflexion"></svg></div>
-            <div class="col"><p class="slider_title">Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="70" data-slider="Originalité"></svg></div>
+            <div class="col"><p class="slider_title">Originalité</p><svg class="slider_svg" id="slider2" width="500" height="70" data-slider="Originalité"></svg></div>
         </div>
     </div>
 </div>
@@ -123,7 +123,7 @@
         var handle = slider.insert("circle", ".track-overlay")
             .attr("class", "handle")
             .attr("cx", x(sliderValue))
-            .attr("r", 20);
+            .attr("r", 15);
 
         function sliderData(h) {
             handle.attr("cx", x(h));
@@ -291,56 +291,67 @@
         {
             name : "Horror Humanum Est",
             url : "https://rednugget.fr/21-10-2017/horror-humanum-est/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_HHEv2.png",
             data : data1
         },
         {
             name : "Cocovoit",
             url : "https://rednugget.fr/25-10-2017/cocovoit/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_Cocovoit.png",
             data : data2
         },
         {
             name : "This Place",
             url : "https://rednugget.fr/28-10-2017/this-place/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_ThisPlace.png",
             data : data3
         },
         {
             name : "Hugo Décrypte",
             url : "https://rednugget.fr/01-11-2017/hugodecrypte/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_Hugo.jpg",
             data : data4
         },
         {
             name : "Startup Heroes",
             url : "https://rednugget.fr/03-11-2017/startup-heroes/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_StartupHeroes.jpg",
             data : data5
         },
         {
             name : "Stupid Economics",
             url : "https://rednugget.fr/08-11-2017/stupid-economics/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_StupidEconomics.png",
             data : data6
         },
         {
             name : "Tu mourras moins bete",
             url : "https://rednugget.fr/10-11-2017/tu-mourras-moins-bete/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_TMMB.jpg",
             data : data7
         },
         {
             name : "Léo Duff",
             url : "https://rednugget.fr/15-11-2017/leo-duff/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_LeoDuff.jpg",
             data : data8
         },
         {
             name : "Et tout le monde s'en fout",
             url : "https://rednugget.fr/18-11-2017/et-tout-le-monde-s-en-fout/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_ETLMSF.jpg",
             data : data9
         },
         {
             name : "Nicolas Meyrieux",
             url : "https://rednugget.fr/21-11-2017/nicolas-meyrieux/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_NicolasMeyrieux.png",
             data : data10
         },
         {
             name : "Le Sense of Wonder",
             url : "https://rednugget.fr/25-11-2017/le-sense-of-wonder/",
+            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_SenseOfWonder.jpg",
             data : data11
         },
     ];
@@ -393,6 +404,7 @@
         var result=1.5;
         var winner = "";
         var winner_url= "";
+        var winner_urlimg= "";
         var nugget_ratio= 0;
 
         for (n=0;n<15;n++){
@@ -419,12 +431,13 @@
                 result = t;
                 winner = data_full[i]["name"];
                 winner_url = data_full[i]["url"];
+                winner_urlimg = data_full[i]["urlimg"];
                 nugget_ratio = Math.round(100 - result*100).toFixed(2);
             }
             i++;
             console.log(n2, result, winner);
             //console.log(n2);
-            $("#result").html("La pépite la plus proche :  " + "<a target=_blank href= " + winner_url + " >" + winner + "</a>");
+            $("#result").html("La pépite la plus proche :  " + " <a target=_blank href= " + winner_url + " ><img src=" + winner_urlimg + " " + winner + "</a>");
             $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
         }
     }
