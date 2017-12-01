@@ -283,19 +283,19 @@
             $("#result").html("La pépite la plus proche :  " + " <a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
             $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
             if (result>1){
-                $("#reaction").html("Mais... arrêtes de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.")
+                $("#reaction").html("Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.")
                 }
             else if (result<1 && result>0.7){
-                $("#reaction").html("Bon ça correspond mais pas trop, je te garantis rien !")
+                $("#reaction").html("Bon ça correspond mais pas trop, on te garantit rien !")
             }
             else if (result<0.7 && result>0.4){
-                $("#reaction").html("Pas mal ta pépite, tu devrais trouver ton bonheur sur cette chaine.")
+                $("#reaction").html("Pas mal ta pépite, tu devrais trouver ton bonheur sur cette chaîne.")
             }
             else if (result<0.4 && result>0.1){
                 $("#reaction").html("On a trouvé une pépite qui ressemble beaucoup à la tienne. ;)")
             }
             else if (result<0.1){
-                $("#reaction").html("OK on a trouvé la pépite de tes rêves ! :o")
+                $("#reaction").html("OK, on a trouvé la pépite de tes rêves ! :o")
             }
         }
     }
