@@ -25,4 +25,9 @@ $.get(URL, function (textString) {
         }
     });
     console.log(data_full);
+    //Call function to draw the Radar chart
+    data_full.forEach(function(d){
+        RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
+    });
+    RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
 });
