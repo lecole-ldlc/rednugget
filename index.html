@@ -24,16 +24,41 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-lg-6" id="CYN">
-        </div>
         <div class="col-sm-12 col-lg-6 ">
-            <div class="col"><p class="slider_title">Humour</p><svg class="slider_svg" id="slider3" width="500" height="60" data-slider="Humour"></svg></div>
-            <div class="col"><p class="slider_title">Durée moyenne</p><svg class="slider_svg" id="slider4" width="500" height="70" data-slider="Durée moyenne"></svg></div>
-            <div class="col"><p class="slider_title">Abonnés</p><svg class="slider_svg" id="slider5" width="500" height="70" data-slider="Abonnés"></svg></div>
-            <div class="col"><p class="slider_title">Fréquence</p><svg class="slider_svg" id="slider6" width="500" height="70" data-slider="Fréquence"></svg></div>
-            <div class="col"><p class="slider_title">Réflexion</p><svg class="slider_svg" id="slider1" width="500" height="70" data-slider="Réflexion"></svg></div>
-            <div class="col"><p class="slider_title">Originalité</p><svg class="slider_svg" id="slider2" width="500" height="70" data-slider="Originalité"></svg></div>
+
+            <div class="row">
+                <div class="col"><p class="slider_title">Pas drôle</p></div>
+                <svg class="slider_svg col" id="slider3" width="170" height="60" data-slider="Humour"></svg>
+                <div class="col"><p class="slider_title">Drôle</p></div>
+            </div>
+            <div class="row">
+                <div class="col"><p class="slider_title">Vidéos courtes</p></div>
+                <svg class="slider_svg col" id="slider4" width="170" height="60" data-slider="Durée moyenne"></svg>
+                <div class="col"><p class="slider_title">Vidéos longues</p></div>
+            </div>
+            <div class="row">
+                <div class="col"><p class="slider_title">Abonnés --</p></div>
+                <svg class="slider_svg col" id="slider5" width="170" height="60" data-slider="Abonnés"></svg>
+                <div class="col"><p class="slider_title">Abonnés ++</p></div>
+            </div>
+            <div class="row">
+                <div class="col"><p class="slider_title">Peu fréquent</p></div>
+                <svg class="slider_svg col" id="slider6" width="170" height="60" data-slider="Fréquence"></svg>
+                <div class="col"><p class="slider_title">Très fréquent</p></div>
+            </div>
+            <div class="row">
+                <div class="col"><p class="slider_title">Réflexion --</p></div>
+                <svg class="slider_svg col" id="slider1" width="170" height="60" data-slider="Réflexion"></svg>
+                <div class="col"><p class="slider_title">Réflexion ++</p></div>
+            </div>
+            <div class="row">
+                <div class="col"><p class="slider_title">Pas original</p></div>
+                <svg class="slider_svg col" id="slider2" width="170" height="60" data-slider="Originalité"></svg>
+                    <div class="col"><p class="slider_title">Très original</p></div>
+            </div>
         </div>
+
+        <div class="col-sm-12 col-lg-6" id="CYN"></div>
     </div>
 </div>
 
@@ -70,7 +95,7 @@
 
     function drawSlider(element) {
         var svg = d3.select(element),
-            margin = {right: 50, left: 50},
+            margin = {right: 5, left: 5},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height");
         var selector = element;
@@ -218,6 +243,7 @@
         w: width*0.4,
         h: height*0.4,
         margin: margin,
+        dotRadius: 2,
         maxValue: 0.5,
         levels: 5,
         roundStrokes: true,
@@ -228,6 +254,7 @@
     var customRadarChartOptions = {
         w: width*1.2,
         h: height*1.2,
+        dotRadius: 5,
         margin: customMargin,
         maxValue: 0.5,
         levels: 5,
@@ -235,6 +262,12 @@
         color: color,
         showLabel: true
     };
+
+    //Call function to draw the Radar chart
+    data_full.forEach(function(d){
+        RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
+    });
+    RadarChart("#CYN", data_slider, "", customRadarChartOptions);
 
     //Custom nugget drawn by user, stocked in data_slider
 
@@ -275,7 +308,7 @@
                 winner = data_full[i]["name"];
                 winner_url = data_full[i]["url"];
                 winner_urlimg = data_full[i]["urlimg"];
-                nugget_ratio = Math.round(100 - result*100).toFixed(2);
+                nugget_ratio = Math.round(100 - result*100);
             }
             i++;
             console.log(n2, result, winner);

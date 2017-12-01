@@ -16,7 +16,7 @@ function RadarChart(id_sm, data, name, options) {
         wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
         opacityArea: 0.35, 	//The opacity of the area of the blob
         dotRadius: 4, 			//The size of the colored circles of each blog
-        opacityCircles: 0.1, 	//The opacity of the circles of each blob
+        opacityCircles: 0.05, 	//The opacity of the circles of each blob
         strokeWidth: 2, 		//The width of the stroke around each blob
         roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
         showAxisText: false,    //If true show the axis label
@@ -101,6 +101,7 @@ function RadarChart(id_sm, data, name, options) {
         })
         .style("fill", "#CDCDCD")
         .style("stroke", "#CDCDCD")
+        .style("stroke-width", "0.3")
         .style("fill-opacity", cfg.opacityCircles)
         .style("filter", "url(#glow)");
 

@@ -32,13 +32,14 @@ p {
 }
 
 .track {
-    stroke: #000;
-    stroke-opacity: 0.3;
+    stroke: #353535;
+    stroke-opacity: 0.1;
     stroke-width: 10px;
 }
 
 .track-inset {
-    stroke: #ddd;
+    stroke: #353535;
+    stroke-opacity: 0.1;
     stroke-width: 8px;
 }
 
@@ -46,23 +47,26 @@ p {
     pointer-events: stroke;
     stroke-width: 50px;
     stroke: transparent;
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 .handle {
-    fill: #fff;
-    stroke: #000;
-    stroke-opacity: 0.5;
-    stroke-width: 1.25px;
+    fill: rgba(53,53,53, 0.8);
+    stroke: #f43131;
+    stroke-opacity: 0;
+    stroke-width: 2px;
 }
+
 
 .slider_svg {
     margin-top: 0px;
     margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
-.slider_title {
-    margin-bottom: 0rem!important;
+.slider_title{
+    padding-top: 20px!important; padding-left: 0px!important; padding-right: 0px!important;
 }
 
 #best_match{
