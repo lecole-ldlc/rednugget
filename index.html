@@ -22,51 +22,54 @@
 
 <h1>La mine des pépites</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-lg-6 ">
+<div class="row">
+    <div class="col-sm-12 col-lg-4 ">
 
-            <div class="row">
-                <div class="col"><p class="slider_title">Pas drôle</p></div>
-                <svg class="slider_svg col" id="slider3" width="170" height="60" data-slider="Humour"></svg>
-                <div class="col"><p class="slider_title">Drôle</p></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="slider_title">Vidéos courtes</p></div>
-                <svg class="slider_svg col" id="slider4" width="170" height="60" data-slider="Durée moyenne"></svg>
-                <div class="col"><p class="slider_title">Vidéos longues</p></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="slider_title">Abonnés --</p></div>
-                <svg class="slider_svg col" id="slider5" width="170" height="60" data-slider="Abonnés"></svg>
-                <div class="col"><p class="slider_title">Abonnés ++</p></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="slider_title">Peu fréquent</p></div>
-                <svg class="slider_svg col" id="slider6" width="170" height="60" data-slider="Fréquence"></svg>
-                <div class="col"><p class="slider_title">Très fréquent</p></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="slider_title">Réflexion --</p></div>
-                <svg class="slider_svg col" id="slider1" width="170" height="60" data-slider="Réflexion"></svg>
-                <div class="col"><p class="slider_title">Réflexion ++</p></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="slider_title">Pas original</p></div>
-                <svg class="slider_svg col" id="slider2" width="170" height="60" data-slider="Originalité"></svg>
-                    <div class="col"><p class="slider_title">Très original</p></div>
-            </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Pas drôle</p></div>
+            <svg class="slider_svg col" id="slider3" width="190" height="60" data-slider="Humour"></svg>
+            <div class="col"><p class="slider_title">Drôle</p></div>
         </div>
-
-        <div class="col-sm-12 col-lg-6" id="CYN"></div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Vidéos courtes</p></div>
+            <svg class="slider_svg col" id="slider4" width="190" height="60" data-slider="Durée moyenne"></svg>
+            <div class="col"><p class="slider_title">Vidéos longues</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Abonnés --</p></div>
+            <svg class="slider_svg col" id="slider5" width="190" height="60" data-slider="Abonnés"></svg>
+            <div class="col"><p class="slider_title">Abonnés ++</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Peu fréquent</p></div>
+            <svg class="slider_svg col" id="slider6" width="190" height="60" data-slider="Fréquence"></svg>
+            <div class="col"><p class="slider_title">Très fréquent</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Réflexion --</p></div>
+            <svg class="slider_svg col" id="slider1" width="190" height="60" data-slider="Réflexion"></svg>
+            <div class="col"><p class="slider_title">Réflexion ++</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Pas original</p></div>
+            <svg class="slider_svg col" id="slider2" width="190" height="60" data-slider="Originalité"></svg>
+            <div class="col"><p class="slider_title">Très original</p></div>
+        </div>
     </div>
+
+    <div class="col-sm-12 col-lg-4" id="CYN"></div>
+
+    <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
+        <p id="reaction"></p>
+        <p id="result"></p>
+        <p id="ratio"></p>
+    </div>
+
 </div>
 
-<!--<button onclick="whowins()">Oui</button>-->
-<p id="result"></p>
-<p id="ratio"></p>
-<p id="reaction"></p>
 <br><br>
+
+<h2>Toutes nos pépites</h2>
 <div class="row justify-content-start" id="small_multiple"></div>
 
 <script
@@ -95,7 +98,7 @@
 
     function drawSlider(element) {
         var svg = d3.select(element),
-            margin = {right: 5, left: 5},
+            margin = {right: 10, left: 10},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height");
         var selector = element;
@@ -215,7 +218,7 @@
                         {axis: 'Originalité', 'value': +line[3].replace(",", ".")},
                         {axis: 'Durée moyenne', 'value': +line[4].replace(",", ".")},
                         {axis: 'Abonnés', 'value': +line[5].replace(",", ".")},
-                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")},
+                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")}
                     ]]
                 }
                 data_full.push(o);
@@ -227,7 +230,7 @@
         data_full.forEach(function (d) {
             RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
         });
-        RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
+        RadarChart("#CYN", data_slider, "", customRadarChartOptions);
     });
 
 
@@ -311,24 +314,25 @@
                 nugget_ratio = Math.round(100 - result*100);
             }
             i++;
-            console.log(n2, result, winner);
-            //console.log(n2);
-            $("#result").html("La pépite la plus proche :  " + " <a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
-            $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
+            console.log(result, winner);
+            $("#result").html("<br> <a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
+            //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
+
             if (result>1){
-                $("#reaction").html("Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.")
-                }
+                $("#reaction").html("Ça correspond pas DU TOUT, mais bon. 👇")
+            }
+            //Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.
             else if (result<1 && result>0.7){
-                $("#reaction").html("Bon ça correspond mais pas trop, on te garantit rien !")
+                $("#reaction").html("Bon ça correspond mais pas trop, on te garantit rien ! 👇")
             }
             else if (result<0.7 && result>0.4){
-                $("#reaction").html("Pas mal ta pépite, tu devrais trouver ton bonheur sur cette chaîne.")
+                $("#reaction").html("Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
             }
             else if (result<0.4 && result>0.1){
-                $("#reaction").html("On a trouvé une pépite qui ressemble beaucoup à la tienne. ;)")
+                $("#reaction").html("On a trouvé une pépite qui ressemble beaucoup à la tienne. ! 👇")
             }
             else if (result<0.1){
-                $("#reaction").html("OK, on a trouvé la pépite de tes rêves ! :o")
+                $("#reaction").html("OK, on a trouvé la pépite de tes rêves ! 👇")
             }
         }
     }
