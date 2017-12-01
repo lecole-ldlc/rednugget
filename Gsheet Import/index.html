@@ -6,62 +6,13 @@
 </head>
 <body>
 
-<h1>Nugget Builder</h1>
-
-<button type="button" onclick="loadData()">Afficher données RedNugget</button>
-<div id="display"></div>
-
-<script>
-    function loadData() {
-        var url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv";
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("display").innerHTML = xmlhttp.responseText;
-            }
-        };
-        xmlhttp.open("GET", url, true);
-        xmlhttp.send(null);
-    }
-
-</script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
 <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-<script>
-    var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
 
-    $.get(URL, function (textString) {
-
-        console.log("data loaded");
-        data = d3.csvParseRows(textString);
-        console.log(data);
-
-        data_full = []
-        data.forEach(function (line, ind) {
-            if (ind > 0) {
-                o = {
-                    'name': line[0],
-                    'url': line[8],
-                    data: [
-                        {axis: 'Humour', 'value': +line[1].replace(",", ".")},
-                        {axis: 'Réflexion', 'value': +line[2].replace(",", ".")},
-                        {axis: 'Originalité', 'value': +line[3].replace(",", ".")},
-                        {axis: 'Durée moyenne', 'value': +line[4].replace(",", ".")},
-                        {axis: 'Abonnés', 'value': +line[5].replace(",", ".")},
-                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")},
-                    ]
-                }
-                data_full.push(o);
-            }
-        });
-        console.log(data_full);
-    });
-</script>
-
+<script src="dataimport.js"></script>
 
 </body>
 </html>
