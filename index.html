@@ -44,8 +44,9 @@
 <br><br>
 <div class="row justify-content-start" id="small_multiple"></div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
         integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
@@ -168,195 +169,40 @@
     ////////////////////////// Data //////////////////////////////
     //////////////////////////////////////////////////////////////
 
-    var data1 = [
-        [//HHE
-            {axis: "Humour", value: 0.48},
-            {axis: "Durée moyenne", value: 0.20},
-            {axis: "Abonnés", value: 0.60},
-            {axis: "Fréquence", value: 0.40},
-            {axis: "Réflexion", value: 0.70},
-            {axis: "Originalité", value: 0.83}
-        ]
-    ];
+    var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
 
-    var data2 = [
-        [//Cocovoit
-            {axis: "Humour", value: 0.78},
-            {axis: "Durée moyenne", value: 0.20},
-            {axis: "Abonnés", value: 0.10},
-            {axis: "Fréquence", value: 0.70},
-            {axis: "Réflexion", value: 0.25},
-            {axis: "Originalité", value: 0.68}
-        ]
-    ];
+    $.get(URL, function (textString) {
 
-    var data3 = [
-        [//This Place
-            {axis: "Humour", value: 0.53},
-            {axis: "Durée moyenne", value: 0.40},
-            {axis: "Abonnés", value: 0.60},
-            {axis: "Fréquence", value: 0.20},
-            {axis: "Réflexion", value: 0.83},
-            {axis: "Originalité", value: 0.70}
-        ]
-    ];
+        console.log("data loaded");
+        data = d3.csvParseRows(textString);
+        console.log(data);
 
-    var data4 = [
-        [//HugoDécrypte
-            {axis: "Humour", value: 0.23},
-            {axis: "Durée moyenne", value: 0.30},
-            {axis: "Abonnés", value: 0.60},
-            {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.68},
-            {axis: "Originalité", value: 0.58}
-        ]
-    ];
+        data_full = []
+        data.forEach(function (line, ind) {
+            if (ind > 0) {
+                o = {
+                    'name': line[0],
+                    'url': line[8],
+                    data: [[
+                        {axis: 'Humour', 'value': +line[1].replace(",", ".")},
+                        {axis: 'Réflexion', 'value': +line[2].replace(",", ".")},
+                        {axis: 'Originalité', 'value': +line[3].replace(",", ".")},
+                        {axis: 'Durée moyenne', 'value': +line[4].replace(",", ".")},
+                        {axis: 'Abonnés', 'value': +line[5].replace(",", ".")},
+                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")},
+                    ]]
+                }
+                data_full.push(o);
+            }
+        });
+        console.log(data_full);
 
-    var data5 = [
-        [//Startup Heroes
-            {axis: "Humour", value: 0.75},
-            {axis: "Durée moyenne", value: 0.10},
-            {axis: "Abonnés", value: 0.30},
-            {axis: "Fréquence", value: 0.10},
-            {axis: "Réflexion", value: 0.30},
-            {axis: "Originalité", value: 0.83}
-        ]
-    ];
-
-    var data6 = [
-        [//Stupid Economics
-            {axis: "Humour", value: 0.20},
-            {axis: "Durée moyenne", value: 0.30},
-            {axis: "Abonnés", value: 0.30},
-            {axis: "Fréquence", value: 0.40},
-            {axis: "Réflexion", value: 0.75},
-            {axis: "Originalité", value: 0.60}
-        ]
-    ];
-
-    var data7 = [
-        [//Tu mourras moins bete
-            {axis: "Humour", value: 0.68},
-            {axis: "Durée moyenne", value: 0.20},
-            {axis: "Abonnés", value: 0.70},
-            {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.65},
-            {axis: "Originalité", value: 0.78}
-        ]
-    ];
-
-    var data8 = [
-        [//Leo Duff
-            {axis: "Humour", value: 0.53},
-            {axis: "Durée moyenne", value: 0.40},
-            {axis: "Abonnés", value: 0.50},
-            {axis: "Fréquence", value: 0.50},
-            {axis: "Réflexion", value: 0.70},
-            {axis: "Originalité", value: 0.65}
-        ]
-    ];
-
-    var data9 = [
-        [//ETLMSF
-            {axis: "Humour", value: 0.70},
-            {axis: "Durée moyenne", value: 0.40},
-            {axis: "Abonnés", value: 0.50},
-            {axis: "Fréquence", value: 0.50},
-            {axis: "Réflexion", value: 0.80},
-            {axis: "Originalité", value: 0.78}
-        ]
-    ];
-
-    var data10 = [
-        [//Nicolas Meyrieux
-            {axis: "Humour", value: 0.68},
-            {axis: "Durée moyenne", value: 0.30},
-            {axis: "Abonnés", value: 0.50},
-            {axis: "Fréquence", value: 0.40},
-            {axis: "Réflexion", value: 0.70},
-            {axis: "Originalité", value: 0.63}
-        ]
-    ];
-
-    var data11 = [
-        [//Le Sense of Wonder
-            {axis: "Humour", value: 0.28},
-            {axis: "Durée moyenne", value: 0.50},
-            {axis: "Abonnés", value: 0.40},
-            {axis: "Fréquence", value: 0.20},
-            {axis: "Réflexion", value: 0.85},
-            {axis: "Originalité", value: 0.68}
-        ]
-    ];
-
-    var data_full = [
-        {
-            name : "Horror Humanum Est",
-            url : "https://rednugget.fr/21-10-2017/horror-humanum-est/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_HHEv2.png",
-            data : data1
-        },
-        {
-            name : "Cocovoit",
-            url : "https://rednugget.fr/25-10-2017/cocovoit/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_Cocovoit.png",
-            data : data2
-        },
-        {
-            name : "This Place",
-            url : "https://rednugget.fr/28-10-2017/this-place/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/10/Thumbnail_ThisPlace.png",
-            data : data3
-        },
-        {
-            name : "Hugo Décrypte",
-            url : "https://rednugget.fr/01-11-2017/hugodecrypte/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_Hugo.jpg",
-            data : data4
-        },
-        {
-            name : "Startup Heroes",
-            url : "https://rednugget.fr/03-11-2017/startup-heroes/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_StartupHeroes.jpg",
-            data : data5
-        },
-        {
-            name : "Stupid Economics",
-            url : "https://rednugget.fr/08-11-2017/stupid-economics/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_StupidEconomics.png",
-            data : data6
-        },
-        {
-            name : "Tu mourras moins bete",
-            url : "https://rednugget.fr/10-11-2017/tu-mourras-moins-bete/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_TMMB.jpg",
-            data : data7
-        },
-        {
-            name : "Léo Duff",
-            url : "https://rednugget.fr/15-11-2017/leo-duff/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_LeoDuff.jpg",
-            data : data8
-        },
-        {
-            name : "Et tout le monde s'en fout",
-            url : "https://rednugget.fr/18-11-2017/et-tout-le-monde-s-en-fout/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_ETLMSF.jpg",
-            data : data9
-        },
-        {
-            name : "Nicolas Meyrieux",
-            url : "https://rednugget.fr/21-11-2017/nicolas-meyrieux/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_NicolasMeyrieux.png",
-            data : data10
-        },
-        {
-            name : "Le Sense of Wonder",
-            url : "https://rednugget.fr/25-11-2017/le-sense-of-wonder/",
-            urlimg : "https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_SenseOfWonder.jpg",
-            data : data11
-        },
-    ];
+        //Call function to draw the Radar chart
+        data_full.forEach(function (d) {
+            RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
+        });
+        RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
+    });
 
 
 
@@ -388,12 +234,6 @@
         color: color,
         showLabel: true
     };
-
-    //Call function to draw the Radar chart
-    data_full.forEach(function(d){
-        RadarChart("#small_multiple", d.data, d.name, radarChartOptions);
-    });
-    RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
 
     //Custom nugget drawn by user, stocked in data_slider
 
@@ -443,7 +283,7 @@
             $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
             if (result>1){
                 $("#reaction").html("Mais... arrêtes de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.")
-            }
+                }
             else if (result<1 && result>0.7){
                 $("#reaction").html("Bon ça correspond mais pas trop, je te garantis rien !")
             }
