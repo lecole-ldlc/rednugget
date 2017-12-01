@@ -13,72 +13,9 @@
     <!-- D3.js
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
  -->
+
+    <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-
-
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 300;
-            fill: #242424;
-            text-align: center;
-            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-            cursor: default;
-        }
-
-        .legend {
-            font-family: 'Raleway', sans-serif;
-            fill: #333333;
-        }
-
-        .tooltip {
-            fill: #333333;
-        }
-    </style>
-    <style>
-
-        .ticks {
-            font: 10px sans-serif;
-        }
-
-        .track,
-        .track-inset,
-        .track-overlay {
-            stroke-linecap: round;
-        }
-
-        .track {
-            stroke: #000;
-            stroke-opacity: 0.3;
-            stroke-width: 10px;
-        }
-
-        .track-inset {
-            stroke: #ddd;
-            stroke-width: 8px;
-        }
-
-        .track-overlay {
-            pointer-events: stroke;
-            stroke-width: 50px;
-            stroke: transparent;
-            cursor: crosshair;
-        }
-
-        .handle {
-            fill: #fff;
-            stroke: #000;
-            stroke-opacity: 0.5;
-            stroke-width: 1.25px;
-        }
-
-        .slider_svg {
-            margin-top: -20px;
-            margin-bottom: 50px;
-        }
-
-    </style>
 
 </head>
 <body>
@@ -87,22 +24,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6" id="CYN">
-        </div>
-        <div class="col-6">
-            <div><h6>Humour</h6><svg class="slider_svg" id="slider3" width="500" height="100" data-slider="Humour"></svg></div>
-            <div><h6>Durée moyenne</h6><svg class="slider_svg" id="slider4" width="500" height="100" data-slider="Durée moyenne"></svg></div>
-            <div><h6>Abonnés</h6><svg class="slider_svg" id="slider5" width="500" height="100" data-slider="Abonnés"></svg></div>
-            <div><h6>Fréquence</h6><svg class="slider_svg" id="slider6" width="500" height="100" data-slider="Fréquence"></svg></div>
-            <div><h6>Réflexion</h6><svg class="slider_svg" id="slider1" width="500" height="100" data-slider="Réflexion"></svg></div>
-            <div><h6>Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="100" data-slider="Originalité"></svg></div>
+        <div class="col-md-6" id="CYN"></div>
+        <div class="col-md-6 ">
+            <div class="col"><p class="slider_title">Humour</p><svg class="slider_svg" id="slider3" width="500" height="60" data-slider="Humour"></svg></div>
+            <div class="col"><p class="slider_title">Durée moyenne</p><svg class="slider_svg" id="slider4" width="500" height="70" data-slider="Durée moyenne"></svg></div>
+            <div class="col"><p class="slider_title">Abonnés</p><svg class="slider_svg" id="slider5" width="500" height="70" data-slider="Abonnés"></svg></div>
+            <div class="col"><p class="slider_title">Fréquence</p><svg class="slider_svg" id="slider6" width="500" height="70" data-slider="Fréquence"></svg></div>
+            <div class="col"><p class="slider_title">Réflexion</p><svg class="slider_svg" id="slider1" width="500" height="70" data-slider="Réflexion"></svg></div>
+            <div class="col"><p class="slider_title">Originalité</h6><svg class="slider_svg" id="slider2" width="500" height="70" data-slider="Originalité"></svg></div>
         </div>
     </div>
 </div>
 
-<button onclick="whowins()">Oui</button>
+<!--<button onclick="whowins()">Oui</button>-->
 <p id="result"></p>
-
+<p id="ratio"></p>
+<br><br>
 <div class="row justify-content-start" id="small_multiple"></div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -171,17 +108,17 @@
                     sliderData(x.invert(d3.event.x));
                 }));
 
-        slider.insert("g", ".track-overlay")
-            .attr("class", "ticks")
-            .attr("transform", "translate(0," + 30 + ")")
-            .selectAll("text")
-            .data(x.ticks(10))
-            .enter().append("text")
-            .attr("x", x)
-            .attr("text-anchor", "middle")
-            .text(function (d) {
-                return d;
-            });
+//        slider.insert("g", ".track-overlay")
+//            .attr("class", "ticks")
+//            .attr("transform", "translate(0," + 30 + ")")
+//            .selectAll("text")
+//            .data(x.ticks(10))
+//            .enter().append("text")
+//            .attr("x", x)
+//            .attr("text-anchor", "middle")
+//            .text(function (d) {
+//                return d;
+//            });
 
         var handle = slider.insert("circle", ".track-overlay")
             .attr("class", "handle")
@@ -199,17 +136,15 @@
                 }
             });
             $("#CYN").html("");
-            RadarChart("#CYN", data_slider, "Nugget Builder", customRadarChartOptions);
-            //whowins();
-
-            //console.log("sliderValue= " + sliderValue);
+            RadarChart("#CYN", data_slider, " ", customRadarChartOptions);
+            console.log("sliderValue= " + sliderValue);
+            whowins();
         }
     }
 
     $(".slider_svg").each(function (e) {
         drawSlider("#" + $(this).attr('id'));
     })
-
 
 </script>
 <script>
@@ -223,7 +158,7 @@
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var customMargin = {top: 80, right: 60, bottom: 80, left: 60},
+    var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
@@ -233,7 +168,7 @@
 
     var data1 = [
         [//HHE
-            {axis: "Humour", value: 0.47},
+            {axis: "Humour", value: 0.48},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.60},
             {axis: "Fréquence", value: 0.40},
@@ -244,12 +179,12 @@
 
     var data2 = [
         [//Cocovoit
-            {axis: "Humour", value: 0.77},
+            {axis: "Humour", value: 0.78},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.10},
             {axis: "Fréquence", value: 0.70},
-            {axis: "Réflexion", value: 0.27},
-            {axis: "Originalité", value: 0.67}
+            {axis: "Réflexion", value: 0.25},
+            {axis: "Originalité", value: 0.68}
         ]
     ];
 
@@ -270,18 +205,18 @@
             {axis: "Durée moyenne", value: 0.30},
             {axis: "Abonnés", value: 0.60},
             {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.67},
-            {axis: "Originalité", value: 0.57}
+            {axis: "Réflexion", value: 0.68},
+            {axis: "Originalité", value: 0.58}
         ]
     ];
 
     var data5 = [
         [//Startup Heroes
-            {axis: "Humour", value: 0.10},
-            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Humour", value: 0.75},
+            {axis: "Durée moyenne", value: 0.10},
             {axis: "Abonnés", value: 0.30},
             {axis: "Fréquence", value: 0.10},
-            {axis: "Réflexion", value: 0.27},
+            {axis: "Réflexion", value: 0.30},
             {axis: "Originalité", value: 0.83}
         ]
     ];
@@ -292,52 +227,125 @@
             {axis: "Durée moyenne", value: 0.30},
             {axis: "Abonnés", value: 0.30},
             {axis: "Fréquence", value: 0.40},
-            {axis: "Réflexion", value: 0.77},
+            {axis: "Réflexion", value: 0.75},
             {axis: "Originalité", value: 0.60}
         ]
     ];
 
     var data7 = [
         [//Tu mourras moins bete
-            {axis: "Humour", value: 0.70},
+            {axis: "Humour", value: 0.68},
             {axis: "Durée moyenne", value: 0.20},
             {axis: "Abonnés", value: 0.70},
             {axis: "Fréquence", value: 0.60},
-            {axis: "Réflexion", value: 0.63},
-            {axis: "Originalité", value: 0.80}
+            {axis: "Réflexion", value: 0.65},
+            {axis: "Originalité", value: 0.78}
+        ]
+    ];
+
+    var data8 = [
+        [//Leo Duff
+            {axis: "Humour", value: 0.53},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.50},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.65}
+        ]
+    ];
+
+    var data9 = [
+        [//ETLMSF
+            {axis: "Humour", value: 0.70},
+            {axis: "Durée moyenne", value: 0.40},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.50},
+            {axis: "Réflexion", value: 0.80},
+            {axis: "Originalité", value: 0.78}
+        ]
+    ];
+
+    var data10 = [
+        [//Nicolas Meyrieux
+            {axis: "Humour", value: 0.68},
+            {axis: "Durée moyenne", value: 0.30},
+            {axis: "Abonnés", value: 0.50},
+            {axis: "Fréquence", value: 0.40},
+            {axis: "Réflexion", value: 0.70},
+            {axis: "Originalité", value: 0.63}
+        ]
+    ];
+
+    var data11 = [
+        [//Le Sense of Wonder
+            {axis: "Humour", value: 0.28},
+            {axis: "Durée moyenne", value: 0.50},
+            {axis: "Abonnés", value: 0.40},
+            {axis: "Fréquence", value: 0.20},
+            {axis: "Réflexion", value: 0.85},
+            {axis: "Originalité", value: 0.68}
         ]
     ];
 
     var data_full = [
         {
             name : "Horror Humanum Est",
+            url : "https://rednugget.fr/21-10-2017/horror-humanum-est/",
             data : data1
         },
         {
             name : "Cocovoit",
+            url : "https://rednugget.fr/25-10-2017/cocovoit/",
             data : data2
         },
         {
             name : "This Place",
+            url : "https://rednugget.fr/28-10-2017/this-place/",
             data : data3
         },
         {
             name : "Hugo Décrypte",
+            url : "https://rednugget.fr/01-11-2017/hugodecrypte/",
             data : data4
         },
         {
             name : "Startup Heroes",
+            url : "https://rednugget.fr/03-11-2017/startup-heroes/",
             data : data5
         },
         {
             name : "Stupid Economics",
+            url : "https://rednugget.fr/08-11-2017/stupid-economics/",
             data : data6
         },
         {
             name : "Tu mourras moins bete",
+            url : "https://rednugget.fr/10-11-2017/tu-mourras-moins-bete/",
             data : data7
-        }
+        },
+        {
+            name : "Léo Duff",
+            url : "https://rednugget.fr/15-11-2017/leo-duff/",
+            data : data8
+        },
+        {
+            name : "Et tout le monde s'en fout",
+            url : "https://rednugget.fr/18-11-2017/et-tout-le-monde-s-en-fout/",
+            data : data9
+        },
+        {
+            name : "Nicolas Meyrieux",
+            url : "https://rednugget.fr/21-11-2017/nicolas-meyrieux/",
+            data : data10
+        },
+        {
+            name : "Le Sense of Wonder",
+            url : "https://rednugget.fr/25-11-2017/le-sense-of-wonder/",
+            data : data11
+        },
     ];
+
+
 
 
     //////////////////////////////////////////////////////////////
@@ -384,6 +392,8 @@
         var t=0;
         var result=1.5;
         var winner = "";
+        var winner_url= "";
+        var nugget_ratio= 0;
 
         for (n=0;n<15;n++){
 
@@ -407,12 +417,15 @@
             t=distance(nC,n2);
             if (result>t){
                 result = t;
-                winner = data_full[i]["name"]
+                winner = data_full[i]["name"];
+                winner_url = data_full[i]["url"];
+                nugget_ratio = Math.round(100 - result*100).toFixed(2);
             }
             i++;
             console.log(n2, result, winner);
             //console.log(n2);
-            $("#result").html("La pépite la plus proche : :  " + winner);
+            $("#result").html("La pépite la plus proche :  " + "<a target=_blank href= " + winner_url + " >" + winner + "</a>");
+            $("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
         }
     }
 
