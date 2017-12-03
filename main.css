@@ -16,6 +16,21 @@ p {
 
 h1{
     padding-bottom:30px;
+    padding-top: 30px;
+}
+
+h2{
+    padding-bottom: 50px;
+}
+
+hr{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#small_multiple{
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 
