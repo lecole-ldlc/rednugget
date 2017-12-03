@@ -1,7 +1,7 @@
 /* General */
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Exo', sans-serif;
     font-size: 11px;
     font-weight: 300;
     fill: #242424;
@@ -11,34 +11,39 @@ body {
 }
 
 p {
-    margin-bottom: 0rem!important;
+
+    margin-bottom: 0rem !important;
 }
 
-h1{
-    padding-bottom:30px;
+h1 {
+    font-family: Dosis;
+    padding-bottom: 30px;
     padding-top: 30px;
 }
 
-h2{
+h2 {
+    font-family: Dosis;
     padding-bottom: 50px;
 }
 
-hr{
+hr {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#small_multiple{
+#small_multiple {
     margin-left: 100px;
     margin-right: 100px;
 }
 
+a {
+    color: #353535;
+}
 
 /* ##################################################################### */
 /* Slider */
 
 .legend {
-    font-family: 'Raleway', sans-serif;
     fill: #333333;
 }
 
@@ -76,7 +81,7 @@ hr{
 }
 
 .handle {
-    fill: rgba(53,53,53, 0.8);
+    fill: rgba(53, 53, 53, 0.8);
     stroke: #f43131;
     stroke-opacity: 0;
     stroke-width: 2px;
@@ -89,50 +94,49 @@ hr{
     padding-right: 0px;
 }
 
-.slider_title{
+.slider_title {
     font-size: 14px;
-    padding-top: 20px!important;
-    padding-left: 0px!important;
-    padding-right: 0px!important;
+    padding-top: 20px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
-.center{
+.center {
     text-align: center;
-    align-items:center;
+    align-items: center;
     align-content: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-
 /* ##################################################################### */
 /* Third row, results */
 
-#best_match{
-    font-size:20px!important;
+#best_match {
+    font-size: 20px !important;
     text-align: center;
 }
 
-#result{
-    font-size:20px!important;
+#result {
+    font-size: 20px !important;
     text-align: center;
 }
 
-#ratio{
-    font-size:20px!important;
+#ratio {
+    font-size: 20px !important;
     text-align: center;
 }
 
-#reaction{
+#reaction {
     font-size: 20px;
     text-align: center;
 }
 
-.nugget_img{
+.nugget_img {
     width: 200px;
     transition: width 0.5s;
 }
 
-.nugget_img:hover{
+.nugget_img:hover {
     width: 300px;
 }
