@@ -1,6 +1,6 @@
 # Nugget Lab #
 
-[![RedNugget Logo](https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png)](https://rednugget.fr/)
+[![RedNugget Logo](https://rednugget.fr/wp-content/uploads/2017/12/RedNugget-lab.png)](https://rednugget.fr/)
 
 
 ## Présentation du projet RedNugget ##
