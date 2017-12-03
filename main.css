@@ -75,7 +75,18 @@ h1{
 }
 
 .slider_title{
-    padding-top: 20px!important; padding-left: 0px!important; padding-right: 0px!important;
+    font-size: 14px;
+    padding-top: 20px!important;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+
+.center{
+    text-align: center;
+    align-items:center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -103,10 +114,10 @@ h1{
 }
 
 .nugget_img{
-    width: 500px;
+    width: 200px;
+    transition: width 0.5s;
 }
 
 .nugget_img:hover{
-    width: 520px;
-    transition: width 0.5s;
+    width: 300px;
 }
