@@ -11,19 +11,22 @@ body {
 }
 
 p {
-
-    margin-bottom: 0rem !important;
+    margin-bottom: 0rem!important;
+    font-size: 18px;
 }
 
 h1 {
     font-family: Dosis;
     padding-bottom: 30px;
     padding-top: 30px;
+    color: #f43131;
+    font-size: 70px;
 }
 
 h2 {
     font-family: Dosis;
-    padding-bottom: 50px;
+    font-size: 40px;
+    padding-bottom: 10px;
 }
 
 hr {
@@ -32,6 +35,19 @@ hr {
 }
 
 #small_multiple {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#builder_intro {
+    padding-bottom: 50px;
+}
+
+#sm_text {
+    padding-bottom: 50px;
+}
+
+.text-margin {
     margin-left: 100px;
     margin-right: 100px;
 }

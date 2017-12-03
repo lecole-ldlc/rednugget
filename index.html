@@ -21,12 +21,21 @@
 <body>
 
 <h1>Nugget Lab</h1>
+<div id="intro" class="center text-margin">
+    <p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite la plus ressemblante :)<br>Crée, teste, expérimente.. Parce que la science n’attend pas !</p>
+</div>
+
 <hr>
 
 <h2>Polis la pépite de tes rêves !</h2>
+<div id="builder_intro" class="text-margin">
+    <p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs (Humour, Originalité, Réflexion) et trois critères objectifs (Abonnés, Durée, Fréquence) basés sur des échelles choisies de manière totalement subjective. Du coup c’est pas trop objectif, mais bon ce qui compte c’est que ce soit concordant. </p>
+    <br><br>
+    <p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites YouTube). </p>
+</div>
 
 <div class="row">
-    <div class="col-sm-12 col-lg-4 ">
+    <div class="col-sm-12 col-lg-4" style="padding-bottom: 50px">
 
         <div class="row">
             <div class="col"><p class="slider_title">Pas drôle</p></div>
@@ -73,6 +82,10 @@
 <br><br><hr>
 
 <h2>Toutes les pépites</h2>
+<div id="sm_text" class="text-margin">
+    <p>Voici toutes les pépites que nous avons miné jusqu’à maintenant ! Chaque mineur de l’équipe RedNugget a noté l’ensemble des chaînes que tu trouveras sur RedNugget, la moyenne de nos notes a donné ces magnifiques pépites. S’il y en a une qui t’intrigue, clique sur son nom.</p>
+</div>
+
 <div class="row justify-content-start" id="small_multiple"></div>
 
 <script
@@ -332,7 +345,7 @@
                 $("#reaction").html("Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
             }
             else if (result<0.4 && result>0.1){
-                $("#reaction").html("On a trouvé une pépite qui ressemble beaucoup à la tienne. ! 👇")
+                $("#reaction").html("Cette pépite ressemble beaucoup à la tienne ! 👇")
             }
             else if (result<0.1){
                 $("#reaction").html("OK, on a trouvé la pépite de tes rêves ! 👇")
