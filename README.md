@@ -1,10 +1,10 @@
-# Nugget Builder #
+# Nugget Lab #
 
 [![RedNugget Logo](https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png)](https://rednugget.fr/)
 
 
-## Présentation du projet RedNugget##
-RedNugget est un blog qui partage les pépites de YouTube, c’est-à-dire les chaînes YouTube qui sont sous-exposées mais qualitatives. Nous rédigeons des articles qui présentent et analysent ces pépites. Ces articles sont rangés dans 3 catégories : se détendre, se marrer, et se cultiver. Dans ce projet, nous créons une dataviz (réalisée en d3) sous un format de radar-chart pour donner forme à nos pépites YouTube.
+## Présentation du projet RedNugget ##
+RedNugget est un blog qui partage les pépites de YouTube, c’est-à-dire les chaînes YouTube qui sont sous-exposées mais qualitatives. Nous rédigeons des articles qui présentent et analysent ces pépites. Ces articles sont rangés dans 3 catégories : se détendre, se marrer, et se cultiver. Dans ce projet, nous créons une dataviz (réalisée en d3) sous un format de radar-chart pour donner forme à nos pépites YouTube et proposer à l'utilisateur d'en découvrir de nouvelles.
 
 
 #### Trouve ta pépite parmi notre mine et compare-la avec les autres pépites. Peut-être que tu trouveras d’autres pépites qui te ressemblent ?! ####
