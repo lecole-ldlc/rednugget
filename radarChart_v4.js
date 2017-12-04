@@ -219,9 +219,9 @@ function RadarChart(id_sm, data, name, url, options) {
         .style("fill-opacity", cfg.opacityArea)
         .on('mouseover', function (d, i) {
             //Dim all blobs
-            d3.selectAll(".radarArea")
-                .transition().duration(200)
-                .style("fill-opacity", 0.1);
+            //d3.selectAll(".radarArea")
+            //    .transition().duration(200)
+            //    .style("fill-opacity", 0.1);
             //Bring back the hovered over blob
             d3.select(this)
                 .transition().duration(200)

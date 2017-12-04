@@ -77,7 +77,7 @@
     <div class="col-sm-12 col-lg-4" id="CYN"></div>
 
     <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
-        <p id="reaction"></p>
+        <div id="reaction"></div>
         <p id="result"></p>
         <p id="ratio"></p>
     </div>
@@ -226,7 +226,7 @@
         data = d3.csvParseRows(textString);
         console.log(data);
 
-        data_full = []
+        data_full = [];
         data.forEach(function (line, ind) {
             if (ind > 0) {
                 o = {
@@ -340,20 +340,20 @@
             //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
 
             if (result>1){
-                $("#reaction").html("Ça correspond pas DU TOUT, mais bon. 👇")
+                $("#reaction").html("<p style='color:#f43131; font-size:20px'> Ça correspond pas DU TOUT, mais bon. 👇 ")
             }
             //Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.
             else if (result<1 && result>0.7){
-                $("#reaction").html("Bon ça correspond mais pas trop, on te garantit rien ! 👇")
+                $("#reaction").html("<p style='color:#f47b30; font-size:20px'>Bon ça correspond mais pas trop, on te garantit rien ! 👇")
             }
             else if (result<0.7 && result>0.4){
-                $("#reaction").html("Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
+                $("#reaction").html("<p style='color:#e5db1b; font-size:20px'>Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
             }
             else if (result<0.4 && result>0.1){
-                $("#reaction").html("Cette pépite ressemble beaucoup à la tienne ! 👇")
+                $("#reaction").html("<p style='color:#29c126; font-size:20px'>Cette pépite ressemble beaucoup à la tienne ! 👇")
             }
             else if (result<0.1){
-                $("#reaction").html("OK, on a trouvé la pépite de tes rêves ! 👇")
+                $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
             }
         }
     }
