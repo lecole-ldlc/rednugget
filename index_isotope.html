@@ -148,11 +148,9 @@
                 distance: '[data-dist] parseFloat' // value of attribute
             }
         });
-        console.log(grid);
     }
 
     function update() {
-        console.log(grid);
         grid.isotope('updateSortData');
         grid.isotope({sortBy: 'distance'});
         console.log("Isotope updated")
