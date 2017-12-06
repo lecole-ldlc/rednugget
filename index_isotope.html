@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Nugget Lab</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- D3.js
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+ -->
+
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+
+<div class="row">
+    <div style="padding-top: 20px; padding-left: 20px" class="col-1"><img
+            src="https://rednugget.fr/wp-content/uploads/2017/12/RedNugget-lab.png" style="width: 75px;"></div>
+    <div class="col-10"><h1>Nugget Lab</h1></div>
+    <div class="col-1"></div>
+</div>
+
+<div id="intro" class="center text-margin">
+    <p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite
+        la plus ressemblante parce qu'on est gentils et qu'on veut t'éviter de passer 15 ans sur Google à chercher
+        "chaine YouTube comme Squeezie" :)<br>Crée, teste, expérimente... Parce que la science n’attend pas !</p>
+</div>
+
+<hr>
+
+<h2>Polis la pépite de tes rêves !</h2>
+<div id="builder_intro" class="text-margin">
+    <p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
+        (Humour, Originalité, Réflexion) et trois critères objectifs (Abonnés, Durée, Fréquence) basés sur des échelles
+        choisies de manière totalement subjective. Du coup c’est pas trop objectif, mais bon ce qui compte c’est que ce
+        soit concordant. </p>
+    <br><br>
+    <p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites
+        YouTube). </p>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-4 " style="padding-bottom: 50px">
+        <p>Place les curseurs en fonction de ce que tu veux, ta pépite va se construire toute seule, c'est magique !</p>
+        <div class="row">
+            <div class="col"><p class="slider_title">Pas drôle</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider3" width="100" height="60" data-slider="Humour"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Drôle</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Vidéos courtes</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider4" width="100" height="60" data-slider="Durée"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Vidéos longues</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Peu d'abonnés</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider5" width="100" height="60" data-slider="Abonnés"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Beaucoup d'abonnés</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Publie rarement</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider6" width="100" height="60" data-slider="Fréquence"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Publie souvent</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Ne fait pas réfléchir</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider1" width="100" height="60" data-slider="Réflexion"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Fait réfléchir</p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p class="slider_title">Pas original</p></div>
+            <div class="col center">
+                <svg class="slider_svg" id="slider2" width="100" height="60" data-slider="Originalité"></svg>
+            </div>
+            <div class="col"><p class="slider_title">Peu original</p></div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-lg-4" id="CYN"></div>
+
+    <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
+        <div id="reaction"></div>
+        <p id="result"></p>
+        <p id="ratio"></p>
+    </div>
+
+</div>
+
+<br><br>
+<hr>
+<button id="init_isotope" class="btn btn-primary">INIT ISOTOPE</button>
+<h2>Toutes les pépites</h2>
+<div id="sm_text" class="text-margin">
+    <p>Voici toutes les pépites que nous avons miné jusqu’à maintenant ! Chaque mineur de l’équipe RedNugget a noté
+        l’ensemble des chaînes que tu trouveras sur le blog, la moyenne de nos notes a donné ces magnifiques pépites.
+        S’il y en a une qui t’intrigue, ne clique surtout pas sur son nom, il pourrait arriver quelque chose de
+        terrible...</p>
+</div>
+
+<div class="row justify-content-start grid" id="small_multiple"></div>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+<script src="radarChart_v4.js"></script>
+
+<script>
+
+    var grid = null;
+
+    function init_isotope() {
+        grid = $('.grid').isotope({
+            //ISOTOPE
+            itemSelector: '.grid-item',
+            //layoutMode: 'fitRows',
+            getSortData: {
+                value: '[data-value]', // value of attribute
+                distance: '[data-dist] parseFloat' // value of attribute
+            }
+        });
+        console.log(grid);
+    }
+
+    function update() {
+        console.log(grid);
+        grid.isotope('updateSortData');
+        grid.isotope({sortBy: 'distance'});
+        console.log("Isotope updated")
+    }
+
+    $("#init_isotope").click(function () {
+        init_isotope();
+    })
+</script>
+
+<script>
+
+    var data_slider = [
+        [//editable
+            {axis: "Humour", value: 0.5},
+            {axis: "Durée", value: 0.5},
+            {axis: "Abonnés", value: 0.5},
+            {axis: "Fréquence", value: 0.5},
+            {axis: "Réflexion", value: 0.5},
+            {axis: "Originalité", value: 0.5}
+        ]
+    ];
+
+    function drawSlider(element) {
+        var svg = d3.select(element),
+            margin = {right: 10, left: 10},
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height");
+        var selector = element;
+        var key = $(selector).attr("data-slider");
+
+        data_slider[0].forEach(function (d, index) {
+            if (d.axis == key) {
+                sliderValue = data_slider[0][index].value;
+            }
+        });
+
+        var x = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, width])
+            .clamp(true);
+
+        var slider = svg.append("g")
+            .attr("class", "slider")
+            .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+
+        slider.append("line")
+            .attr("class", "track")
+            .attr("x1", x.range()[0])
+            .attr("x2", x.range()[1])
+            .select(function () {
+                return this.parentNode.appendChild(this.cloneNode(true));
+            })
+            .attr("class", "track-inset")
+            .select(function () {
+                return this.parentNode.appendChild(this.cloneNode(true));
+            })
+            .attr("class", "track-overlay")
+            .call(d3.drag()
+                .on("start.interrupt", function () {
+                    slider.interrupt();
+                })
+                .on("start drag", function () {
+                    sliderData(x.invert(d3.event.x));
+                }));
+
+//        slider.insert("g", ".track-overlay")
+//            .attr("class", "ticks")
+//            .attr("transform", "translate(0," + 30 + ")")
+//            .selectAll("text")
+//            .data(x.ticks(10))
+//            .enter().append("text")
+//            .attr("x", x)
+//            .attr("text-anchor", "middle")
+//            .text(function (d) {
+//                return d;
+//            });
+
+        var handle = slider.insert("circle", ".track-overlay")
+            .attr("class", "handle")
+            .attr("cx", x(sliderValue))
+            .attr("r", 10);
+
+        function sliderData(h) {
+            handle.attr("cx", x(h));
+            sliderValue = Math.round(x.invert(d3.event.x) * 100) / 100;
+            $('#sliderData1').html(sliderValue);
+
+            data_slider[0].forEach(function (d, index) {
+                if (d.axis == key) {
+                    data_slider[0][index].value = sliderValue;
+                }
+            });
+            $("#CYN").html("");
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
+            //console.log("sliderValue= " + sliderValue);
+            whowins();
+            update();
+
+        }
+    }
+
+    $(".slider_svg").each(function (e) {
+        drawSlider("#" + $(this).attr('id'));
+    })
+
+</script>
+<script>
+    var sm_ids = 1;
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var margin = {top: 5, right: 20, bottom: 30, left: 20},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var data_full = [];
+    var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
+
+    $.get(URL, function (textString) {
+
+        console.log("data loaded");
+        data = d3.csvParseRows(textString);
+        console.log(data);
+
+        data.forEach(function (line, ind) {
+            if (ind > 0) {
+                o = {
+                    'name': line[0],
+                    'url': line[8],
+                    'urlimg': line[9],
+                    data: [[
+                        {axis: 'Humour', 'value': +line[1].replace(",", ".")},
+                        {axis: 'Réflexion', 'value': +line[2].replace(",", ".")},
+                        {axis: 'Originalité', 'value': +line[3].replace(",", ".")},
+                        {axis: 'Durée', 'value': +line[4].replace(",", ".")},
+                        {axis: 'Abonnés', 'value': +line[5].replace(",", ".")},
+                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")}
+                    ]]
+                };
+                data_full.push(o);
+            }
+        });
+        console.log(data_full);
+
+        //Call function to draw the Radar chart
+        data_full.forEach(function (d) {
+            RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
+        });
+    });
+
+
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+    var color = d3.scaleOrdinal()
+        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
+
+    var radarChartOptions = {
+        w: width * 0.4,
+        h: height * 0.4,
+        margin: margin,
+        dotRadius: 2,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color,
+        showLabel: false
+    };
+
+    var customRadarChartOptions = {
+        w: width * 1.2,
+        h: height * 1.2,
+        dotRadius: 5,
+        margin: customMargin,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color,
+        showLabel: true
+    };
+
+
+    RadarChart("#CYN", data_slider, "", null, customRadarChartOptions);
+
+    //Custom nugget drawn by user, stocked in data_slider
+
+
+    //This variable needs to go through all the nuggets to be compared with nC
+
+    function whowins() {
+        var i = 0;
+        var t = 0;
+        var result = 1.5;
+        var winner = "";
+        var winner_url = "";
+        var winner_urlimg = "";
+        var nugget_ratio = 0;
+
+        distances = [];
+
+        nC = {
+            'h': data_slider[0][0]["value"],
+            'd': data_slider[0][1]["value"],
+            'a': data_slider[0][2]["value"],
+            'f': data_slider[0][3]["value"],
+            'r': data_slider[0][4]["value"],
+            'o': data_slider[0][5]["value"]
+        };
+
+        data_full.forEach(function (d) {
+            n2 = {
+                'h': d["data"][0][0]["value"],
+                'd': d["data"][0][1]["value"],
+                'a': d["data"][0][2]["value"],
+                'f': d["data"][0][3]["value"],
+                'r': d["data"][0][4]["value"],
+                'o': d["data"][0][5]["value"]
+            };
+
+            t = distance(nC, n2);
+
+            distances.push({
+                key: d["name"],
+                dist: t
+            });
+        });
+
+        console.log(distances);
+        distances.sort(function (a, b) {
+            return d3.ascending(a.dist, b.dist);
+        });
+
+        distances.forEach(function (d) {
+            $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist);
+        });
+
+
+        if (result > t) {
+            result = t;
+            winner = data_full[i]["name"];
+            winner_url = data_full[i]["url"];
+            winner_urlimg = data_full[i]["urlimg"];
+            nugget_ratio = Math.round(100 - result * 100);
+        }
+        i++;
+
+        //console.log(result, winner);
+
+        $("#result").html("<br> <a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
+        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
+
+        if (result > 1) {
+            $("#reaction").html("<p style='color:#f43131; font-size:20px'> Ça correspond pas DU TOUT, mais bon. 👇 ")
+        }
+        //Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.
+        else if (result < 1 && result > 0.7) {
+            $("#reaction").html("<p style='color:#f47b30; font-size:20px'>Bon ça correspond mais pas trop, on te garantit rien ! 👇")
+        }
+        else if (result < 0.7 && result > 0.4) {
+            $("#reaction").html("<p style='color:#e5db1b; font-size:20px'>Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
+        }
+        else if (result < 0.4 && result > 0.1) {
+            $("#reaction").html("<p style='color:#29c126; font-size:20px'>Cette pépite ressemble beaucoup à la tienne ! 👇")
+        }
+        else if (result < 0.1) {
+            $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
+        }
+
+        update();
+    }
+
+
+    function distance(nC, n2) {
+        var d = 0.0;
+        for (var prop in nC) {
+            d += (nC[prop] - n2[prop]) * (nC[prop] - n2[prop])
+        }
+        return Math.sqrt(d);
+    }
+
+    //$grid.isotope({sortBy: 'distance'});
+
+</script>
+
+
+</body>
+</html>
