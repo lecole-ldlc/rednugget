@@ -136,20 +136,24 @@
 
 <script>
 
-    var $grid = $('.grid').isotope({
-        //ISOTOPE
-        itemSelector: '.grid-item',
-        layoutMode: 'fitRows',
-        getSortData: {
-            name: '.name', // text from querySelector
-            value: '[data-value]', // value of attribute
-            distance: '[data-dist]' // value of attribute
-        }
-    });
+    var grid = null;
+
+    function init_isotope() {
+        grid = $('.grid').isotope({
+            //ISOTOPE
+            itemSelector: '.grid-item',
+            //layoutMode: 'fitRows',
+            getSortData: {
+                value: '[data-value]', // value of attribute
+                distance: '[data-dist] parseFloat' // value of attribute
+            }
+        });
+        console.log("Isotope initiated")
+    }
 
     function update() {
-        $grid.isotope('updateSortData');
-        $grid.isotope({sortBy: 'distance'});
+        grid.isotope('updateSortData');
+        grid.isotope({sortBy: 'distance'});
         console.log("Isotope updated")
     }
 
@@ -241,10 +245,10 @@
             });
             $("#CYN").html("");
             RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
+
             //console.log("sliderValue= " + sliderValue);
             whowins();
             update();
-
         }
     }
 
@@ -304,6 +308,7 @@
         data_full.forEach(function (d) {
             RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
         });
+        init_isotope();
     });
 
 
@@ -392,15 +397,24 @@
             $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist);
         });
 
-
-        if (result > t) {
-            result = t;
-            winner = data_full[i]["name"];
-            winner_url = data_full[i]["url"];
-            winner_urlimg = data_full[i]["urlimg"];
-            nugget_ratio = Math.round(100 - result * 100);
+        console.log(distances[0]["dist"]);
+        result = distances[0]["dist"];
+        winner = distances[0]["key"];
+        for (var e = 0; e < distances.length; e++) {
+            if (data_full[e].name == distances[0]["key"]) {
+                winner_url = data_full[e].url;
+                //console.log(winner_url);
+            }
         }
-        i++;
+        for (var g = 0; g < distances.length; g++) {
+            if (data_full[g].name == distances[0]["key"]) {
+                winner_urlimg = data_full[g].urlimg;
+                console.log(winner_urlimg);
+            }
+        }
+        nugget_ratio = Math.round(100 - result * 100);
+
+        //i++;
 
         //console.log(result, winner);
 
@@ -423,8 +437,6 @@
         else if (result < 0.1) {
             $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
         }
-
-        update();
     }
 
 
@@ -435,8 +447,6 @@
         }
         return Math.sqrt(d);
     }
-
-    //$grid.isotope({sortBy: 'distance'});
 
 </script>
 
