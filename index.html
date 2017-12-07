@@ -139,11 +139,11 @@
 
     var data_slider = [
         [//editable
-            {axis: "Humour", value: 0.5},
-            {axis: "Durée", value: 0.5},
-            {axis: "Abonnés", value: 0.5},
-            {axis: "Fréquence", value: 0.5},
-            {axis: "Réflexion", value: 0.5},
+            {axis: "Humour", value: 0.2},
+            {axis: "Durée", value: 0.4},
+            {axis: "Abonnés", value: 0.6},
+            {axis: "Fréquence", value: 0.8},
+            {axis: "Réflexion", value: 1.0},
             {axis: "Originalité", value: 0.5}
         ]
     ];
@@ -302,7 +302,7 @@
         levels: 5,
         roundStrokes: true,
         color: color,
-        showLabel: false
+        showLabel: false,
     };
 
     var customRadarChartOptions = {
@@ -314,7 +314,8 @@
         levels: 5,
         roundStrokes: true,
         color: color,
-        showLabel: true
+        showLabel: true,
+        enableDrag: true
     };
 
 

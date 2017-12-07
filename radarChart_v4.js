@@ -20,6 +20,7 @@ function RadarChart(id_sm, data, name, url, options) {
         strokeWidth: 2, 		//The width of the stroke around each blob
         roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
         showAxisText: false,    //If true show the axis label
+        enableDrag: false,     // If true enable draggable sliders
         color: d3.scaleOrdinal(d3.schemeCategory10)	//Color function
     };
 
@@ -201,53 +202,13 @@ function RadarChart(id_sm, data, name, url, options) {
         radarLine.curve(d3.curveCardinalClosed);
     }
 
-    //Create a wrapper for the blobs
     var blobWrapper = g.selectAll(".radarWrapper")
         .data(data)
         .enter().append("g")
         .attr("class", "radarWrapper");
 
-    //Append the backgrounds
-    blobWrapper
-        .append("path")
-        .attr("class", "radarArea")
-        .attr("d", function (d, i) {
-            return radarLine(d);
-        })
-        .style("fill", function (d, i) {
-            return cfg.color(i);
-        })
-        .style("fill-opacity", cfg.opacityArea)
-        .on('mouseover', function (d, i) {
-            //Dim all blobs
-            //d3.selectAll(".radarArea")
-            //    .transition().duration(200)
-            //    .style("fill-opacity", 0.1);
-            //Bring back the hovered over blob
-            d3.select(this)
-                .transition().duration(200)
-                .style("fill-opacity", 0.7)
-                .style("cursor", "pointer");
-        })
-        .on('mouseout', function () {
-            //Bring back all blobs
-            d3.selectAll(".radarArea")
-                .transition().duration(200)
-                .style("fill-opacity", cfg.opacityArea);
-        });
-
-    //Create the outlines
-    blobWrapper.append("path")
-        .attr("class", "radarStroke")
-        .attr("d", function (d, i) {
-            return radarLine(d);
-        })
-        .style("stroke-width", cfg.strokeWidth + "px")
-        .style("stroke", function (d, i) {
-            return cfg.color(i);
-        })
-        .style("fill", "none")
-        .style("filter", "url(#glow)");
+    // Draw initial shape
+    update_path(blobWrapper);
 
 
     var drag = d3.drag()
@@ -275,30 +236,31 @@ function RadarChart(id_sm, data, name, url, options) {
         this.parentNode.appendChild(this);
         var dragTarget = d3.select(this);
         var oldData = dragTarget.data()[0];
-        var oldX = parseFloat(dragTarget.attr("cx")) - cfg.w / 2;
-        var oldY = cfg.h / 2 - parseFloat(dragTarget.attr("cy"));
+        var oldX = parseFloat(dragTarget.attr("cx"));
+        var oldY = parseFloat(dragTarget.attr("cy"));
 
         //Bug for vector @ 270deg -Infinity/Infinity slope
         oldX = (Math.abs(oldX) < 0.0000001) ? 0 : oldX;
         oldY = (Math.abs(oldY) < 0.0000001) ? 0 : oldY;
 
         var newY = 0, newX = 0, newValue = 0;
-        var maxX = 1 - cfg.w / 2;
-        var maxY = cfg.h / 2 - 1;
+        var maxX = cfg.w / 2;
+        var maxY = cfg.h / 2;
 
         if (oldX === 0) {
 
-            newY = oldY - d3.event.dy;
+            newY = oldY + d3.event.dy;
 
             if (Math.abs(newY) > Math.abs(maxY)) {
                 newY = maxY;
             }
-            newValue = ((newY / oldY) * oldData.value).toFixed(2);
+            //newValue = ((newY / oldY) * oldData.value).toFixed(2);
+            newValue = Math.abs(newY / radius).toFixed(2);
         }
         else {
             var slope = oldY / oldX;
 
-            newX = d3.event.dx + parseFloat(dragTarget.attr("cx")) - cfg.w / 2;
+            newX = d3.event.dx + oldX;
 
             if (Math.abs(newX) > Math.abs(maxX)) {
                 newX = maxX;
@@ -306,24 +268,27 @@ function RadarChart(id_sm, data, name, url, options) {
             newY = newX * slope;
 
             var ratio = newX / oldX;
-            newValue = (ratio * oldData.value).toFixed(2);
+            //newValue = (ratio * oldData.value).toFixed(2);
+            newValue = Math.sqrt(newX * newX + newY * newY) / radius;
         }
 
-        console.log(newValue, newX, newY);
+        //newX = d3.event.dx + parseFloat(dragTarget.attr("cx"));
+        //newY = d3.event.dy + parseFloat(dragTarget.attr("cy"));
+
+        console.log(oldX, oldY, oldData.value, newX, newY, newValue);
         //Bound the drag behavior to the max and min of the axis, not by pixels but by value calc (easier)
-        if (newValue >= 1 && newValue <= cfg.levels) {
+        if (newValue >= 0 && newValue <= 1) {
 
             dragTarget
                 .attr("cx", function () {
-                    return newX + cfg.w / 2;
+                    return newX;
                 })
                 .attr("cy", function () {
-                    return cfg.h / 2 - newY;
+                    return newY;
                 });
 
             //Updating the data set with the new value
             (dragTarget.data()[0]).value = newValue;
-
             //center display for value
             d3.select(".updatevalue.skill").text((dragTarget.data()[0]).axis)
                 .style("display", "block")
@@ -338,6 +303,18 @@ function RadarChart(id_sm, data, name, url, options) {
                 .style("visibility", "visible");
 
 
+            data_slider[0].forEach(function (d, index) {
+                if (d.axis == oldData.axis) {
+                    data_slider[0][index].value = newValue;
+                }
+            });
+            data[0].forEach(function (d, index) {
+                if (d.axis == oldData.axis) {
+                    data_slider[0][index].value = newValue;
+                }
+            });
+            update_path(blobWrapper);
+            update();
             //reCalculatePoints();
             //drawPoly();'
             //updatePoly();
@@ -351,15 +328,15 @@ function RadarChart(id_sm, data, name, url, options) {
             if (newValue <= 0) {
                 newValue = 0;
             }
-            else if (newValue >= cfg.levels) {
-                newValue = cfg.levels;
+            else if (newValue >= 1.0) {
+                newValue = 1.0;
             }
             dragTarget.on("drag", null);
         }
     }
 
     //Append the circles
-    blobWrapper.selectAll(".radarCircle")
+    var circles = blobWrapper.selectAll(".radarCircle")
         .data(function (d, i) {
             return d;
         })
@@ -375,8 +352,12 @@ function RadarChart(id_sm, data, name, url, options) {
         .style("fill", function (d, i, j) {
             return cfg.color(j);
         })
-        .style("fill-opacity", 0.8)
-        .call(drag);
+        .style("fill-opacity", 0.8);
+
+    if (cfg.enableDrag){
+        circles.call(drag);
+    }
+
 
     /////////////////////////////////////////////////////////
     //////// Append invisible circles for tooltip ///////////
@@ -429,6 +410,59 @@ function RadarChart(id_sm, data, name, url, options) {
     /////////////////////////////////////////////////////////
     /////////////////// Helper Function /////////////////////
     /////////////////////////////////////////////////////////
+
+    // Update the shape the the radar (needed
+    function update_path(blobWrapper) {
+
+        g.selectAll(".radarArea").remove();
+        g.selectAll(".radarStroke").remove();
+
+        //Create a wrapper for the blobs
+
+
+        //Append the backgrounds
+        blobWrapper
+            .append("path")
+            .attr("class", "radarArea")
+            .attr("d", function (d, i) {
+                return radarLine(d);
+            })
+            .style("fill", function (d, i) {
+                return cfg.color(i);
+            })
+            .style("fill-opacity", cfg.opacityArea)
+            .on('mouseover', function (d, i) {
+                //Dim all blobs
+                //d3.selectAll(".radarArea")
+                //    .transition().duration(200)
+                //    .style("fill-opacity", 0.1);
+                //Bring back the hovered over blob
+                d3.select(this)
+                    .transition().duration(200)
+                    .style("fill-opacity", 0.7)
+                    .style("cursor", "pointer");
+            })
+            .on('mouseout', function () {
+                //Bring back all blobs
+                d3.selectAll(".radarArea")
+                    .transition().duration(200)
+                    .style("fill-opacity", cfg.opacityArea);
+            });
+
+        //Create the outlines
+        blobWrapper.append("path")
+            .attr("class", "radarStroke")
+            .attr("d", function (d, i) {
+                return radarLine(d);
+            })
+            .style("stroke-width", cfg.strokeWidth + "px")
+            .style("stroke", function (d, i) {
+                return cfg.color(i);
+            })
+            .style("fill", "none")
+            .style("filter", "url(#glow)");
+
+    }
 
     //Taken from http://bl.ocks.org/mbostock/7555321
     //Wraps SVG text
