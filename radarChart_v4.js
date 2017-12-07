@@ -59,13 +59,13 @@ function RadarChart(id_sm, data, name, url, options) {
     var id = "#radar_" + sm_ids;
 
     var title;
-    if (url){
-        title = "<a target='_blank' href=\"" +  url + "\">" + name + "</a>";
+    if (url) {
+        title = "<a target='_blank' href=\"" + url + "\">" + name + "</a>";
     } else {
         title = name;
     }
 
-    $(id_sm).append('<div class="radar_chat col-2 grid-item" id="radar_' + sm_ids + '" data-value="'+ name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
+    $(id_sm).append('<div class="radar_chat col-2 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
     sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
@@ -142,6 +142,7 @@ function RadarChart(id_sm, data, name, url, options) {
         .append("g")
         .attr("class", "axis");
     //Append the lines
+
     axis.append("line")
         .attr("x1", 0)
         .attr("y1", 0)
@@ -151,13 +152,13 @@ function RadarChart(id_sm, data, name, url, options) {
         .attr("y2", function (d, i) {
             return rScale(1) * Math.sin(angleSlice * i - Math.PI / 2);
         })
-        .attr("class", "line")
+        .attr("class", "line ")
         .style("stroke", "white")
         .style("stroke-width", "2px");
 
+
     //Append the labels at each axis
-    if (cfg.showLabel)
-    {
+    if (cfg.showLabel) {
         axis.append("text")
             .attr("class", "legend")
             .style("font-size", "14px")
@@ -248,6 +249,117 @@ function RadarChart(id_sm, data, name, url, options) {
         .style("fill", "none")
         .style("filter", "url(#glow)");
 
+
+    var drag = d3.drag()
+        .on("start", dragstarted)
+        .on("drag", move)
+        .on("end", dragend);
+
+    function dragstarted(d) {
+        d3.select(this).raise().classed("active", true);
+    }
+
+    function dragend() {
+        d3.select(".updatevalue.skill")
+            .style("display", "block")
+            .style("text-align", "center")
+            .style("margin-top", "13px")
+            .style("font-size", "14px")
+            .transition().duration(500)
+            .text("Drag a Point to Edit");
+        d3.select(".updatevalue.value").style("visibility", "hidden");
+    }
+
+
+    function move(dobj, i) {
+        this.parentNode.appendChild(this);
+        var dragTarget = d3.select(this);
+        var oldData = dragTarget.data()[0];
+        console.log(oldData);
+        console.log(dragTarget);
+        var oldX = parseFloat(dragTarget.attr("cx")) - cfg.w / 2;
+        var oldY = cfg.h / 2 - parseFloat(dragTarget.attr("cy"));
+
+        //Bug for vector @ 270deg -Infinity/Infinity slope
+        oldX = (Math.abs(oldX) < 0.0000001) ? 0 : oldX;
+        oldY = (Math.abs(oldY) < 0.0000001) ? 0 : oldY;
+
+        var newY = 0, newX = 0, newValue = 0;
+        var maxX = 1 - cfg.w / 2;
+        var maxY = cfg.h / 2 - 1;
+
+        if (oldX === 0) {
+
+            newY = oldY - d3.event.dy;
+
+            if (Math.abs(newY) > Math.abs(maxY)) {
+                newY = maxY;
+            }
+            newValue = ((newY / oldY) * oldData.value).toFixed(2);
+        }
+        else {
+            var slope = oldY / oldX;
+
+            newX = d3.event.dx + parseFloat(dragTarget.attr("cx")) - cfg.w / 2;
+
+            if (Math.abs(newX) > Math.abs(maxX)) {
+                newX = maxX;
+            }
+            newY = newX * slope;
+
+            var ratio = newX / oldX;
+            newValue = (ratio * oldData.value).toFixed(2);
+        }
+
+        console.log(newValue, newX, newY);
+        //Bound the drag behavior to the max and min of the axis, not by pixels but by value calc (easier)
+        if (newValue >= 1 && newValue <= cfg.levels) {
+
+            dragTarget
+                .attr("cx", function () {
+                    return newX + cfg.w / 2;
+                })
+                .attr("cy", function () {
+                    return cfg.h / 2 - newY;
+                });
+
+            //Updating the data set with the new value
+            (dragTarget.data()[0]).value = newValue;
+
+            //center display for value
+            d3.select(".updatevalue.skill").text((dragTarget.data()[0]).axis)
+                .style("display", "block")
+                .style("font-size", "12px")
+                .style("text-align", "center")
+                .style("margin", "20px 0 5px 0");
+
+
+            d3.select(".updatevalue.value").text(newValue)
+                .style("display", "block")
+                .style("text-align", "center")
+                .style("visibility", "visible");
+
+
+            //reCalculatePoints();
+            //drawPoly();'
+            updatePoly();
+
+
+        }
+
+        //Release the drag listener on the node if you hit the min/max values
+        //https://github.com/mbostock/d3/wiki/Drag-Behavior
+        else {
+            if (newValue <= 0) {
+                newValue = 0;
+            }
+            else if (newValue >= cfg.levels) {
+                newValue = cfg.levels;
+            }
+            dragTarget.on("drag", null);
+        }
+    }
+
     //Append the circles
     blobWrapper.selectAll(".radarCircle")
         .data(function (d, i) {
@@ -265,7 +377,8 @@ function RadarChart(id_sm, data, name, url, options) {
         .style("fill", function (d, i, j) {
             return cfg.color(j);
         })
-        .style("fill-opacity", 0.8);
+        .style("fill-opacity", 0.8)
+        .call(drag);
 
     /////////////////////////////////////////////////////////
     //////// Append invisible circles for tooltip ///////////
@@ -278,6 +391,7 @@ function RadarChart(id_sm, data, name, url, options) {
         .attr("class", "radarCircleWrapper");
 
     //Append a set of invisible circles on top for the mouseover pop-up
+    /*
     blobCircleWrapper.selectAll(".radarInvisibleCircle")
         .data(function (d, i) {
             return d;
@@ -307,7 +421,7 @@ function RadarChart(id_sm, data, name, url, options) {
         .on("mouseout", function () {
             tooltip.transition().duration(200)
                 .style("opacity", 0);
-        });
+        });*/
 
     //Set up the small tooltip for when you hover over a circle
     var tooltip = g.append("text")
