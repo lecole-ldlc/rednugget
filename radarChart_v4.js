@@ -255,7 +255,7 @@ function RadarChart(id_sm, data, name, url, options) {
         .on("drag", move)
         .on("end", dragend);
 
-    function dragstarted(d) {
+    function dragstarted() {
         d3.select(this).raise().classed("active", true);
     }
 
@@ -275,8 +275,6 @@ function RadarChart(id_sm, data, name, url, options) {
         this.parentNode.appendChild(this);
         var dragTarget = d3.select(this);
         var oldData = dragTarget.data()[0];
-        console.log(oldData);
-        console.log(dragTarget);
         var oldX = parseFloat(dragTarget.attr("cx")) - cfg.w / 2;
         var oldY = cfg.h / 2 - parseFloat(dragTarget.attr("cy"));
 
@@ -342,7 +340,7 @@ function RadarChart(id_sm, data, name, url, options) {
 
             //reCalculatePoints();
             //drawPoly();'
-            updatePoly();
+            //updatePoly();
 
 
         }
