@@ -257,8 +257,6 @@
             });
             $("#CYN").html("");
             RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
-
-            //console.log("sliderValue= " + sliderValue);
             whowins();
             update();
         }
@@ -346,7 +344,7 @@
     var customRadarChartOptions = {
         w: width * 1.2,
         h: height * 1.2,
-        dotRadius: 5,
+        dotRadius: 9,
         margin: customMargin,
         maxValue: 0.5,
         levels: 5,

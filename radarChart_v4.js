@@ -60,13 +60,13 @@ function RadarChart(id_sm, data, name, url, options) {
     var id = "#radar_" + sm_ids;
 
     var title;
-    if (url){
-        title = "<a class='sm_title' target='_blank' href=\"" +  url + "\">" + name + "</a>";
+    if (url) {
+        title = "<a class='sm_title' target='_blank' href=\"" + url + "\">" + name + "</a>";
     } else {
         title = name;
     }
 
-    $(id_sm).append('<div class="radar_chat col-lg-1 col-md-2 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="'+ name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
+    $(id_sm).append('<div class="radar_chat col-lg-1 col-md-2 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
     sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
@@ -188,6 +188,7 @@ function RadarChart(id_sm, data, name, url, options) {
     ///////////// Draw the radar chart blobs ////////////////
     /////////////////////////////////////////////////////////
 
+
     //The radial line function
     var radarLine = d3.lineRadial()
         .radius(function (d) {
@@ -306,15 +307,19 @@ function RadarChart(id_sm, data, name, url, options) {
             data_slider[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
+                    console.log("oui",data_slider[0][index].value)
                 }
             });
             data[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
+                    console.log("oui2",data_slider[0][index].value)
                 }
             });
             update_path(blobWrapper);
             update();
+            whowins();
+            console.log("1",data_slider);
             //reCalculatePoints();
             //drawPoly();'
             //updatePoly();
@@ -354,9 +359,20 @@ function RadarChart(id_sm, data, name, url, options) {
         })
         .style("fill-opacity", 0.8);
 
-    if (cfg.enableDrag){
+    if (cfg.enableDrag) {
         circles.call(drag);
     }
+
+    d3.selection.prototype.moveToFront = function () {
+        return this.each(function () {
+            this.parentNode.appendChild(this);
+        });
+    };
+
+    circles.on("mouseover", function () {
+        var sel = d3.select(this);
+        sel.moveToFront();
+    });
 
 
     /////////////////////////////////////////////////////////
@@ -413,7 +429,6 @@ function RadarChart(id_sm, data, name, url, options) {
 
     // Update the shape the the radar (needed
     function update_path(blobWrapper) {
-
         g.selectAll(".radarArea").remove();
         g.selectAll(".radarStroke").remove();
 
