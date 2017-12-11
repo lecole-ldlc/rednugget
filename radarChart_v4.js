@@ -66,7 +66,7 @@ function RadarChart(id_sm, data, name, url, options) {
         title = name;
     }
 
-    $(id_sm).append('<div class="radar_chat col-lg-1 col-md-2 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
+    $(id_sm).append('<div class="radar_chat col-lg-2 col-md-3 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
     sm_ids = sm_ids + 1;
 
     //Remove whatever chart with the same id/class was present before
