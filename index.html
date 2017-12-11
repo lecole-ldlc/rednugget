@@ -23,6 +23,26 @@
 <body>
 <div style="margin-top: 20px;">
 </div>
+
+<div id="intro" class="center text-margin">
+    <!--<p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite
+        la plus ressemblante parce qu'on est gentils et qu'on veut t'éviter de passer 15 ans sur Google à chercher
+        "chaine YouTube comme Squeezie" :)<br>Crée, teste, expérimente... Parce que la science n’attend pas !</p>-->
+</div>
+
+<hr>
+
+<h2>Polis la pépite de tes rêves !</h2>
+<div id="builder_intro" class="text-margin">
+    <!--<p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
+        (Humour, Originalité, Réflexion) et trois critères objectifs (Abonnés, Durée, Fréquence) basés sur des échelles
+        choisies de manière totalement subjective. Du coup c’est pas trop objectif, mais bon ce qui compte c’est que ce
+        soit concordant. </p>-->
+    <br><br>
+    <!--<p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites
+        YouTube). </p>-->
+</div>
+
 <div class="row">
     <div class="col-sm-12 col-lg-4 " style="padding-bottom: 50px">
         <p>Joue avec les curseurs !</p>
@@ -68,17 +88,22 @@
             </div>
             <div class="col"><p class="slider_title">Peu original</p></div>
         </div>
+        <div class="row">
+            <button id="reset" class="btn btn-primary">Reset</button>
+        </div>
     </div>
 
     <div class="col-sm-12 col-lg-4" id="CYN"></div>
 
     <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
+
         <div id="reaction"></div>
         <p id="result"></p>
         <p id="ratio"></p>
     </div>
 
 </div>
+<div class="justify-content-start grid" id="small_multiple"></div>
 
 <br><br>
 <hr>
@@ -90,8 +115,6 @@
         S’il y en a une qui t’intrigue, ne clique surtout pas sur son nom, il pourrait arriver quelque chose de
         terrible...</p>
 </div>
-
-<div class="row justify-content-start grid" id="small_multiple"></div>
 
 
 <script
@@ -139,14 +162,28 @@
 
     var data_slider = [
         [//editable
-            {axis: "Humour", value: 0.2},
-            {axis: "Durée", value: 0.4},
-            {axis: "Abonnés", value: 0.6},
-            {axis: "Fréquence", value: 0.8},
-            {axis: "Réflexion", value: 1.0},
+            {axis: "Humour", value: 0.5},
+            {axis: "Durée", value: 0.5},
+            {axis: "Abonnés", value: 0.5},
+            {axis: "Fréquence", value: 0.5},
+            {axis: "Réflexion", value: 0.5},
             {axis: "Originalité", value: 0.5}
         ]
     ];
+
+    $("#reset").click(function () {
+        data_slider = [
+            [//editable
+                {axis: "Humour", value: 0.5},
+                {axis: "Durée", value: 0.5},
+                {axis: "Abonnés", value: 0.5},
+                {axis: "Fréquence", value: 0.5},
+                {axis: "Réflexion", value: 0.5},
+                {axis: "Originalité", value: 0.5}
+            ]
+        ];
+        console.log(data_slider)
+    });
 
     function drawSlider(element) {
         var svg = d3.select(element),
@@ -239,7 +276,7 @@
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
-    var margin = {top: 5, right: 20, bottom: 30, left: 20},
+    var margin = {top: 5, right: 5, bottom: 5, left: 5},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
@@ -256,6 +293,7 @@
     $.get(URL, function (textString) {
 
         console.log("data loaded");
+
         data = d3.csvParseRows(textString);
         console.log(data);
 
@@ -294,15 +332,15 @@
         .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
 
     var radarChartOptions = {
-        w: width * 0.4,
-        h: height * 0.4,
+        w: width * 0.3,
+        h: height * 0.3,
         margin: margin,
         dotRadius: 2,
         maxValue: 0.5,
         levels: 5,
         roundStrokes: true,
         color: color,
-        showLabel: false,
+        showLabel: false
     };
 
     var customRadarChartOptions = {
