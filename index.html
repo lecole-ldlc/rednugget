@@ -306,19 +306,19 @@
         data = d3.csvParseRows(textString);
         console.log(data);
 
-        data.forEach(function (line, ind) {
+        data.forEach(function (col, ind) {
             if (ind > 0) {
                 o = {
-                    'name': line[0],
-                    'url': line[8],
-                    'urlimg': line[9],
+                    'name': col[0],
+                    'url': col[8],
+                    'urlimg': col[9],
                     data: [[
-                        {axis: 'Humour', 'value': +line[1].replace(",", ".")},
-                        {axis: 'Réflexion', 'value': +line[2].replace(",", ".")},
-                        {axis: 'Originalité', 'value': +line[3].replace(",", ".")},
-                        {axis: 'Durée', 'value': +line[4].replace(",", ".")},
-                        {axis: 'Abonnés', 'value': +line[5].replace(",", ".")},
-                        {axis: 'Fréquence', 'value': +line[6].replace(",", ".")}
+                        {axis: 'Humour', 'value': +col[1].replace(",", ".")},
+                        {axis: 'Durée', 'value': +col[4].replace(",", ".")},
+                        {axis: 'Abonnés', 'value': +col[5].replace(",", ".")},
+                        {axis: 'Fréquence', 'value': +col[6].replace(",", ".")},
+                        {axis: 'Réflexion', 'value': +col[2].replace(",", ".")},
+                        {axis: 'Originalité', 'value': +col[3].replace(",", ".")}
                     ]]
                 };
                 data_full.push(o); // Store data in data_full array

@@ -307,19 +307,19 @@ function RadarChart(id_sm, data, name, url, options) {
             data_slider[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
-                    console.log("oui",data_slider[0][index].value)
+                    console.log("oui", data_slider[0][index].value)
                 }
             });
             data[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
-                    console.log("oui2",data_slider[0][index].value)
+                    console.log("oui2", data_slider[0][index].value)
                 }
             });
             update_path(blobWrapper);
             update();
             whowins();
-            console.log("1",data_slider);
+            console.log("1", data_slider);
             //reCalculatePoints();
             //drawPoly();'
             //updatePoly();
@@ -434,7 +434,6 @@ function RadarChart(id_sm, data, name, url, options) {
 
         //Create a wrapper for the blobs
 
-
         //Append the backgrounds
         blobWrapper
             .append("path")
@@ -449,7 +448,7 @@ function RadarChart(id_sm, data, name, url, options) {
             .style("fill-opacity", cfg.opacityArea)
             .on('mouseover', function (d, i) {
                 //Dim all blobs
-                d3.selectAll(".radarArea")
+                //d3.selectAll(".radarArea")
                 //    .transition().duration(200)
                 //    .style("fill-opacity", 0.1);
                 //Bring back the hovered over blob
@@ -463,6 +462,33 @@ function RadarChart(id_sm, data, name, url, options) {
                 d3.selectAll(".radarArea")
                     .transition().duration(200)
                     .style("fill-opacity", cfg.opacityArea);
+            })
+            .on('click', function () {
+                console.log("oui");
+                console.log(name);
+                console.log(data);
+                data_slider[0][0]["value"] = data[0][0]["value"];
+                data_slider[0][1]["value"] = data[0][1]["value"];
+                data_slider[0][2]["value"] = data[0][2]["value"];
+                data_slider[0][3]["value"] = data[0][3]["value"];
+                data_slider[0][4]["value"] = data[0][4]["value"];
+                data_slider[0][5]["value"] = data[0][5]["value"];
+                console.log(data_slider);
+                whowins();
+                update();
+                $('#CYN').html('');
+                RadarChart("#CYN", data_slider, "", null, customRadarChartOptions);
+                /*data_slider = [
+                    [
+                        {axis: "Humour", value: 0.5},
+                        {axis: "Durée", value: 0.5},
+                        {axis: "Abonnés", value: 0.5},
+                        {axis: "Fréquence", value: 0.5},
+                        {axis: "Réflexion", value: 0.5},
+                        {axis: "Originalité", value: 0.5}
+                    ]
+                ];*/
+
             });
 
         //Create the outlines
