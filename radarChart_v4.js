@@ -439,6 +439,7 @@ function RadarChart(id_sm, data, name, url, options) {
         blobWrapper
             .append("path")
             .attr("class", "radarArea")
+            .attr("id", "radarArea" + sm_ids)
             .attr("d", function (d, i) {
                 return radarLine(d);
             })
@@ -448,7 +449,7 @@ function RadarChart(id_sm, data, name, url, options) {
             .style("fill-opacity", cfg.opacityArea)
             .on('mouseover', function (d, i) {
                 //Dim all blobs
-                //d3.selectAll(".radarArea")
+                d3.selectAll(".radarArea")
                 //    .transition().duration(200)
                 //    .style("fill-opacity", 0.1);
                 //Bring back the hovered over blob

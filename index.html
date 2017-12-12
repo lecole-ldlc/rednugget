@@ -13,13 +13,12 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <!-- D3.js
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
- -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>-->
 
     <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-
 </head>
+
 <body>
 <div style="margin-top: 20px;">
 </div>
@@ -97,20 +96,18 @@
 
     <div style="margin-left: auto; margin-right: auto;" class="justify-content-start grid col-lg-8"
          id="small_multiple"></div>
-
-
 </div>
-<div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
+
+<div class="col-sm-12 col-lg-4" style="margin-bottom: 20px; margin-left: auto; margin-right: auto">
     <div id="reaction"></div>
     <p id="result"></p>
     <p id="ratio"></p>
-    <br>
+    <br><br>
     <button id="reset" class="btn btn-primary">Reset</button>
 </div>
 <!--
 <br><br>
 <hr>
-
 <h2>Toutes les pépites</h2>
 <div id="sm_text" class="text-margin">
     <p>Voici toutes les pépites que nous avons miné jusqu’à maintenant ! Chaque mineur de l’équipe RedNugget a noté
@@ -137,11 +134,12 @@
 
 <script>
 
+    // ISOTOPE FUNCTIONS //
+
     var grid = null;
 
     function init_isotope() {
         grid = $('.grid').isotope({
-            //ISOTOPE
             itemSelector: '.grid-item',
             //layoutMode: 'fitRows',
             getSortData: {
@@ -152,19 +150,18 @@
         console.log("Isotope initiated")
     }
 
+    // Get the new distance data and sort it in ascending order
     function update() {
         grid.isotope('updateSortData');
         grid.isotope({sortBy: 'distance'});
         console.log("Isotope updated")
     }
 
+    //__________________________________________//
 
-</script>
-
-<script>
-
+    // Array that stores the input from the user
     var data_slider = [
-        [//editable
+        [
             {axis: "Humour", value: 0.5},
             {axis: "Durée", value: 0.5},
             {axis: "Abonnés", value: 0.5},
@@ -174,9 +171,10 @@
         ]
     ];
 
+    // Function to reset the slider data to default when a button is clicked
     $("#reset").click(function () {
-        data_slider = [
-            [//editable
+        data_slider = [ // Default
+            [
                 {axis: "Humour", value: 0.5},
                 {axis: "Durée", value: 0.5},
                 {axis: "Abonnés", value: 0.5},
@@ -185,12 +183,17 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins();
-        $('#CYN').html('');
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         console.log(data_slider)
     });
 
+    //__________________________________________//
+
+    // SLIDER FUNCTIONS //
+
+    // Draw the Sliders previously used when you couldn't slide directly in the Builder
     function drawSlider(element) {
         var svg = d3.select(element),
             margin = {right: 10, left: 10},
@@ -251,9 +254,10 @@
             .attr("cx", x(sliderValue))
             .attr("r", 10);
 
+        // Get the data from the slider and insert it into the data_slider array
         function sliderData(h) {
             handle.attr("cx", x(h));
-            sliderValue = Math.round(x.invert(d3.event.x) * 100) / 100;
+            sliderValue = Math.round(x.invert(d3.event.x) * 100) / 100; // Calculate the value and transform it into "0,xx"
             $('#sliderData1').html(sliderValue);
 
             data_slider[0].forEach(function (d, index) {
@@ -261,19 +265,20 @@
                     data_slider[0][index].value = sliderValue;
                 }
             });
-            $("#CYN").html("");
-            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
-            whowins();
-            update();
+            $("#CYN").html(""); // Kill the builder
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw
+            whowins(); // Calculate distances
+            update(); // Update isotope and reorder small multiples
         }
     }
 
     $(".slider_svg").each(function (e) {
-        drawSlider("#" + $(this).attr('id'));
-    })
+        drawSlider("#" + $(this).attr('id')); // Draw each slider
+    });
 
-</script>
-<script>
+
+    //__________________________________________//
+
     var sm_ids = 1;
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
@@ -282,11 +287,11 @@
     //////////////////////////////////////////////////////////////
     var margin = {top: 5, right: 5, bottom: 5, left: 5},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
 
     var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
 
     //////////////////////////////////////////////////////////////
     ////////////////////////// Data //////////////////////////////
@@ -294,7 +299,7 @@
     var data_full = [];
     var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
 
-    $.get(URL, function (textString) {
+    $.get(URL, function (textString) { // Get the nugget data from our google sheet
 
         console.log("data loaded");
 
@@ -316,16 +321,16 @@
                         {axis: 'Fréquence', 'value': +line[6].replace(",", ".")}
                     ]]
                 };
-                data_full.push(o);
+                data_full.push(o); // Store data in data_full array
             }
         });
         console.log(data_full);
 
         //Call function to draw the Radar chart
-        data_full.forEach(function (d) {
+        data_full.forEach(function (d) { // For each nugget, create a small radar chart
             RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
         });
-        init_isotope();
+        init_isotope(); // Initializing isotope script now that the grid has been created
     });
 
 
@@ -333,9 +338,9 @@
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
     var color = d3.scaleOrdinal()
-        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
+        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
 
-    var radarChartOptions = {
+    var radarChartOptions = { // Options for the small multiples
         w: width * 0.3,
         h: height * 0.3,
         margin: margin,
@@ -347,7 +352,7 @@
         showLabel: false
     };
 
-    var customRadarChartOptions = {
+    var customRadarChartOptions = { // Options for the builder
         w: width * 1.2,
         h: height * 1.2,
         dotRadius: 9,
@@ -361,14 +366,9 @@
     };
 
 
-    RadarChart("#CYN", data_slider, "", null, customRadarChartOptions);
+    RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
 
-    //Custom nugget drawn by user, stocked in data_slider
-
-
-    //This variable needs to go through all the nuggets to be compared with nC
-
-    function whowins() {
+    function whowins() { // Functions that compares the input with all existing nuggets to calculate the euclidean distances with each nugget
         var i = 0;
         var t = 0;
         var result = 1.5;
@@ -377,9 +377,9 @@
         var winner_urlimg = "";
         var nugget_ratio = 0;
 
-        distances = [];
+        distances = []; // Array to store the distances
 
-        nC = {
+        nC = { // Input from user
             'h': data_slider[0][0]["value"],
             'd': data_slider[0][1]["value"],
             'a': data_slider[0][2]["value"],
@@ -388,8 +388,8 @@
             'o': data_slider[0][5]["value"]
         };
 
-        data_full.forEach(function (d) {
-            n2 = {
+        data_full.forEach(function (d) { // For each nugget
+            n2 = { // Stores the nugget data
                 'h': d["data"][0][0]["value"],
                 'd': d["data"][0][1]["value"],
                 'a': d["data"][0][2]["value"],
@@ -398,46 +398,46 @@
                 'o': d["data"][0][5]["value"]
             };
 
-            t = distance(nC, n2);
+            t = distance(nC, n2); // Calculate distance between input and nugget (distance function at the end of the script)
 
-            distances.push({
-                key: d["name"],
-                dist: t
+            distances.push({ // Add result to the array
+                key: d["name"], // Nugget name
+                dist: t // Distance
             });
         });
 
         console.log(distances);
+
         distances.sort(function (a, b) {
-            return d3.ascending(a.dist, b.dist);
+            return d3.ascending(a.dist, b.dist); // Sort all the processed distances in ascending order
         });
 
         distances.forEach(function (d) {
-            $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist);
+            $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
         });
 
         console.log(distances[0]["dist"]);
-        result = distances[0]["dist"];
-        winner = distances[0]["key"];
+
+        result = distances[0]["dist"]; // Smallest distance
+        winner = distances[0]["key"]; // Name of the closest nugget
+
         for (var e = 0; e < distances.length; e++) {
-            if (data_full[e].name == distances[0]["key"]) {
+            if (data_full[e].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 winner_url = data_full[e].url;
-                //console.log(winner_url);
             }
         }
         for (var g = 0; g < distances.length; g++) {
-            if (data_full[g].name == distances[0]["key"]) {
+            if (data_full[g].name == distances[0]["key"]) { // Get the image URL of the closest nugget
                 winner_urlimg = data_full[g].urlimg;
-                console.log(winner_urlimg);
             }
         }
-        nugget_ratio = Math.round(100 - result * 100);
+        nugget_ratio = Math.round(100 - result * 100); // Calculate a ratio, not used anymore
 
-        //i++;
 
-        //console.log(result, winner);
+        // A few conditions to display a different text based on the closeness of the closest nugget //
 
         $("#result").html("<br> <a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
-        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%");
+        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
 
         if (result > 1) {
             $("#reaction").html("<p style='color:#f43131; font-size:20px'> Ça correspond pas DU TOUT, mais bon. 👇 ")
@@ -457,8 +457,7 @@
         }
     }
 
-
-    function distance(nC, n2) {
+    function distance(nC, n2) { // Euclidean distance function, i don't entirely understand it, thanks Antoine.
         var d = 0.0;
         for (var prop in nC) {
             d += (nC[prop] - n2[prop]) * (nC[prop] - n2[prop])
@@ -467,7 +466,5 @@
     }
 
 </script>
-
-
 </body>
 </html>

@@ -166,10 +166,10 @@ a {
 }
 
 .nugget_img {
-    width: 200px;
+    width: 400px;
     transition: width 0.5s;
 }
 
 .nugget_img:hover {
-    width: 300px;
+    width: 500px;
 }
