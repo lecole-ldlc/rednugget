@@ -23,15 +23,15 @@
 <body>
 <div style="margin-top: 20px;">
 </div>
-
+<!--
 <div id="intro" class="center text-margin">
-    <!--<p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite
+    <p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite
         la plus ressemblante parce qu'on est gentils et qu'on veut t'éviter de passer 15 ans sur Google à chercher
-        "chaine YouTube comme Squeezie" :)<br>Crée, teste, expérimente... Parce que la science n’attend pas !</p>-->
+        "chaine YouTube comme Squeezie" :)<br>Crée, teste, expérimente... Parce que la science n’attend pas !</p>
 </div>
 
 <hr>
-
+-->
 <h2>Polis la pépite de tes rêves !</h2>
 <div id="builder_intro" class="text-margin">
     <!--<p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
@@ -95,17 +95,19 @@
 
     <div style="margin-left: auto; margin-right: auto" class="col-sm-12 col-lg-4" id="CYN"></div>
 
-    <div style="margin-left: auto; margin-right: auto;" class="justify-content-start grid col-lg-8" id="small_multiple"></div>
-
+    <div style="margin-left: auto; margin-right: auto;" class="justify-content-start grid col-lg-8"
+         id="small_multiple"></div>
 
 
 </div>
 <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px">
-
-        <div id="reaction"></div>
-        <p id="result"></p>
-        <p id="ratio"></p>
-    </div>
+    <div id="reaction"></div>
+    <p id="result"></p>
+    <p id="ratio"></p>
+    <br>
+    <button id="reset" class="btn btn-primary">Reset</button>
+</div>
+<!--
 <br><br>
 <hr>
 
@@ -116,7 +118,7 @@
         S’il y en a une qui t’intrigue, ne clique surtout pas sur son nom, il pourrait arriver quelque chose de
         terrible...</p>
 </div>
-
+-->
 
 <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -183,6 +185,9 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
+        whowins();
+        $('#CYN').html('');
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions);
         console.log(data_slider)
     });
 
