@@ -223,12 +223,6 @@ function RadarChart(id_sm, data, name, url, options) {
 
     function dragend() {
         d3.select(".updatevalue.skill")
-            .style("display", "block")
-            .style("text-align", "center")
-            .style("margin-top", "13px")
-            .style("font-size", "14px")
-            .transition().duration(500)
-            .text("Drag a Point to Edit");
         d3.select(".updatevalue.value").style("visibility", "hidden");
     }
 
@@ -255,8 +249,15 @@ function RadarChart(id_sm, data, name, url, options) {
             if (Math.abs(newY) > Math.abs(maxY)) {
                 newY = maxY;
             }
+
+            var ratioY = newY / oldY;
             //newValue = ((newY / oldY) * oldData.value).toFixed(2);
             newValue = Math.abs(newY / radius).toFixed(2);
+            if (ratioY < 0){
+                newValue = - newValue;
+            }
+            console.log(newValue);
+
         }
         else {
             var slope = oldY / oldX;
@@ -270,15 +271,17 @@ function RadarChart(id_sm, data, name, url, options) {
 
             var ratio = newX / oldX;
             //newValue = (ratio * oldData.value).toFixed(2);
-            newValue = Math.sqrt(newX * newX + newY * newY) / radius;
+            newValue = Math.sqrt((newX * newX) + (newY * newY)) / radius;
+            if (ratio < 0){
+                newValue = - newValue;
+            }
         }
 
-        //newX = d3.event.dx + parseFloat(dragTarget.attr("cx"));
-        //newY = d3.event.dy + parseFloat(dragTarget.attr("cy"));
+        // newX = d3.event.dx + parseFloat(dragTarget.attr("cx"));
+        // newY = d3.event.dy + parseFloat(dragTarget.attr("cy"));
 
-        console.log(oldX, oldY, oldData.value, newX, newY, newValue);
         //Bound the drag behavior to the max and min of the axis, not by pixels but by value calc (easier)
-        if (newValue >= 0 && newValue <= 1) {
+        if (newValue > 0 && newValue <= 1) {
 
             dragTarget
                 .attr("cx", function () {
@@ -307,19 +310,19 @@ function RadarChart(id_sm, data, name, url, options) {
             data_slider[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
-                    console.log("oui", data_slider[0][index].value)
+                    // console.log("oui", data_slider[0][index].value)
                 }
             });
             data[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
-                    console.log("oui2", data_slider[0][index].value)
+                    // console.log("oui2", data_slider[0][index].value)
                 }
             });
             update_path(blobWrapper);
             update();
             whowins();
-            console.log("1", data_slider);
+            // console.log("1", data_slider);
             //reCalculatePoints();
             //drawPoly();'
             //updatePoly();
@@ -367,7 +370,9 @@ function RadarChart(id_sm, data, name, url, options) {
         return this.each(function () {
             this.parentNode.appendChild(this);
         });
+
     };
+
 
     circles.on("mouseover", function () {
         var sel = d3.select(this);
@@ -418,23 +423,17 @@ function RadarChart(id_sm, data, name, url, options) {
                 .style("opacity", 0);
         });*/
 
-    //Set up the small tooltip for when you hover over a circle
-    var tooltip = g.append("text")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
     /////////////////////////////////////////////////////////
     /////////////////// Helper Function /////////////////////
     /////////////////////////////////////////////////////////
 
-    // Update the shape the the radar (needed
+    // Update the shape the radar needed
     function update_path(blobWrapper) {
         g.selectAll(".radarArea").remove();
         g.selectAll(".radarStroke").remove();
 
-        //Create a wrapper for the blobs
 
-        //Append the backgrounds
+        // Append the backgrounds
         blobWrapper
             .append("path")
             .attr("class", "radarArea")
@@ -491,7 +490,7 @@ function RadarChart(id_sm, data, name, url, options) {
 
             });
 
-        //Create the outlines
+        // Create the outlines
         blobWrapper.append("path")
             .attr("class", "radarStroke")
             .attr("d", function (d, i) {
@@ -506,8 +505,8 @@ function RadarChart(id_sm, data, name, url, options) {
 
     }
 
-    //Taken from http://bl.ocks.org/mbostock/7555321
-    //Wraps SVG text
+    // Taken from http://bl.ocks.org/mbostock/7555321
+    // Wraps SVG text
     function wrap(text, width) {
         text.each(function () {
             var text = d3.select(this),

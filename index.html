@@ -147,14 +147,14 @@
                 distance: '[data-dist] parseFloat' // value of attribute
             }
         });
-        console.log("Isotope initiated")
+        //console.log("Isotope initiated")
     }
 
     // Get the new distance data and sort it in ascending order
     function update() {
         grid.isotope('updateSortData');
         grid.isotope({sortBy: 'distance'});
-        console.log("Isotope updated")
+        //console.log("Isotope updated")
     }
 
     //__________________________________________//
@@ -186,7 +186,7 @@
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        console.log(data_slider)
+        //console.log(data_slider)
     });
 
     //__________________________________________//
@@ -301,10 +301,10 @@
 
     $.get(URL, function (textString) { // Get the nugget data from our google sheet
 
-        console.log("data loaded");
+        //console.log("data loaded");
 
         data = d3.csvParseRows(textString);
-        console.log(data);
+        //console.log(data);
 
         data.forEach(function (col, ind) {
             if (ind > 0) {
@@ -324,7 +324,7 @@
                 data_full.push(o); // Store data in data_full array
             }
         });
-        console.log(data_full);
+        //console.log(data_full);
 
         //Call function to draw the Radar chart
         data_full.forEach(function (d) { // For each nugget, create a small radar chart
@@ -406,7 +406,7 @@
             });
         });
 
-        console.log(distances);
+        //console.log(distances);
 
         distances.sort(function (a, b) {
             return d3.ascending(a.dist, b.dist); // Sort all the processed distances in ascending order
@@ -416,7 +416,7 @@
             $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
         });
 
-        console.log(distances[0]["dist"]);
+        //console.log(distances[0]["dist"]);
 
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
