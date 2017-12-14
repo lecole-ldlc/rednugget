@@ -14,7 +14,7 @@ function RadarChart(id_sm, data, name, url, options) {
         maxValue: 1, 			//What is the value that the biggest circle will represent
         labelFactor: 1.01, 	//How much farther than the radius of the outer circle should the labels be placed
         wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
-        opacityArea: 0.35, 	//The opacity of the area of the blob
+        opacityArea: 0.4, 	//The opacity of the area of the blob
         dotRadius: 4, 			//The size of the colored circles of each blog
         opacityCircles: 0.05, 	//The opacity of the circles of each blob
         strokeWidth: 2, 		//The width of the stroke around each blob
@@ -253,8 +253,8 @@ function RadarChart(id_sm, data, name, url, options) {
             var ratioY = newY / oldY;
             //newValue = ((newY / oldY) * oldData.value).toFixed(2);
             newValue = Math.abs(newY / radius).toFixed(2);
-            if (ratioY < 0){
-                newValue = - newValue;
+            if (ratioY < 0) {
+                newValue = -newValue;
             }
             console.log(newValue);
 
@@ -272,8 +272,8 @@ function RadarChart(id_sm, data, name, url, options) {
             var ratio = newX / oldX;
             //newValue = (ratio * oldData.value).toFixed(2);
             newValue = Math.sqrt((newX * newX) + (newY * newY)) / radius;
-            if (ratio < 0){
-                newValue = - newValue;
+            if (ratio < 0) {
+                newValue = -newValue;
             }
         }
 
@@ -322,6 +322,8 @@ function RadarChart(id_sm, data, name, url, options) {
             update_path(blobWrapper);
             update();
             whowins();
+
+
             // console.log("1", data_slider);
             //reCalculatePoints();
             //drawPoly();'
@@ -366,19 +368,6 @@ function RadarChart(id_sm, data, name, url, options) {
         circles.call(drag);
     }
 
-    d3.selection.prototype.moveToFront = function () {
-        return this.each(function () {
-            this.parentNode.appendChild(this);
-        });
-
-    };
-
-
-    circles.on("mouseover", function () {
-        var sel = d3.select(this);
-        sel.moveToFront();
-    });
-
 
     /////////////////////////////////////////////////////////
     //////// Append invisible circles for tooltip ///////////
@@ -418,10 +407,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 .transition().duration(200)
                 .style('opacity', 1);
         })
-        .on("mouseout", function () {
-            tooltip.transition().duration(200)
-                .style("opacity", 0);
-        });*/
+        ;*/
 
     /////////////////////////////////////////////////////////
     /////////////////// Helper Function /////////////////////
@@ -435,7 +421,7 @@ function RadarChart(id_sm, data, name, url, options) {
 
         // Append the backgrounds
         blobWrapper
-            .append("path")
+            .insert("path", "circle")
             .attr("class", "radarArea")
             .attr("id", "radarArea" + sm_ids)
             .attr("d", function (d, i) {
@@ -446,22 +432,24 @@ function RadarChart(id_sm, data, name, url, options) {
             })
             .style("fill-opacity", cfg.opacityArea)
             .on('mouseover', function (d, i) {
-                //Dim all blobs
-                //d3.selectAll(".radarArea")
-                //    .transition().duration(200)
-                //    .style("fill-opacity", 0.1);
-                //Bring back the hovered over blob
-                d3.select(this)
-                    .transition().duration(200)
-                    .style("fill-opacity", 0.7)
-                    .style("cursor", "pointer");
-            })
-            .on('mouseout', function () {
-                //Bring back all blobs
-                d3.selectAll(".radarArea")
-                    .transition().duration(200)
-                    .style("fill-opacity", cfg.opacityArea);
-            })
+                    if (!cfg.enableDrag) {
+                        d3.select(this)
+                            .transition()
+                            .duration(100)
+                            .style("fill-opacity", 0.7)
+                            .style("cursor", "pointer");
+                    }
+                }
+            )
+            .on("mouseout", function () {
+                    if (!cfg.enableDrag) {
+                        d3.select(this).transition().duration(200)
+                            .style("fill-opacity", 0.4)
+                            .style("cursor", "none");
+
+                    }
+                }
+            )
             .on('click', function () {
                 console.log("oui");
                 console.log(name);
@@ -490,8 +478,8 @@ function RadarChart(id_sm, data, name, url, options) {
 
             });
 
-        // Create the outlines
-        blobWrapper.append("path")
+// Create the outlines
+        blobWrapper.insert("path", "circle")
             .attr("class", "radarStroke")
             .attr("d", function (d, i) {
                 return radarLine(d);
@@ -505,8 +493,8 @@ function RadarChart(id_sm, data, name, url, options) {
 
     }
 
-    // Taken from http://bl.ocks.org/mbostock/7555321
-    // Wraps SVG text
+// Taken from http://bl.ocks.org/mbostock/7555321
+// Wraps SVG text
     function wrap(text, width) {
         text.each(function () {
             var text = d3.select(this),
