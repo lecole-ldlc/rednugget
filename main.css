@@ -28,6 +28,9 @@ h2 {
     font-family: Dosis;
     font-size: 40px;
     padding-bottom: 10px;
+    text-align: left;
+    margin-top: 0px;
+    padding-left: 40px;
 }
 
 h3 {
@@ -40,9 +43,17 @@ hr {
     padding-bottom: 20px;
 }
 
+.col-lg-1 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.col-lg-2 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 #small_multiple {
-    margin-left: 100px;
-    margin-right: 100px;
 }
 
 #sm_text {
@@ -67,10 +78,22 @@ a {
     font-size: 10px !important;
 }
 
+#reset {
+    background-color: #353535;
+    margin-bottom: 20px;
+    margin-top: 6px;
+}
+
+#reset:hover {
+    background-color: rgba(53, 53, 53, 0.5);
+}
+
 .grid {
 }
 
 .grid-item {
+    /*    padding-left: 0 !important;
+        padding-right: 0 !important;*/
 }
 
 /* ##################################################################### */
@@ -166,10 +189,51 @@ a {
 }
 
 .nugget_img {
-    width: 400px;
+    width: 300px;
     transition: width 0.5s;
 }
 
 .nugget_img:hover {
-    width: 500px;
+    width: 320px;
+}
+
+/* ##################################################################### */
+/* Tooltip w3Schools */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

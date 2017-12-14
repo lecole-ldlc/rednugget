@@ -61,14 +61,17 @@ function RadarChart(id_sm, data, name, url, options) {
 
     var title;
     if (url) {
-        title = "<a class='sm_title' target='_blank' href=\"" + url + "\">" + name + "</a>";
+        title = "<div class='grid-item-content'><a class='sm_title' target='_blank' href=\"" + url + "\">" + name + "</a></div>";
     } else {
         title = name;
     }
-
-    $(id_sm).append('<div class="radar_chat col-lg-2 col-md-3 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0"><p class="small_multiple">' + title + '</p></div>');
+    if (cfg.enableDrag) {
+        $(id_sm).append('<div id="radar_' + sm_ids + '"></div>');
+    } else {
+        $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');
+    }
     sm_ids = sm_ids + 1;
-
+    //return;
     //Remove whatever chart with the same id/class was present before
     d3.select(id).select("svg").remove();
 
@@ -76,7 +79,7 @@ function RadarChart(id_sm, data, name, url, options) {
     var svg = d3.select(id).append("svg")
         .attr("width", cfg.w + cfg.margin.left + cfg.margin.right)
         .attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
-        .attr("class", "radar" + id);
+        .attr("class", "radar");
     //Append a g element
     var g = svg.append("g")
         .attr("transform", "translate(" + (cfg.w / 2 + cfg.margin.left) + "," + (cfg.h / 2 + cfg.margin.top) + ")");

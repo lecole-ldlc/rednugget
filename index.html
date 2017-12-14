@@ -9,14 +9,18 @@
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- D3.js
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>-->
 
     <link href='main.css' rel='stylesheet' type='text/css'>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -31,17 +35,24 @@
 
 <hr>
 -->
-<h2>Polis la pépite de tes rêves !</h2>
-<div id="builder_intro" class="text-margin">
-    <!--<p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
+<div class="row">
+    <div class="col-lg-1">
+        <button id="reset" class="btn btn-primary">Reset</button>
+    </div>
+    <div class="col-lg-11">
+        <h2>Polis la pépite de tes rêves !</h2>
+    </div>
+</div>
+
+<!--<div id="builder_intro" class="text-margin">
+    <p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
         (Humour, Originalité, Réflexion) et trois critères objectifs (Abonnés, Durée, Fréquence) basés sur des échelles
         choisies de manière totalement subjective. Du coup c’est pas trop objectif, mais bon ce qui compte c’est que ce
         soit concordant. </p>-->
-    <br><br>
-    <!--<p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites
-        YouTube). </p>-->
+<br><br>
+<!--<p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites
+    YouTube). </p>-->
 </div>
-
 <div class="row">
     <!--<div class="col-sm-12 col-lg-4 " style="padding-bottom: 50px">
         <p>Joue avec les curseurs !</p>
@@ -92,18 +103,20 @@
         </div>
     </div>-->
 
-    <div style="margin-left: auto; margin-right: auto" class="col-sm-12 col-lg-4" id="CYN"></div>
+    <div class="col-sm-12 col-lg-5 text-center" id="CYN"></div>
 
-    <div style="margin-left: auto; margin-right: auto;" class="justify-content-start grid col-lg-8"
-         id="small_multiple"></div>
-</div>
+    <div class="col-sm-12 col-lg-3" style="margin-bottom: 20px;">
+        <div id="reaction"></div>
+        <p id="result"></p>
+        <p id="ratio"></p>
+        <br><br>
+    </div>
 
-<div class="col-sm-12 col-lg-4" style="margin-bottom: 20px; margin-left: auto; margin-right: auto">
-    <div id="reaction"></div>
-    <p id="result"></p>
-    <p id="ratio"></p>
-    <br><br>
-    <button id="reset" class="btn btn-primary">Reset</button>
+    <div class="justify-content-start grid col-lg-4">
+        <div class="container-fluid" id="small_multiple">
+            <div class="grid-sizer col-lg-4"></div>
+        </div>
+    </div>
 </div>
 <!--
 <br><br>
@@ -121,14 +134,12 @@
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
 
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
 <script src="radarChart_v4.js"></script>
 
@@ -142,6 +153,10 @@
         grid = $('.grid').isotope({
             itemSelector: '.grid-item',
             //layoutMode: 'fitRows',
+            percentPosition: true,
+            masonry: {
+                columnWidth: '.grid-sizer'
+            },
             getSortData: {
                 value: '[data-value]', // value of attribute
                 distance: '[data-dist] parseFloat' // value of attribute
@@ -185,6 +200,7 @@
         ];
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
+
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
     });
@@ -319,14 +335,15 @@
                         {axis: 'Fréquence', 'value': +col[6].replace(",", ".")},
                         {axis: 'Réflexion', 'value': +col[2].replace(",", ".")},
                         {axis: 'Originalité', 'value': +col[3].replace(",", ".")}
-                    ]]
+                    ]],
+                    'fullname': col[10]
                 };
                 data_full.push(o); // Store data in data_full array
             }
         });
         //console.log(data_full);
 
-        //Call function to draw the Radar chart
+        //Call function to draw the Radar charts
         data_full.forEach(function (d) { // For each nugget, create a small radar chart
             RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
         });
@@ -353,8 +370,8 @@
     };
 
     var customRadarChartOptions = { // Options for the builder
-        w: width * 1.2,
-        h: height * 1.2,
+        w: width * 1.1,
+        h: height * 1.1,
         dotRadius: 9,
         margin: customMargin,
         maxValue: 0.5,
@@ -466,5 +483,6 @@
     }
 
 </script>
+
 </body>
 </html>
