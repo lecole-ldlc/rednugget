@@ -440,9 +440,21 @@
             return d3.ascending(a.dist, b.dist); // Sort all the processed distances in ascending order
         });
 
+        var incr = 2;
+
         distances.forEach(function (d) {
-            $("[data-value=" + '"' + d.key + '"' + "]").attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
+            var smSelector = $("[data-value=" + '"' + d.key + '"' + "]" + "[data-type=" + '"sm_rank"' + "]");
+                smSelector.attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
+
+
+                smSelector.addClass("hidenug").removeClass("shownug");
+                if (incr < 11) {
+                    $("[data-value=" + '"' + d.key + '"' + "]").removeClass("hidenug").addClass("shownug");
+                }
+                incr += 1;
+
         });
+
 
         //console.log(distances[0]["dist"]);
 

@@ -237,3 +237,11 @@ a {
     visibility: visible;
     opacity: 1;
 }
+
+.shownug{
+    display:block;
+}
+
+.hidenug{
+    display: none;
+}
