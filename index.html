@@ -118,6 +118,15 @@
         </div>
     </div>
 </div>
+
+<br><br>
+
+<div class="row">
+    <h2 style="text-align: center;">Toutes nos pépites !</h2>
+    <div id="small_multiple2">
+    </div>
+</div>
+
 <!--
 <br><br>
 <hr>
@@ -200,6 +209,7 @@
         ];
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
+        update();
 
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
@@ -346,6 +356,7 @@
         //Call function to draw the Radar charts
         data_full.forEach(function (d) { // For each nugget, create a small radar chart
             RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
+            RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions);
         });
         init_isotope(); // Initializing isotope script now that the grid has been created
     });
@@ -482,6 +493,8 @@
         return Math.sqrt(d);
     }
 
+
+    // OK EN FAIT C'EST PAS AUSSI SIMPLE, c'est hyper chaud il faut qu'il calcule le top 9 du tableau distances et qu'il n'affiche que ça TODO: fuck
 </script>
 
 </body>

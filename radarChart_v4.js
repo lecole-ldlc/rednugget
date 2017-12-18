@@ -67,11 +67,20 @@ function RadarChart(id_sm, data, name, url, options) {
     }
     if (cfg.enableDrag) {
         $(id_sm).append('<div id="radar_' + sm_ids + '"></div>');
-    } else {
-        $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');
     }
-    sm_ids = sm_ids + 1;
-    //return;
+    else if (!cfg.enableDrag && id_sm == "#small_multiple") {
+        if (sm_ids <= 18) {
+            $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');
+        }
+        // else {
+        //     $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item" style="display: none;" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');
+        // }
+    }
+    else if (!cfg.enableDrag && id_sm == "#small_multiple2") {
+        $(id_sm).append('<div class="radar_chart col-lg-1 col-md-4 col-sm-4 grid-item" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');
+    }
+    sm_ids += 1;
+
     //Remove whatever chart with the same id/class was present before
     d3.select(id).select("svg").remove();
 
