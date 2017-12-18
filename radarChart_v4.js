@@ -70,7 +70,7 @@ function RadarChart(id_sm, data, name, url, options) {
     }
     else if (!cfg.enableDrag && id_sm == "#small_multiple") {
 //        if (sm_ids <= 18) {
-            $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item dynamicnugs" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_rank">' + title + '</div>');
+            $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item dynamicnugs hidenug" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_rank">' + title + '</div>');
 //        }
         // else {
         //     $(id_sm).append('<div class="radar_chart col-lg-2 col-md-4 col-sm-4 grid-item" style="display: none;" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0">' + title + '</div>');

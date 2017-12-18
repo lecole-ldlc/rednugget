@@ -35,7 +35,9 @@ h2 {
 
 h3 {
     font-family: Exo;
-    font-size: 16px;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 0px;
 }
 
 hr {

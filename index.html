@@ -107,7 +107,9 @@
 
     <div class="col-sm-12 col-lg-3" style="margin-bottom: 20px;">
         <div id="reaction"></div>
-        <p id="result"></p>
+        <h3 id="fullname"></h3>
+        <p id="result"></p><br><br>
+        <p id="desc"></p>
         <p id="ratio"></p>
         <br><br>
     </div>
@@ -216,93 +218,9 @@
     });
 
     //__________________________________________//
-
-    // SLIDER FUNCTIONS //
-
-    // Draw the Sliders previously used when you couldn't slide directly in the Builder
-    function drawSlider(element) {
-        var svg = d3.select(element),
-            margin = {right: 10, left: 10},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height");
-        var selector = element;
-        var key = $(selector).attr("data-slider");
-
-        data_slider[0].forEach(function (d, index) {
-            if (d.axis == key) {
-                sliderValue = data_slider[0][index].value;
-            }
-        });
-
-        var x = d3.scaleLinear()
-            .domain([0, 1])
-            .range([0, width])
-            .clamp(true);
-
-        var slider = svg.append("g")
-            .attr("class", "slider")
-            .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
-
-        slider.append("line")
-            .attr("class", "track")
-            .attr("x1", x.range()[0])
-            .attr("x2", x.range()[1])
-            .select(function () {
-                return this.parentNode.appendChild(this.cloneNode(true));
-            })
-            .attr("class", "track-inset")
-            .select(function () {
-                return this.parentNode.appendChild(this.cloneNode(true));
-            })
-            .attr("class", "track-overlay")
-            .call(d3.drag()
-                .on("start.interrupt", function () {
-                    slider.interrupt();
-                })
-                .on("start drag", function () {
-                    sliderData(x.invert(d3.event.x));
-                }));
-
-//        slider.insert("g", ".track-overlay")
-//            .attr("class", "ticks")
-//            .attr("transform", "translate(0," + 30 + ")")
-//            .selectAll("text")
-//            .data(x.ticks(10))
-//            .enter().append("text")
-//            .attr("x", x)
-//            .attr("text-anchor", "middle")
-//            .text(function (d) {
-//                return d;
-//            });
-
-        var handle = slider.insert("circle", ".track-overlay")
-            .attr("class", "handle")
-            .attr("cx", x(sliderValue))
-            .attr("r", 10);
-
-        // Get the data from the slider and insert it into the data_slider array
-        function sliderData(h) {
-            handle.attr("cx", x(h));
-            sliderValue = Math.round(x.invert(d3.event.x) * 100) / 100; // Calculate the value and transform it into "0,xx"
-            $('#sliderData1').html(sliderValue);
-
-            data_slider[0].forEach(function (d, index) {
-                if (d.axis == key) {
-                    data_slider[0][index].value = sliderValue;
-                }
-            });
-            $("#CYN").html(""); // Kill the builder
-            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw
-            whowins(); // Calculate distances
-            update(); // Update isotope and reorder small multiples
-        }
-    }
-
-    $(".slider_svg").each(function (e) {
-        drawSlider("#" + $(this).attr('id')); // Draw each slider
-    });
-
-
+</script>
+<!--<script src="slider.js"></script>-->
+<script>
     //__________________________________________//
 
     var sm_ids = 1;
@@ -346,7 +264,8 @@
                         {axis: 'Réflexion', 'value': +col[2].replace(",", ".")},
                         {axis: 'Originalité', 'value': +col[3].replace(",", ".")}
                     ]],
-                    'fullname': col[10]
+                    'fullname': col[10],
+                    'desc': col[11]
                 };
                 data_full.push(o); // Store data in data_full array
             }
@@ -403,6 +322,8 @@
         var winner = "";
         var winner_url = "";
         var winner_urlimg = "";
+        var fullname = "";
+        var desc = "";
         var nugget_ratio = 0;
 
         distances = []; // Array to store the distances
@@ -441,25 +362,32 @@
         });
 
         var incr = 2;
-
         distances.forEach(function (d) {
             var smSelector = $("[data-value=" + '"' + d.key + '"' + "]" + "[data-type=" + '"sm_rank"' + "]");
-                smSelector.attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
+            smSelector.attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
 
-
-                smSelector.addClass("hidenug").removeClass("shownug");
-                if (incr < 11) {
-                    $("[data-value=" + '"' + d.key + '"' + "]").removeClass("hidenug").addClass("shownug");
-                }
-                incr += 1;
-
+            smSelector.addClass("hidenug").removeClass("shownug");
+            if (incr < 11) {
+                $("[data-value=" + '"' + d.key + '"' + "]").removeClass("hidenug").addClass("shownug");
+            }
+            incr += 1;
         });
-
-
-        //console.log(distances[0]["dist"]);
 
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
+
+        for (var f = 0; f < distances.length; f++) {
+            if (data_full[f].name == distances[0]["key"]) { // Get the URL of the closest nugget
+                fullname = data_full[f].fullname;
+            }
+        }
+
+        for (var d = 0; d < distances.length; d++) {
+            if (data_full[d].name == distances[0]["key"]) { // Get the URL of the closest nugget
+                desc = data_full[d].desc;
+                console.log(desc)
+            }
+        }
 
         for (var e = 0; e < distances.length; e++) {
             if (data_full[e].name == distances[0]["key"]) { // Get the URL of the closest nugget
@@ -475,19 +403,15 @@
 
 
         // A few conditions to display a different text based on the closeness of the closest nugget //
-
-        $("#result").html("<br><a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
-        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
-
         if (result > 1) {
             $("#reaction").html("<p style='color:#f43131; font-size:20px'> Ça correspond pas DU TOUT, mais bon. 👇 ")
         }
         //Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.
         else if (result < 1 && result > 0.7) {
-            $("#reaction").html("<p style='color:#f47b30; font-size:20px'>Bon ça correspond mais pas trop, on te garantit rien ! 👇")
+            $("#reaction").html("<p style='color:#f47b30; font-size:20px'>Bon prend la mais on te garantit rien ! 👇")
         }
         else if (result < 0.7 && result > 0.4) {
-            $("#reaction").html("<p style='color:#e5db1b; font-size:20px'>Pas mal, tu devrais trouver ton bonheur sur cette chaîne ! 👇")
+            $("#reaction").html("<p style='color:#e5db1b; font-size:20px'>Pas mal, tu devrais trouver ton bonheur ici ! 👇")
         }
         else if (result < 0.4 && result > 0.1) {
             $("#reaction").html("<p style='color:#29c126; font-size:20px'>Cette pépite ressemble beaucoup à la tienne ! 👇")
@@ -495,6 +419,11 @@
         else if (result < 0.1) {
             $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
         }
+        $("#fullname").html(fullname);
+        $("#result").html("<br><a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
+        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
+        $("#desc").html(desc);
+
     }
 
     function distance(nC, n2) { // Euclidean distance function, i don't entirely understand it, thanks Antoine.
@@ -504,10 +433,6 @@
         }
         return Math.sqrt(d);
     }
-
-
-    // OK EN FAIT C'EST PAS AUSSI SIMPLE, c'est hyper chaud il faut qu'il calcule le top 9 du tableau distances et qu'il n'affiche que ça TODO: fuck
 </script>
-
 </body>
 </html>
