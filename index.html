@@ -6,106 +6,51 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 
-    <!-- Google fonts -->
+    <!-- Google fonts & CSS-->
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- D3.js
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>-->
-
     <link href='main.css' rel='stylesheet' type='text/css'>
+
+    <!-- D3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
             integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
             crossorigin="anonymous"></script>
-
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <!-- Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <!-- RadarChart -->
+    <script src="radarChart_v4.js"></script>
 </head>
 
 <body>
-<div style="margin-top: 20px;">
-</div>
-<!--
-<div id="intro" class="center text-margin">
-    <p>Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite
-        la plus ressemblante parce qu'on est gentils et qu'on veut t'éviter de passer 15 ans sur Google à chercher
-        "chaine YouTube comme Squeezie" :)<br>Crée, teste, expérimente... Parce que la science n’attend pas !</p>
-</div>
+<h1>NuggetLab</h1>
 
-<hr>
--->
 <div class="row">
     <div class="col-lg-1">
         <button id="reset" class="btn btn-primary">Reset</button>
     </div>
     <div class="col-lg-11">
-        <h2>Polis la pépite de tes rêves !</h2>
+        <h2>Crée ta pépite !</h2>
     </div>
 </div>
-
-<!--<div id="builder_intro" class="text-margin">
-    <p>Glisse les curseurs, vas-y fais joujou, tu vas vite comprendre. Il y a trois critères totalement subjectifs
-        (Humour, Originalité, Réflexion) et trois critères objectifs (Abonnés, Durée, Fréquence) basés sur des échelles
-        choisies de manière totalement subjective. Du coup c’est pas trop objectif, mais bon ce qui compte c’est que ce
-        soit concordant. </p>-->
 <br><br>
-<!--<p style="font-style: italic;">Nos critères ne sont pas vérifiés par l’ONPY (Organisation Nationale des Pépites
-    YouTube). </p>-->
-</div>
+
 <div class="row">
-    <!--<div class="col-sm-12 col-lg-4 " style="padding-bottom: 50px">
-        <p>Joue avec les curseurs !</p>
-        <div class="row">
-            <div class="col"><p class="slider_title">Pas drôle</p></div>
-            <div class="col center">
-                <svg class="slider_svg" id="slider3" width="100" height="60" data-slider="Humour"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Drôle</p></div>
-        </div>
-        <div class="row">
-            <div class="col"><p class="slider_title">Vidéos courtes</p></div>
-            <div class="col center">
-                <svg class="slider_svg" id="slider4" width="100" height="60" data-slider="Durée"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Vidéos longues</p></div>
-        </div>
-        <div class="row">
-            <div class="col"><p class="slider_title">Peu d'abonnés</p></div>
-            <div class="col center">
-                <svg class="slider_svg" id="slider5" width="100" height="60" data-slider="Abonnés"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Beaucoup d'abonnés</p></div>
-        </div>
-        <div class="row">
-            <div class="col"><p class="slider_title">Publie rarement</p></div>
-            <div class="col center">
-                <svg class="slider_svg" id="slider6" width="100" height="60" data-slider="Fréquence"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Publie souvent</p></div>
-        </div>
-        <div class="row">
-            <div class="col"><p class="slider_title">Ne fait pas réfléchir</p></div>
-            <div class="col center">
-                <svg class="slider_svg" id="slider1" width="100" height="60" data-slider="Réflexion"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Fait réfléchir</p></div>
-        </div>
-        <div class="row">
-            <div class="col"><p class="slider_title">Pas original</p></div>
-            <div class="col center"
-                <svg class="slider_svg" id="slider2" width="100" height="60" data-slider="Originalité"></svg>
-            </div>
-            <div class="col"><p class="slider_title">Peu original</p></div>
-        </div>
-        <div class="row">
-            <button id="reset" class="btn btn-primary">Reset</button>
-        </div>
-    </div>-->
 
-    <div class="col-sm-12 col-lg-5 text-center" id="CYN"></div>
+    <div class="col-sm-12 col-lg-4 text-center" id="CYN"></div>
 
-    <div class="col-sm-12 col-lg-3" style="margin-bottom: 20px;">
+    <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px;">
         <div id="reaction"></div>
         <h3 id="fullname"></h3>
         <p id="result"></p><br><br>
@@ -128,31 +73,6 @@
     <div id="small_multiple2">
     </div>
 </div>
-
-<!--
-<br><br>
-<hr>
-<h2>Toutes les pépites</h2>
-<div id="sm_text" class="text-margin">
-    <p>Voici toutes les pépites que nous avons miné jusqu’à maintenant ! Chaque mineur de l’équipe RedNugget a noté
-        l’ensemble des chaînes que tu trouveras sur le blog, la moyenne de nos notes a donné ces magnifiques pépites.
-        S’il y en a une qui t’intrigue, ne clique surtout pas sur son nom, il pourrait arriver quelque chose de
-        terrible...</p>
-</div>
--->
-
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-
-<script src="radarChart_v4.js"></script>
 
 <script>
 

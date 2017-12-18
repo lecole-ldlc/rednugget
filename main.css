@@ -18,8 +18,8 @@ p {
 
 h1 {
     font-family: Dosis;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-top: 10px;
     color: #f43131;
     font-size: 70px;
 }
@@ -45,6 +45,11 @@ hr {
     padding-bottom: 20px;
 }
 
+a {
+    color: #353535;
+    font-size: 10px !important;
+}
+
 .col-lg-1 {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -54,6 +59,9 @@ hr {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+
+/* ##################################################################### */
+/* Small Multiples */
 
 #small_multiple {
 }
@@ -66,19 +74,8 @@ hr {
     font-size: 10px !important;
 }
 
-#builder_intro {
-    padding-bottom: 50px;
-}
-
-.text-margin {
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-a {
-    color: #353535;
-    font-size: 10px !important;
-}
+/* ##################################################################### */
+/* Reset Button */
 
 #reset {
     background-color: #353535;
@@ -88,14 +85,6 @@ a {
 
 #reset:hover {
     background-color: rgba(53, 53, 53, 0.5);
-}
-
-.grid {
-}
-
-.grid-item {
-    /*    padding-left: 0 !important;
-        padding-right: 0 !important;*/
 }
 
 /* ##################################################################### */
@@ -168,7 +157,7 @@ a {
 }
 
 /* ##################################################################### */
-/* Third row, results */
+/* Results */
 
 #best_match {
     font-size: 20px !important;
@@ -197,6 +186,11 @@ a {
 
 .nugget_img:hover {
     width: 320px;
+}
+
+#desc {
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 /* ##################################################################### */
@@ -240,10 +234,13 @@ a {
     opacity: 1;
 }
 
-.shownug{
-    display:block;
+/* ##################################################################### */
+/* Others */
+
+.shownug {
+    display: block;
 }
 
-.hidenug{
+.hidenug {
     display: none;
 }
