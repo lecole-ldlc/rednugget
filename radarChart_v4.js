@@ -77,7 +77,7 @@ function RadarChart(id_sm, data, name, url, options) {
         // }
     }
     else if (!cfg.enableDrag && id_sm == "#small_multiple2") {
-        $(id_sm).append('<div class="radar_chart col-lg-2 col-md-2 col-sm-4 fixednugs" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_chrono">' + title + '</div>');
+        $(id_sm).append('<div onclick="topFunction()" class="radar_chart col-lg-2 col-md-2 col-sm-4 fixednugs" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_chrono">' + title + '</div>');
     }
     sm_ids += 1;
 
@@ -268,7 +268,7 @@ function RadarChart(id_sm, data, name, url, options) {
             if (ratioY < 0) {
                 newValue = -newValue;
             }
-            console.log(newValue);
+            //console.log(newValue);
 
         }
         else {
@@ -455,16 +455,12 @@ function RadarChart(id_sm, data, name, url, options) {
                 }
             )
             .on('click', function () {
-                console.log("oui");
-                console.log(name);
-                console.log(data);
                 data_slider[0][0]["value"] = data[0][0]["value"];
                 data_slider[0][1]["value"] = data[0][1]["value"];
                 data_slider[0][2]["value"] = data[0][2]["value"];
                 data_slider[0][3]["value"] = data[0][3]["value"];
                 data_slider[0][4]["value"] = data[0][4]["value"];
                 data_slider[0][5]["value"] = data[0][5]["value"];
-                console.log(data_slider);
                 whowins();
                 update();
                 $('#CYN').html('');

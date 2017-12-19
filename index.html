@@ -77,6 +77,12 @@
 
 <script>
 
+    function topFunction() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+    }
+
     // ISOTOPE FUNCTIONS //
 
     var grid = null;
@@ -154,6 +160,7 @@
         update();
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
+
     });
 
 
@@ -339,7 +346,6 @@
         for (var d = 0; d < distances.length; d++) {
             if (data_full[d].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 desc = data_full[d].desc;
-                console.log(desc)
             }
         }
 
