@@ -34,10 +34,10 @@
 </head>
 
 <body>
-<h1>NuggetLab</h1>
+<!--<h1>NuggetLab</h1>-->
 
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-lg-1">f
         <button id="reset" class="btn btn-primary">Reset</button>
     </div>
     <div class="col-lg-11">
@@ -66,10 +66,11 @@
     </div>
 </div>
 
-<br><br>
+<br><br><br><br>
 
 <div class="row">
     <h2 style="text-align: center;">Toutes nos pépites !</h2>
+    <br><br><br>
     <div id="small_multiple2" class="col-lg-9 center">
     </div>
 </div>
@@ -195,7 +196,7 @@
         //Call function to draw the Radar charts
         data_full.forEach(function (d) { // For each nugget, create a small radar chart
             RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
-            RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions);
+            RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
         });
         init_isotope(); // Initializing isotope script now that the grid has been created
     });
@@ -206,6 +207,8 @@
     //////////////////////////////////////////////////////////////
     var color = d3.scaleOrdinal()
         .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
+    var color2 = d3.scaleOrdinal()
+        .range(["#353535", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
 
     var radarChartOptions = { // Options for the small multiples
         w: width * 0.3,
@@ -216,6 +219,18 @@
         levels: 5,
         roundStrokes: true,
         color: color,
+        showLabel: false
+    };
+
+    var radarChartOptions2 = { // Options for the small multiples
+        w: width * 0.3,
+        h: height * 0.3,
+        margin: margin,
+        dotRadius: 2,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color2,
         showLabel: false
     };
 

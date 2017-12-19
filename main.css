@@ -95,6 +95,10 @@ a {
     /*margin-left: 10px;*/
 }
 
+#small_multiple.radarArea {
+    fill: #242424!important;
+}
+
 /* ##################################################################### */
 /* Reset Button */
 
