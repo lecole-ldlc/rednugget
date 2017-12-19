@@ -138,6 +138,26 @@
         //console.log(data_slider)
     });
 
+
+    $(document).ready(function () {
+        data_slider = [ // Default
+            [
+                {axis: "Humour", value: 0.5},
+                {axis: "Durée", value: 0.5},
+                {axis: "Abonnés", value: 0.5},
+                {axis: "Fréquence", value: 0.5},
+                {axis: "Réflexion", value: 0.5},
+                {axis: "Originalité", value: 0.5}
+            ]
+        ];
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
+    });
+
+
     //__________________________________________//
 </script>
 <!--<script src="slider.js"></script>-->
