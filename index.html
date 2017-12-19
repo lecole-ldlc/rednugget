@@ -133,7 +133,6 @@
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
         update();
-
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
     });
@@ -170,7 +169,7 @@
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
-    var margin = {top: 5, right: 5, bottom: 5, left: 5},
+    var margin = {top: 5, right: 5, bottom: 10, left: 5},
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
 
