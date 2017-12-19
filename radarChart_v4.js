@@ -234,7 +234,7 @@ function RadarChart(id_sm, data, name, url, options) {
     }
 
     function dragend() {
-        d3.select(".updatevalue.skill")
+        d3.select(".updatevalue.skill");
         d3.select(".updatevalue.value").style("visibility", "hidden");
     }
 

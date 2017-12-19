@@ -61,7 +61,7 @@ a {
 }
 
 @media (min-width: 1200px) {
-    .col-lg-2 #small_multiple {
+    .col-lg-2.dynamicnugs {
         width: 28.5% !important;
     }
 }
@@ -89,6 +89,10 @@ a {
 
 #sm_title {
     font-size: 10px !important;
+}
+
+#CYN {
+    /*margin-left: 10px;*/
 }
 
 /* ##################################################################### */
@@ -197,15 +201,16 @@ a {
 }
 
 .nugget_img {
-    width: 300px;
+    width: 200px;
     transition: width 0.5s;
 }
 
 .nugget_img:hover {
-    width: 320px;
+    width: 220px;
 }
 
 #desc {
+    font-size: 16px;
     padding-left: 70px;
     padding-right: 70px;
 }
