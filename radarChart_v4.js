@@ -77,7 +77,7 @@ function RadarChart(id_sm, data, name, url, options) {
         // }
     }
     else if (!cfg.enableDrag && id_sm == "#small_multiple2") {
-        $(id_sm).append('<div class="radar_chart col-lg-1 col-md-4 col-sm-4 fixednugs" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_chrono">' + title + '</div>');
+        $(id_sm).append('<div class="radar_chart col-lg-2 col-md-2 col-sm-4 fixednugs" id="radar_' + sm_ids + '" data-value="' + name + '" data-dist="0" data-type="sm_chrono">' + title + '</div>');
     }
     sm_ids += 1;
 

@@ -60,10 +60,27 @@ a {
     padding-right: 0 !important;
 }
 
+@media (min-width: 1200px) {
+    .col-lg-2 #small_multiple {
+        width: 28.5% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-9 {
+        float: none !important;
+    }
+}
+
 /* ##################################################################### */
 /* Small Multiples */
 
 #small_multiple {
+}
+
+#small_multiple2 {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #sm_text {
@@ -189,8 +206,8 @@ a {
 }
 
 #desc {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
 /* ##################################################################### */
