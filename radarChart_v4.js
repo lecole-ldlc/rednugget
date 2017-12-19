@@ -334,14 +334,6 @@ function RadarChart(id_sm, data, name, url, options) {
             update_path(blobWrapper);
             update();
             whowins();
-
-
-            // console.log("1", data_slider);
-            //reCalculatePoints();
-            //drawPoly();'
-            //updatePoly();
-
-
         }
 
         //Release the drag listener on the node if you hit the min/max values
