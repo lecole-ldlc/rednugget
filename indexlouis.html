@@ -426,12 +426,12 @@
     if (bouton_humour == false)
     {
         bouton_humour = true;
-        $( "#humour" ).addClass("critere");
+        $( "#humour" ).removeClass("nocritere").addClass("critere");
     }
     else if (bouton_humour == true)
     {
         bouton_humour = false;
-        $( "#humour" ).removeClass("critere");
+        $( "#humour" ).addClass("nocritere").removeClass("critere");
 
     }
         console.log(bouton_humour)
