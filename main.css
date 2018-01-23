@@ -296,3 +296,40 @@ a {
 .nocritere {
     fill: rgba(0, 0, 0, 0.5) ;
 }
+
+.GetNugget {
+    font-size: 50px;
+    border-radius: 20px;
+    background-color: #f43131;
+    color: #F9F9F9;
+    margin-bottom: 50px;
+    border: none;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.GetNugget:hover {
+    background-color: #F9F9F9;
+    color: #f43131;
+    border-color: #f43131;
+}
+
+#nuggetHelp {
+    border-radius: 20px;
+    background-color: #f43131;
+    color: #F9F9F9;
+    margin-top: 10px;
+    border: none;
+}
+
+#nuggetHelp:hover {
+    border-radius: 20px;
+    background-color: #F9F9F9;
+    color: #f43131;
+    border: none;
+}
+
+#reset {
+    border-radius: 20px;
+    border: none;
+}

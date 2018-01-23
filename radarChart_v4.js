@@ -343,7 +343,6 @@ function RadarChart(id_sm, data, name, url, options) {
             });
             update_path(blobWrapper);
             update();
-            whowins();
         }
 
         //Release the drag listener on the node if you hit the min/max values
