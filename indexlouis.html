@@ -412,6 +412,116 @@
         }
         return Math.sqrt(d);
     }
+
+    var bouton_humour = true;
+    var bouton_duree = true;
+    var bouton_abonnes = true;
+    var bouton_frequence = true;
+    var bouton_reflexion = true;
+    var bouton_originalite = true;
+
+
+
+    $("#humour").on("click", function () {
+    if (bouton_humour == false)
+    {
+        bouton_humour = true;
+        $( "#humour" ).addClass("critere");
+        $( "#humour" ).css('background', 'yellow');
+    }
+    else if (bouton_humour == true)
+    {
+        bouton_humour = false;
+        $( "#humour" ).removeClass("critere");
+
+    }
+        console.log(bouton_humour)
+
+    })
+
+
+    $("#duree").on("click", function () {
+        if (bouton_duree == false)
+        {
+            bouton_duree = true;
+            $( "#duree" ).removeClass("critere").addClass("nocritere");
+        }
+        else if (bouton_duree == true)
+        {
+            bouton_duree = false;
+            $( "#duree" ).addClass("critere").removeClass("nocritere");
+        }
+        console.log(bouton_duree)
+
+    })
+
+    $("#abonnes").on("click", function () {
+        if (bouton_abonnes == false)
+        {
+            bouton_abonnes = true;
+            $( "#abonnes" ).addClass("critere");
+
+        }
+        else if (bouton_abonnes == true)
+        {
+            bouton_abonnes = false;
+            $( "#abonnes" ).removeClass("critere");
+
+        }
+        console.log(bouton_abonnes)
+
+    })
+
+    $("#frequence").on("click", function () {
+        if (bouton_frequence == false)
+        {
+            bouton_frequence = true;
+            $( "#frequence" ).addClass("critere");
+
+        }
+        else if (bouton_frequence == true)
+        {
+            bouton_frequence = false;
+            $( "#frequence" ).removeClass("critere");
+
+        }
+        console.log(bouton_frequence)
+
+    })
+
+    $("#reflexion").on("click", function () {
+        if (bouton_reflexion == false)
+        {
+            bouton_reflexion = true;
+            $( "#reflexion" ).addClass("critere");
+
+        }
+        else if (bouton_reflexion == true)
+        {
+            bouton_reflexion = false;
+            $( "#reflexion" ).removeClass("critere");
+
+        }
+        console.log(bouton_reflexion)
+
+    })
+
+    $("#originalite").on("click", function () {
+        if (bouton_originalite == false)
+        {
+            bouton_originalité = true;
+            $( "#originalite" ).addClass("critere");
+
+        }
+        else if (bouton_originalite == true)
+        {
+            bouton_originalite = false;
+            $( "#originalite" ).removeClass("critere");
+
+        }
+        console.log(bouton_originalite)
+
+    })
 </script>
 </body>
 </html>

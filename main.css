@@ -116,7 +116,12 @@ a {
 /* Slider */
 
 .legend {
-    fill: #333333;
+    fill: rgba(0, 0, 0, 0.5);
+
+}
+
+.legend:hover {
+    font-weight: bold;
 }
 
 .tooltip {
@@ -269,4 +274,17 @@ a {
 
 .hidenug {
     display: none;
+}
+
+
+
+
+
+
+.critere {
+    fill: #f43131 ;
+}
+
+.nocritere {
+    fill: rgba(0, 0, 0, 0.5) ;
 }

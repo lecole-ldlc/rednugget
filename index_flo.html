@@ -23,8 +23,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <!-- Isotope -->
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -35,66 +33,21 @@
 
 <body>
 <h1>NuggetLab</h1>
-<br><p class="center">Hey ! Bienvenue dans le Lab. Ici, tu pourras créer ta propre pépite selon tes envies. On te proposera la pépite la plus ressemblante. :)</p><br><br>
-<p class="center">Crée, teste, expérimente.. Parce que la science n’attend pas !</p><br><br>
-<div class="row center"><a href="#contexte"><button class="btn btn-primary" style="background-color: #f43131">En savoir plus</button></a></div>
+
 <div class="row">
     <div class="col-lg-1">
         <button id="reset" class="btn btn-primary">Reset</button>
-    </div>
-    <div class="col-lg-11">
-        <h2>Crée ta pépite !</h2>
     </div>
 </div>
 <br><br>
 
 <div class="row">
 
-    <div class="col-sm-12 col-lg-4 text-center" id="CYN"></div>
+    <div class="col-sm-12 col-lg-12 text-center" id="CYN"></div>
 
-    <div class="col-sm-12 col-lg-4" style="margin-bottom: 20px;">
-        <div id="reaction"></div>
-        <h3 id="fullname"></h3>
-        <p id="result"></p><br><br>
-        <p id="desc"></p>
-        <p id="ratio"></p>
-        <br><br>
-    </div>
-
-    <div class="justify-content-start grid col-lg-4">
-        <div class="container-fluid" id="small_multiple">
-            <div class="grid-sizer col-lg-4"></div>
-        </div>
-    </div>
-</div>
-
-<br><br><br><br>
-
-<div class="row">
-    <h2 style="text-align: center;">Toutes nos pépites !</h2>
-    <br><br><br>
-    <div id="small_multiple2" class="col-lg-9 center">
-    </div>
-</div>
-
-<div class="container" id="contexte" style="margin-bottom: 100px">
-    <br><br><br>
-    <h2 class="center">A propos de cette visualisation de données</h2>
-    <h3>Le projet RedNugget</h3>
-    <p>RedNugget est un blog qui partage les pépites de YouTube, c’est-à-dire les chaînes YouTube qui sont sous-exposées mais qualitatives. Nous rédigeons des articles qui présentent et analysent ces pépites. Ces articles sont rangés dans 3 catégories : se détendre, se marrer, et se cultiver. Dans ce projet, nous créons une dataviz (réalisée en d3) sous un format de radar-chart pour donner forme à nos pépites YouTube.</p>
-    <h3>Pourquoi ce <i>truc</i> ?</h3>
-    <p>Cette <i>dataviz</i> est là pour que tu puisses “créer” toi-même ta pépite. Tu es donc en quelque sorte acteur de la découverte de pépites, bien que celles-ci soient déjà découvertes par nous, RedNugget. ;)</p>
-    <p>Ces pépites sont représentées par différents critères de notation, à savoir : humour, durée moyenne, abonnés, fréquence de mise en ligne des vidéos, réflexion, originalité. Ces critères balayent donc la pépite dans son ensemble et permettent de donner une première vue de celle-ci.</p>
-
-    <!--<h3>Le Nugget Builder</h3>
-    <p></p>
-
-    <h3>Toutes nos pépites</h3>-->
-    <p></p>
 </div>
 
 <script>
-
 
     function topFunction() {
         $('body,html').animate({
@@ -102,34 +55,6 @@
         }, 400);
     }
 
-    // ISOTOPE FUNCTIONS //
-
-    var grid = null;
-
-    function init_isotope() {
-        grid = $('.grid').isotope({
-            itemSelector: '.grid-item',
-            //layoutMode: 'fitRows',
-            percentPosition: true,
-            masonry: {
-                columnWidth: '.grid-sizer'
-            },
-            getSortData: {
-                value: '[data-value]', // value of attribute
-                distance: '[data-dist] parseFloat' // value of attribute
-            }
-        });
-        //console.log("Isotope initiated")
-    }
-
-    // Get the new distance data and sort it in ascending order
-    function update() {
-        grid.isotope('updateSortData');
-        grid.isotope({sortBy: 'distance'});
-        //console.log("Isotope updated")
-    }
-
-    //__________________________________________//
 
     // Array that stores the input from the user
     var data_slider = [
@@ -157,7 +82,6 @@
         ];
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
-        update();
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
     });
@@ -176,7 +100,6 @@
         ];
         whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
-        update();
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
 
@@ -184,10 +107,7 @@
 
 
     //__________________________________________//
-</script>
-<!--<script src="slider.js"></script>-->
-<script>
-    //__________________________________________//
+
 
     var sm_ids = 1;
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
@@ -236,14 +156,6 @@
                 data_full.push(o); // Store data in data_full array
             }
         });
-        //console.log(data_full);
-
-        //Call function to draw the Radar charts
-        data_full.forEach(function (d) { // For each nugget, create a small radar chart
-            RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
-            RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
-        });
-        init_isotope(); // Initializing isotope script now that the grid has been created
     });
 
 
@@ -280,8 +192,8 @@
     };
 
     var customRadarChartOptions = { // Options for the builder
-        w: width * 0.9,
-        h: height * 0.9,
+        w: width * 1.5,
+        h: height * 1.6,
         dotRadius: 9,
         margin: customMargin,
         maxValue: 0.5,

@@ -24,6 +24,11 @@ function RadarChart(id_sm, data, name, url, options) {
         color: d3.scaleOrdinal(d3.schemeCategory10)	//Color function
     };
 
+
+
+
+
+
     //Put all of the options into a variable called cfg
     if ('undefined' !== typeof options) {
         for (var i in options) {
@@ -173,7 +178,11 @@ function RadarChart(id_sm, data, name, url, options) {
     //Append the labels at each axis
     if (cfg.showLabel) {
         axis.append("text")
-            .attr("class", "legend")
+            .attr("class", "legend btn btn-primary critere")
+            .attr("id", function (d, i) {
+                if (i == 0){ return "humour";} if (i == 1){ return "durée";} if (i == 2){ return "abonnés";} if (i == 3){ return "fréquence";} if (i == 4){ return "réflexion";} if (i == 5){ return "originalité";}
+            })
+
             .style("font-size", "14px")
             .attr("text-anchor", function (d, i) {
                 if (i == 0 || i == 3) {
@@ -195,6 +204,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 return d
             })
             .call(wrap, cfg.wrapWidth);
+        console.log("oui")
     }
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
@@ -501,7 +511,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 words = text.text().split(/\s+/).reverse(),
                 word,
                 line = [],
-                lineNumber = 0,
+                lineNumber = 0,button
                 lineHeight = 1.4, // ems
                 y = text.attr("y"),
                 x = text.attr("x"),
