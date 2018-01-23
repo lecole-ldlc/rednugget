@@ -427,7 +427,6 @@
     {
         bouton_humour = true;
         $( "#humour" ).addClass("critere");
-        $( "#humour" ).css('background', 'yellow');
     }
     else if (bouton_humour == true)
     {
@@ -437,91 +436,90 @@
     }
         console.log(bouton_humour)
 
-    })
+    });
 
 
     $("#duree").on("click", function () {
         if (bouton_duree == false)
         {
             bouton_duree = true;
-            $( "#duree" ).removeClass("critere").addClass("nocritere");
+            $( "#duree" ).removeClass("nocritere").addClass("critere");
         }
         else if (bouton_duree == true)
         {
             bouton_duree = false;
-            $( "#duree" ).addClass("critere").removeClass("nocritere");
+            $( "#duree" ).addClass("nocritere").removeClass("critere");
         }
         console.log(bouton_duree)
 
-    })
+    });
 
     $("#abonnes").on("click", function () {
         if (bouton_abonnes == false)
         {
             bouton_abonnes = true;
-            $( "#abonnes" ).addClass("critere");
-
+            $( "#abonnes" ).removeClass("nocritere").addClass("critere");
         }
         else if (bouton_abonnes == true)
         {
             bouton_abonnes = false;
-            $( "#abonnes" ).removeClass("critere");
+            $( "#abonnes" ).addClass("nocritere").removeClass("critere");
 
         }
         console.log(bouton_abonnes)
 
-    })
+    });
 
     $("#frequence").on("click", function () {
         if (bouton_frequence == false)
         {
             bouton_frequence = true;
-            $( "#frequence" ).addClass("critere");
+            $( "#frequence" ).removeClass("nocritere").addClass("critere");
 
         }
         else if (bouton_frequence == true)
         {
             bouton_frequence = false;
-            $( "#frequence" ).removeClass("critere");
+            $( "#frequence" ).addClass("nocritere").removeClass("critere");
 
         }
         console.log(bouton_frequence)
 
-    })
+    });
 
     $("#reflexion").on("click", function () {
         if (bouton_reflexion == false)
         {
             bouton_reflexion = true;
-            $( "#reflexion" ).addClass("critere");
+            $( "#reflexion" ).removeClass("nocritere").addClass("critere");
 
         }
         else if (bouton_reflexion == true)
         {
             bouton_reflexion = false;
-            $( "#reflexion" ).removeClass("critere");
+            $( "#reflexion" ).addClass("nocritere").removeClass("critere");
 
         }
         console.log(bouton_reflexion)
 
-    })
+    });
 
     $("#originalite").on("click", function () {
         if (bouton_originalite == false)
         {
             bouton_originalite = true;
-            $( "#originalite" ).addClass("critere");
+            $( "#originalite" ).removeClass("nocritere").addClass("critere");
 
         }
         else if (bouton_originalite == true)
         {
             bouton_originalite = false;
-            $( "#originalite" ).removeClass("critere");
+            $( "#originalite" ).addClass("nocritere").removeClass("critere");
 
         }
         console.log(bouton_originalite)
 
-    })
+    });
 </script>
 </body>
 </html>
