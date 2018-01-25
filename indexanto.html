@@ -48,10 +48,13 @@
     <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
         <div style="">
             <!--<div id="reaction"></div>-->
-            <img>
-            <div id="result"></div>
-            <h3 id="fullname"></h3><br>
-            <p id="desc"></p>
+            <div class="row">
+                <div class="col-lg-5"><p id="result"></p></div>
+                <div class="col-lg-7">
+                    <h3 id="fullname"></h3><br>
+                    <p id="desc"></p></div>
+            </div>
+
             <p id="ratio"></p>
             <br><br>
             <hr style="border-top: 1px solid rgba(0,0,0,0.1)">
@@ -320,13 +323,18 @@
             }
             incr += 1;
         });
-
+        var fullname2 = "";
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
 
         for (var f = 0; f < distances.length; f++) {
             if (data_full[f].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 fullname = data_full[f].fullname;
+                console.log(fullname)
+            }
+            else if (data_full[f].name == distances[1]["key"]) {
+                fullname2 = data_full[f].fullname;
+                console.log(fullname2);
             }
         }
 

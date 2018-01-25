@@ -174,11 +174,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
-        $('#CYN').html(''); // Kill builder
-        update();
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        //console.log(data_slider)
 
     });
 
@@ -244,6 +239,11 @@
             RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
         });
         init_isotope(); // Initializing isotope script now that the grid has been created
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
     });
 
 
@@ -317,6 +317,7 @@
             'o': data_slider[0][5]["value"]
         };
 
+
         data_full.forEach(function (d) { // For each nugget
             n2 = { // Stores the nugget data
                 'h': d["data"][0][0]["value"],
@@ -352,7 +353,6 @@
             }
             incr += 1;
         });
-
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
 

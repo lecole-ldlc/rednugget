@@ -204,7 +204,6 @@ function RadarChart(id_sm, data, name, url, options) {
                 return d
             })
             .call(wrap, cfg.wrapWidth);
-        console.log("oui")
     }
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
@@ -328,7 +327,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 .style("text-align", "center")
                 .style("visibility", "visible");
 
-
+            //console.log(newValue);
             data_slider[0].forEach(function (d, index) {
                 if (d.axis == oldData.axis) {
                     data_slider[0][index].value = newValue;
@@ -342,6 +341,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 }
             });
             update_path(blobWrapper);
+            whowins();
             update();
         }
 
@@ -470,6 +470,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 data_slider[0][3]["value"] = data[0][3]["value"];
                 data_slider[0][4]["value"] = data[0][4]["value"];
                 data_slider[0][5]["value"] = data[0][5]["value"];
+                console.log("WHOWINS !");
                 whowins();
                 update();
                 $('#CYN').html('');

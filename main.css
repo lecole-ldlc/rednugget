@@ -200,7 +200,7 @@ a {
 #ratio {
     font-size: 20px !important;
     /*text-align: center;*/
-    padding-left: 50px;
+    /*padding-left: 50px;*/
 }
 
 #reaction {
@@ -211,7 +211,8 @@ a {
 #fullname {
     font-size: 40px;
     text-align: left;
-    padding-left: 50px;
+    padding-top: 15px;
+    /*padding-left: 50px;*/
 }
 
 .nugget_img {
@@ -219,16 +220,16 @@ a {
     transition: width 0.5s;
 }
 
-.nugget_img:hover {
+/*.nugget_img:hover {
     width: 420px;
-}
+}*/
 
 #desc {
     font-size: 16px;
     /*padding-left: 70px;*/
-    padding-right: 70px;
+    padding-right: 200px;
     text-align: left;
-    padding-left: 50px;
+    /*padding-left: 50px;*/
 }
 
 /* ##################################################################### */
