@@ -180,7 +180,12 @@ function RadarChart(id_sm, data, name, url, options) {
         axis.append("text")
             .attr("class", "legend btn btn-primary critere")
             .attr("id", function (d, i) {
-                if (i == 0){ return "humour";} if (i == 1){ return "duree";} if (i == 2){ return "abonnes";} if (i == 3){ return "frequence";} if (i == 4){ return "reflexion";} if (i == 5){ return "originalite";}
+                if (i == 0){ return "humour";}
+                if (i == 1){ return "duree";}
+                if (i == 2){ return "abonnes";}
+                if (i == 3){ return "frequence";}
+                if (i == 4){ return "reflexion";}
+                if (i == 5){ return "originalite";}
             })
 
             .style("font-size", "14px")
