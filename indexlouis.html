@@ -96,6 +96,15 @@
 <script>
 
 
+
+    var bouton_humour = true;
+    var bouton_duree = true;
+    var bouton_abonnes = true;
+    var bouton_frequence = true;
+    var bouton_reflexion = true;
+    var bouton_originalite = true;
+
+
     function topFunction() {
         $('body,html').animate({
             scrollTop: 0
@@ -155,11 +164,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
-        $('#CYN').html(''); // Kill builder
-        update();
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        //console.log(data_slider)
     });
 
 
@@ -174,11 +178,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
-        $('#CYN').html(''); // Kill builder
-        update();
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        //console.log(data_slider)
 
     });
 
@@ -244,6 +243,12 @@
             RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
         });
         init_isotope(); // Initializing isotope script now that the grid has been created
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        axisbuttons()
+        //console.log(data_slider)
     });
 
 
@@ -294,6 +299,7 @@
 
 
     RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
+    axisbuttons()
 
     function whowins() { // Functions that compares the input with all existing nuggets to calculate the euclidean distances with each nugget
         var i = 0;
@@ -316,6 +322,7 @@
             'r': data_slider[0][4]["value"],
             'o': data_slider[0][5]["value"]
         };
+
 
         data_full.forEach(function (d) { // For each nugget
             n2 = { // Stores the nugget data
@@ -352,7 +359,6 @@
             }
             incr += 1;
         });
-
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
 
@@ -412,114 +418,108 @@
         }
         return Math.sqrt(d);
     }
+    function axisbuttons () {
+        $("#humour").on("click", function () {
+            if (bouton_humour == false)
+            {
+                bouton_humour = true;
+                $( "#humour" ).removeClass("nocritere").addClass("critere");
+            }
+            else if (bouton_humour == true)
+            {
+                bouton_humour = false;
+                $( "#humour" ).addClass("nocritere").removeClass("critere");
 
-    var bouton_humour = true;
-    var bouton_duree = true;
-    var bouton_abonnes = true;
-    var bouton_frequence = true;
-    var bouton_reflexion = true;
-    var bouton_originalite = true;
+            }
+            console.log(bouton_humour)
+
+        });
 
 
+        $("#duree").on("click", function () {
+            if (bouton_duree == false)
+            {
+                bouton_duree = true;
+                $( "#duree" ).removeClass("nocritere").addClass("critere");
+            }
+            else if (bouton_duree == true)
+            {
+                bouton_duree = false;
+                $( "#duree" ).addClass("nocritere").removeClass("critere");
+            }
+            console.log(bouton_duree)
 
-    $("#humour").on("click", function () {
-    if (bouton_humour == false)
-    {
-        bouton_humour = true;
-        $( "#humour" ).removeClass("nocritere").addClass("critere");
+        });
+
+        $("#abonnes").on("click", function () {
+            if (bouton_abonnes == false)
+            {
+                bouton_abonnes = true;
+                $( "#abonnes" ).removeClass("nocritere").addClass("critere");
+            }
+            else if (bouton_abonnes == true)
+            {
+                bouton_abonnes = false;
+                $( "#abonnes" ).addClass("nocritere").removeClass("critere");
+
+            }
+            console.log(bouton_abonnes)
+
+        });
+
+        $("#frequence").on("click", function () {
+            if (bouton_frequence == false)
+            {
+                bouton_frequence = true;
+                $( "#frequence" ).removeClass("nocritere").addClass("critere");
+
+            }
+            else if (bouton_frequence == true)
+            {
+                bouton_frequence = false;
+                $( "#frequence" ).addClass("nocritere").removeClass("critere");
+
+            }
+            console.log(bouton_frequence)
+
+        });
+
+        $("#reflexion").on("click", function () {
+            if (bouton_reflexion == false)
+            {
+                bouton_reflexion = true;
+                $( "#reflexion" ).removeClass("nocritere").addClass("critere");
+
+            }
+            else if (bouton_reflexion == true)
+            {
+                bouton_reflexion = false;
+                $( "#reflexion" ).addClass("nocritere").removeClass("critere");
+
+            }
+            console.log(bouton_reflexion)
+
+        });
+
+        $("#originalite").on("click", function () {
+            if (bouton_originalite == false)
+            {
+                bouton_originalite = true;
+                $( "#originalite" ).removeClass("nocritere").addClass("critere");
+
+            }
+            else if (bouton_originalite == true)
+            {
+                bouton_originalite = false;
+                $( "#originalite" ).addClass("nocritere").removeClass("critere");
+
+            }
+            console.log(bouton_originalite)
+
+        });
     }
-    else if (bouton_humour == true)
-    {
-        bouton_humour = false;
-        $( "#humour" ).addClass("nocritere").removeClass("critere");
-
-    }
-        console.log(bouton_humour)
-
-    });
 
 
-    $("#duree").on("click", function () {
-        if (bouton_duree == false)
-        {
-            bouton_duree = true;
-            $( "#duree" ).removeClass("nocritere").addClass("critere");
-        }
-        else if (bouton_duree == true)
-        {
-            bouton_duree = false;
-            $( "#duree" ).addClass("nocritere").removeClass("critere");
-        }
-        console.log(bouton_duree)
-
-    });
-
-    $("#abonnes").on("click", function () {
-        if (bouton_abonnes == false)
-        {
-            bouton_abonnes = true;
-            $( "#abonnes" ).removeClass("nocritere").addClass("critere");
-        }
-        else if (bouton_abonnes == true)
-        {
-            bouton_abonnes = false;
-            $( "#abonnes" ).addClass("nocritere").removeClass("critere");
-
-        }
-        console.log(bouton_abonnes)
-
-    });
-
-    $("#frequence").on("click", function () {
-        if (bouton_frequence == false)
-        {
-            bouton_frequence = true;
-            $( "#frequence" ).removeClass("nocritere").addClass("critere");
-
-        }
-        else if (bouton_frequence == true)
-        {
-            bouton_frequence = false;
-            $( "#frequence" ).addClass("nocritere").removeClass("critere");
-
-        }
-        console.log(bouton_frequence)
-
-    });
-
-    $("#reflexion").on("click", function () {
-        if (bouton_reflexion == false)
-        {
-            bouton_reflexion = true;
-            $( "#reflexion" ).removeClass("nocritere").addClass("critere");
-
-        }
-        else if (bouton_reflexion == true)
-        {
-            bouton_reflexion = false;
-            $( "#reflexion" ).addClass("nocritere").removeClass("critere");
-
-        }
-        console.log(bouton_reflexion)
-
-    });
-
-    $("#originalite").on("click", function () {
-        if (bouton_originalite == false)
-        {
-            bouton_originalite = true;
-            $( "#originalite" ).removeClass("nocritere").addClass("critere");
-
-        }
-        else if (bouton_originalite == true)
-        {
-            bouton_originalite = false;
-            $( "#originalite" ).addClass("nocritere").removeClass("critere");
-
-        }
-        console.log(bouton_originalite)
-
-    });
 </script>
 </body>
 </html>
