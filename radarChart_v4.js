@@ -25,10 +25,6 @@ function RadarChart(id_sm, data, name, url, options) {
     };
 
 
-
-
-
-
     //Put all of the options into a variable called cfg
     if ('undefined' !== typeof options) {
         for (var i in options) {
@@ -180,12 +176,24 @@ function RadarChart(id_sm, data, name, url, options) {
         axis.append("text")
             .attr("class", "legend btn btn-primary critere")
             .attr("id", function (d, i) {
-                if (i == 0){ return "humour";}
-                if (i == 1){ return "duree";}
-                if (i == 2){ return "abonnes";}
-                if (i == 3){ return "frequence";}
-                if (i == 4){ return "reflexion";}
-                if (i == 5){ return "originalite";}
+                if (i == 0) {
+                    return "humour";
+                }
+                if (i == 1) {
+                    return "duree";
+                }
+                if (i == 2) {
+                    return "abonnes";
+                }
+                if (i == 3) {
+                    return "frequence";
+                }
+                if (i == 4) {
+                    return "reflexion";
+                }
+                if (i == 5) {
+                    return "originalite";
+                }
             })
 
             .style("font-size", "14px")
@@ -250,6 +258,13 @@ function RadarChart(id_sm, data, name, url, options) {
     function dragend() {
         d3.select(".updatevalue.skill");
         d3.select(".updatevalue.value").style("visibility", "hidden");
+        if (page == 2) { //Après avoir cliqué sur le bouton de recherche, on passe la var page à 2, pour autoriser le ondragend.
+            whowins(); // Calculate distance and display winner
+            $('#CYN').html(''); // Kill builder
+            update();
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        }
+
     }
 
 
@@ -346,7 +361,10 @@ function RadarChart(id_sm, data, name, url, options) {
                 }
             });
             update_path(blobWrapper);
-            whowins();
+            if (page == 1) {
+                whowins();
+                update();
+            }
             update();
         }
 
@@ -516,8 +534,8 @@ function RadarChart(id_sm, data, name, url, options) {
                 words = text.text().split(/\s+/).reverse(),
                 word,
                 line = [],
-                lineNumber = 0,button
-                lineHeight = 1.4, // ems
+                lineNumber = 0, button
+            lineHeight = 1.4, // ems
                 y = text.attr("y"),
                 x = text.attr("x"),
                 dy = parseFloat(text.attr("dy")),

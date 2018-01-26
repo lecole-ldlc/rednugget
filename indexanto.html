@@ -46,18 +46,56 @@
     </div>
 
     <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
-        <div style="">
+        <div>
             <!--<div id="reaction"></div>-->
             <div class="row">
-                <div class="col-lg-5"><p id="result"></p></div>
-                <div class="col-lg-7">
-                    <h3 id="fullname"></h3><br>
-                    <p id="desc"></p></div>
+                <div style="float: left; margin-right: 50px">
+                    <p id="result"></p>
+                </div>
+                <div>
+                    <h3 id="fullname" style="margin-top: 10px"></h3><br>
+                    <p id="desc"></p>
+                </div>
             </div>
-
-            <p id="ratio"></p>
+            <!--<p id="ratio"></p>-->
             <br><br>
-            <hr style="border-top: 1px solid rgba(0,0,0,0.1)">
+            <hr style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-bottom: 0px">
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result2"></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname2" style="margin-top: 10px"></h3><br>
+                    <p class="secondarydesc" id="desc2"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result3"></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname3" style="margin-top: 10px"></h3><br>
+                    <p class="secondarydesc" id="desc3"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result4"></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname4" style="margin-top: 10px"></h3><br>
+                    <p class="secondarydesc" id="desc4"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result5"></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname5" style="margin-top: 10px"></h3><br>
+                    <p class="secondarydesc" id="desc5"></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -145,12 +183,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
-        $('#CYN').html(''); // Kill builder
-        update();
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        //console.log(data_slider)
-
     });
 
 
@@ -159,7 +191,7 @@
 <!--<script src="slider.js"></script>-->
 <script>
     //__________________________________________//
-
+    var page = 2;
     var sm_ids = 1;
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
@@ -215,6 +247,11 @@
             RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
         });
         init_isotope(); // Initializing isotope script now that the grid has been created
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
     });
 
 
@@ -272,9 +309,25 @@
         var result = 1.5;
         var winner = "";
         var winner_url = "";
+        var winner_url2 = "";
+        var winner_url3 = "";
+        var winner_url4 = "";
+        var winner_url5 = "";
         var winner_urlimg = "";
+        var winner_urlimg2 = "";
+        var winner_urlimg3 = "";
+        var winner_urlimg4 = "";
+        var winner_urlimg5 = "";
         var fullname = "";
+        var fullname2 = "";
+        var fullname3 = "";
+        var fullname4 = "";
+        var fullname5 = "";
         var desc = "";
+        var desc2 = "";
+        var desc3 = "";
+        var desc4 = "";
+        var desc5 = "";
         var nugget_ratio = 0;
 
         distances = []; // Array to store the distances
@@ -323,18 +376,25 @@
             }
             incr += 1;
         });
-        var fullname2 = "";
+
         result = distances[0]["dist"]; // Smallest distance
         winner = distances[0]["key"]; // Name of the closest nugget
 
         for (var f = 0; f < distances.length; f++) {
             if (data_full[f].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 fullname = data_full[f].fullname;
-                console.log(fullname)
             }
             else if (data_full[f].name == distances[1]["key"]) {
                 fullname2 = data_full[f].fullname;
-                console.log(fullname2);
+            }
+            else if (data_full[f].name == distances[2]["key"]) {
+                fullname3 = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[3]["key"]) {
+                fullname4 = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[4]["key"]) {
+                fullname5 = data_full[f].fullname;
             }
         }
 
@@ -342,16 +402,52 @@
             if (data_full[d].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 desc = data_full[d].desc;
             }
+            else if (data_full[d].name == distances[1]["key"]) { // Get the URL of the closest nugget
+                desc2 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[2]["key"]) { // Get the URL of the closest nugget
+                desc3 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[3]["key"]) { // Get the URL of the closest nugget
+                desc4 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[4]["key"]) { // Get the URL of the closest nugget
+                desc5 = data_full[d].desc;
+            }
         }
 
         for (var e = 0; e < distances.length; e++) {
             if (data_full[e].name == distances[0]["key"]) { // Get the URL of the closest nugget
                 winner_url = data_full[e].url;
             }
+            else if (data_full[e].name == distances[1]["key"]) { // Get the URL of the closest nugget
+                winner_url2 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[2]["key"]) { // Get the URL of the closest nugget
+                winner_url3 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[3]["key"]) { // Get the URL of the closest nugget
+                winner_url4 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[4]["key"]) { // Get the URL of the closest nugget
+                winner_url5 = data_full[e].url;
+            }
         }
         for (var g = 0; g < distances.length; g++) {
             if (data_full[g].name == distances[0]["key"]) { // Get the image URL of the closest nugget
                 winner_urlimg = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[1]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg2 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[2]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg3 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[3]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg4 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[4]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg5 = data_full[g].urlimg;
             }
         }
         nugget_ratio = Math.round(100 - result * 100); // Calculate a ratio, not used anymore
@@ -375,9 +471,21 @@
             $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
         }
         $("#fullname").html(fullname);
-        $("#result").html("<br><a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
-        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
         $("#desc").html(desc);
+        $("#fullname2").html(fullname2);
+        $("#desc2").html(desc2);
+        $("#fullname3").html(fullname3);
+        $("#desc3").html(desc3);
+        $("#fullname4").html(fullname4);
+        $("#desc4").html(desc4);
+        $("#fullname5").html(fullname5);
+        $("#desc5").html(desc5);
+        $("#result").html("<br><a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
+        $("#result2").html("<br><a target=_blank href= " + winner_url2 + " ><img class=\"secondaryimg\" src=" + winner_urlimg2 + "></a>");
+        $("#result3").html("<br><a target=_blank href= " + winner_url3 + " ><img class=\"secondaryimg\" src=" + winner_urlimg3 + "></a>");
+        $("#result4").html("<br><a target=_blank href= " + winner_url4 + " ><img class=\"secondaryimg\" src=" + winner_urlimg4 + "></a>");
+        $("#result5").html("<br><a target=_blank href= " + winner_url5 + " ><img class=\"secondaryimg\" src=" + winner_urlimg5 + "></a>");
+        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
 
     }
 

@@ -211,7 +211,7 @@ a {
 #fullname {
     font-size: 40px;
     text-align: left;
-    padding-top: 15px;
+    padding-top: 25px;
     /*padding-left: 50px;*/
 }
 
@@ -231,6 +231,21 @@ a {
     text-align: left;
     /*padding-left: 50px;*/
 }
+
+.secondarytitle {
+    text-align: left;
+    padding-top: 25px;
+}
+
+.secondarydesc {
+    text-align: left;
+}
+
+.secondaryimg {
+    width: 200px;
+    margin-left: 50px;
+}
+
 
 /* ##################################################################### */
 /* Tooltip w3Schools */
