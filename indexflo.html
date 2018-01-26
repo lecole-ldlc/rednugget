@@ -33,10 +33,13 @@
 
 <body>
 
-<div><a href="https://rednugget.fr"><img id="logoLab" src="https://rednugget.fr/wp-content/uploads/2017/12/Nugget-Lab-Logo.png"></a></div>
+<div><a href="https://rednugget.fr"><img id="logoLab"
+                                         src="https://rednugget.fr/wp-content/uploads/2017/12/Nugget-Lab-Logo.png"></a>
+</div>
 
 <!-- Button trigger modal -->
-<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Aide</button>
+<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Aide
+</button>
 
 
 <!-- Modal -->
@@ -137,11 +140,17 @@
     var page = 1;
     var sm_ids = 1;
 
-    $("#GetNugget").on("click",function(){
-        page = 2;
-        console.log(page)
-    });
+    $("#GetNugget").on("click", function () {
 
+        $.get("https://get.rednugget.fr/search.php?h=" + data_slider[0][0].value + "&d" + data_slider[0][1].value + "&a" + data_slider[0][2].value + "&f" + data_slider[0][3].value + "&r" + data_slider[0][4].value + "&o" + data_slider[0][5].value, function(data){
+            console.log(data);
+        });
+        console.log("SEND REQUEST TO " + "https://get.rednugget.fr/search.php?h=" + + data_slider[0][0].value + "&d" + data_slider[0][1].value + "&a" + data_slider[0][2].value + "&f" + data_slider[0][3].value + "&r" + data_slider[0][4].value + "&o" + data_slider[0][5].value);
+
+
+    $("#result").html(data);
+
+    });
 
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
@@ -152,7 +161,7 @@
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
 
-    var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
+    var customMargin = {top: 60, right: 60, bottom: 80, left: 60},
         width = Math.min(300, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
 

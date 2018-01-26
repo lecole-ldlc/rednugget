@@ -1,0 +1,493 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Nugget Lab</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+
+    <!-- Google fonts & CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet" type="text/css">
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script><style></style>
+    <!-- Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Isotope -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- RadarChart -->
+    <script src="radarChart_v4.js"></script>
+</head>
+
+<body cz-shortcut-listen="true">
+
+<h1>NuggetLab</h1>
+<hr style="border-top: 1px solid rgba(0,0,0,0.1); padding-bottom: 0px; margin-bottom: 0px; padding-top: 0px; margin-top: 0px">
+
+<div class="row">
+
+    <div class="col-sm-12 col-lg-4">
+        <div id="CYN"><div id="radar_55"><svg width="393" height="383" class="radar"><g transform="translate(196.5,166.5)"><defs><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"></feGaussianBlur><feMerge><feMergeNode in="coloredBlur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs><g class="axisWrapper"><circle class="gridCircle" r="136.5" style="fill: rgb(205, 205, 205); stroke: rgb(205, 205, 205); stroke-width: 0.3; fill-opacity: 0.05; filter: url(&quot;#glow&quot;);"></circle><circle class="gridCircle" r="109.2" style="fill: rgb(205, 205, 205); stroke: rgb(205, 205, 205); stroke-width: 0.3; fill-opacity: 0.05; filter: url(&quot;#glow&quot;);"></circle><circle class="gridCircle" r="81.9" style="fill: rgb(205, 205, 205); stroke: rgb(205, 205, 205); stroke-width: 0.3; fill-opacity: 0.05; filter: url(&quot;#glow&quot;);"></circle><circle class="gridCircle" r="54.6" style="fill: rgb(205, 205, 205); stroke: rgb(205, 205, 205); stroke-width: 0.3; fill-opacity: 0.05; filter: url(&quot;#glow&quot;);"></circle><circle class="gridCircle" r="27.3" style="fill: rgb(205, 205, 205); stroke: rgb(205, 205, 205); stroke-width: 0.3; fill-opacity: 0.05; filter: url(&quot;#glow&quot;);"></circle><g class="axis"><line x1="0" y1="0" x2="8.358214404180685e-15" y2="-136.5" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="humour" text-anchor="middle" dy="0.35em" x="9.285976203044744e-15" y="-151.65150000000003" style="font-size: 14px;"><tspan x="9.285976203044744e-15" y="-151.65150000000003" dy="0.35em">Humour</tspan></text></g><g class="axis"><line x1="0" y1="0" x2="118.21246761657586" y2="-68.25" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="duree" text-anchor="start" dy="0.35em" x="131.3340515220158" y="-75.82575000000001" style="font-size: 14px;"><tspan x="131.3340515220158" y="-75.82575000000001" dy="0.35em">Durée</tspan></text></g><g class="axis"><line x1="0" y1="0" x2="118.21246761657588" y2="68.24999999999997" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="abonnes" text-anchor="start" dy="0.35em" x="131.33405152201584" y="75.82574999999999" style="font-size: 14px;"><tspan x="131.33405152201584" y="75.82574999999999" dy="0.35em">Abonnés</tspan></text></g><g class="axis"><line x1="0" y1="0" x2="8.358214404180685e-15" y2="136.5" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="frequence" text-anchor="middle" dy="0.35em" x="9.285976203044744e-15" y="151.65150000000003" style="font-size: 14px;"><tspan x="9.285976203044744e-15" y="151.65150000000003" dy="0.35em"></tspan><tspan x="9.285976203044744e-15" y="151.65150000000003" dy="1.75em">Fréquence</tspan></text></g><g class="axis"><line x1="0" y1="0" x2="-118.21246761657585" y2="68.25000000000004" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="reflexion" text-anchor="end" dy="0.35em" x="-131.33405152201578" y="75.82575000000007" style="font-size: 14px;"><tspan x="-131.33405152201578" y="75.82575000000007" dy="0.35em">Réflexion</tspan></text></g><g class="axis"><line x1="0" y1="0" x2="-118.21246761657594" y2="-68.24999999999991" class="line " style="stroke: white; stroke-width: 2px;"></line><text class="legend btn btn-primary critere" id="originalite" text-anchor="end" dy="0.35em" x="-131.33405152201587" y="-75.82574999999991" style="font-size: 14px;"><tspan x="-131.33405152201587" y="-75.82574999999991" dy="0.35em"></tspan><tspan x="-131.33405152201587" y="-75.82574999999991" dy="1.75em">Originalité</tspan></text></g></g><g class="radarWrapper"><path class="radarArea" id="radarArea56" d="M59.10623380828793,-34.12500000000001C68.95727277633593,-17.06250000000001,68.95727277633593,17.062499999999986,59.10623380828794,34.124999999999986C49.25519484023995,51.187499999999986,19.702077936095982,68.25,8.358214404180685e-15,68.25C-19.702077936095968,68.25,-49.25519484023993,51.18750000000002,-59.106233808287925,34.12500000000003C-68.95727277633591,17.062500000000036,-68.95727277633596,-17.062499999999954,-59.10623380828797,-34.12499999999996C-49.25519484023998,-51.18749999999996,-19.702077936095982,-68.24999999999999,0,-68.25C19.702077936095982,-68.25000000000001,49.255194840239945,-51.1875,59.10623380828793,-34.12500000000001" style="fill: rgb(244, 49, 49); fill-opacity: 0.4;"></path><path class="radarStroke" d="M59.10623380828793,-34.12500000000001C68.95727277633593,-17.06250000000001,68.95727277633593,17.062499999999986,59.10623380828794,34.124999999999986C49.25519484023995,51.187499999999986,19.702077936095982,68.25,8.358214404180685e-15,68.25C-19.702077936095968,68.25,-49.25519484023993,51.18750000000002,-59.106233808287925,34.12500000000003C-68.95727277633591,17.062500000000036,-68.95727277633596,-17.062499999999954,-59.10623380828797,-34.12499999999996C-49.25519484023998,-51.18749999999996,-19.702077936095982,-68.24999999999999,0,-68.25C19.702077936095982,-68.25000000000001,49.255194840239945,-51.1875,59.10623380828793,-34.12500000000001" style="stroke-width: 2px; stroke: rgb(244, 49, 49); fill: none; filter: url(&quot;#glow&quot;);"></path><circle class="radarCircle" r="9" cx="4.1791072020903425e-15" cy="-68.25" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle><circle class="radarCircle" r="9" cx="59.10623380828793" cy="-34.125" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle><circle class="radarCircle" r="9" cx="59.10623380828794" cy="34.124999999999986" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle><circle class="radarCircle" r="9" cx="4.1791072020903425e-15" cy="68.25" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle><circle class="radarCircle" r="9" cx="-59.106233808287925" cy="34.12500000000002" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle><circle class="radarCircle" r="9" cx="-59.10623380828797" cy="-34.12499999999996" style="fill: rgb(53, 53, 53); fill-opacity: 0.8;"></circle></g><g class="radarCircleWrapper"></g></g></svg></div></div>
+        <button id="reset" class="btn btn-primary">Recommencer</button>
+    </div>
+
+    <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
+        <div>
+            <!--<div id="reaction"></div>-->
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result"><br><a target="_blank" href="https://rednugget.fr/16-12-2017/tales-from-the-click/"><img class="nugget_img" src="https://rednugget.fr/wp-content/uploads/2017/12/Thumbnail_TFTC.jpg"></a></p>
+                </div>
+                <div>
+                    <h3 id="fullname" style="margin-top: 10px">Tales From The Click</h3><br>
+                    <p id="desc">En apprendre plus sur les films, les séries, et leurs acteurs ! </p>
+                </div>
+            </div>
+            <!--<p id="ratio"></p>-->
+            <br><br>
+            <hr style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-bottom: 0px">
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result2"><br><a target="_blank" href="https://rednugget.fr/15-11-2017/leo-duff/"><img class="secondaryimg" src="https://rednugget.fr/wp-content/uploads/2017/11/Thumbnail_LeoDuff.jpg"></a></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname2" style="margin-top: 10px">Léo Duff</h3><br>
+                    <p class="secondarydesc" id="desc2">Si t'es un passionné de tech on te recommande grandement cette chaîne. Attention c'est un pro-Apple, mais même si t'es plutôt Team Android son contenu saura t'intéresser.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result3"><br><a target="_blank" href="https://rednugget.fr/06-12-2017/pp-world/"><img class="secondaryimg" src="https://rednugget.fr/wp-content/uploads/2017/12/Thumbnail_PPWorld.jpg"></a></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname3" style="margin-top: 10px">PP World</h3><br>
+                    <p class="secondarydesc" id="desc3">Si t'aimes la high-tech, ce monsieur est fait pour toi. Tu vas surkiffer ce jounaliste complètement fou !</p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result4"><br><a target="_blank" href="https://rednugget.fr/29-12-2017/stardust/"><img class="secondaryimg" src="https://rednugget.fr/wp-content/uploads/2017/12/Thumbnail_Stardust.jpg"></a></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname4" style="margin-top: 10px">Stardust</h3><br>
+                    <p class="secondarydesc" id="desc4">De la vulgarisation intergalactique et de l'actualité spatiale.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float: left; margin-right: 50px">
+                    <p id="result5"><br><a target="_blank" href="https://rednugget.fr/09-12-2017/nexus-vi/"><img class="secondaryimg" src="https://rednugget.fr/wp-content/uploads/2017/12/Thumbnail_NexusVI.jpg"></a></p>
+                </div>
+                <div>
+                    <h3 class="secondarytitle" id="fullname5" style="margin-top: 10px">Nexus VI</h3><br>
+                    <p class="secondarydesc" id="desc5">Rejoins l'équipage du Nexus VI qui te plongera dans l'univers de la science-fiction (films, livres, jeux-vidéo et plus encore !)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br><br>
+
+<script>
+
+    function topFunction() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+    }
+
+    // ISOTOPE FUNCTIONS //
+
+    var grid = null;
+
+    function init_isotope() {
+        grid = $('.grid').isotope({
+            itemSelector: '.grid-item',
+            //layoutMode: 'fitRows',
+            percentPosition: true,
+            masonry: {
+                columnWidth: '.grid-sizer'
+            },
+            getSortData: {
+                value: '[data-value]', // value of attribute
+                distance: '[data-dist] parseFloat' // value of attribute
+            }
+        });
+        //console.log("Isotope initiated")
+    }
+
+    // Get the new distance data and sort it in ascending order
+    function update() {
+        grid.isotope('updateSortData');
+        grid.isotope({sortBy: 'distance'});
+        //console.log("Isotope updated")
+    }
+
+    //__________________________________________//
+
+    // Array that stores the input from the user
+    var data_slider = [
+        [
+            {axis: "Humour", value: 0.5},
+            {axis: "Durée", value: 0.5},
+            {axis: "Abonnés", value: 0.5},
+            {axis: "Fréquence", value: 0.5},
+            {axis: "Réflexion", value: 0.5},
+            {axis: "Originalité", value: 0.5}
+        ]
+    ];
+
+    // Function to reset the slider data to default when a button is clicked
+    $("#reset").click(function () {
+        data_slider = [ // Default
+            [
+                {axis: "Humour", value: 0.5},
+                {axis: "Durée", value: 0.5},
+                {axis: "Abonnés", value: 0.5},
+                {axis: "Fréquence", value: 0.5},
+                {axis: "Réflexion", value: 0.5},
+                {axis: "Originalité", value: 0.5}
+            ]
+        ];
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
+    });
+
+
+    $(document).ready(function () {
+        data_slider = [ // Default
+            [
+                {axis: "Humour", value: 0.5},
+                {axis: "Durée", value: 0.5},
+                {axis: "Abonnés", value: 0.5},
+                {axis: "Fréquence", value: 0.5},
+                {axis: "Réflexion", value: 0.5},
+                {axis: "Originalité", value: 0.5}
+            ]
+        ];
+    });
+
+
+    //__________________________________________//
+</script>
+<!--<script src="slider.js"></script>-->
+<script>
+    //__________________________________________//
+    var page = 2;
+    var sm_ids = 1;
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var margin = {top: 5, right: 5, bottom: 10, left: 5},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
+
+    var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+    var data_full = [];
+    var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMpMJUwb0tp1KYel2iu5vQQsvACrgfP7FdAAiFxEUlqk5tkX-HEBI5xcLyocnd5JSemCxMM82Sz1pW/pub?output=csv';
+
+    $.get(URL, function (textString) { // Get the nugget data from our google sheet
+
+        //console.log("data loaded");
+
+        data = d3.csvParseRows(textString);
+        //console.log(data);
+
+        data.forEach(function (col, ind) {
+            if (ind > 0) {
+                o = {
+                    'name': col[0],
+                    'url': col[8],
+                    'urlimg': col[9],
+                    data: [[
+                        {axis: 'Humour', 'value': +col[1].replace(",", ".")},
+                        {axis: 'Durée', 'value': +col[4].replace(",", ".")},
+                        {axis: 'Abonnés', 'value': +col[5].replace(",", ".")},
+                        {axis: 'Fréquence', 'value': +col[6].replace(",", ".")},
+                        {axis: 'Réflexion', 'value': +col[2].replace(",", ".")},
+                        {axis: 'Originalité', 'value': +col[3].replace(",", ".")}
+                    ]],
+                    'fullname': col[10],
+                    'desc': col[11]
+                };
+                data_full.push(o); // Store data in data_full array
+            }
+        });
+        //console.log(data_full);
+
+        //Call function to draw the Radar charts
+        data_full.forEach(function (d) { // For each nugget, create a small radar chart
+            RadarChart("#small_multiple", d.data, d.name, d.url, radarChartOptions);
+            RadarChart("#small_multiple2", d.data, d.name, d.url, radarChartOptions2);
+        });
+        init_isotope(); // Initializing isotope script now that the grid has been created
+        whowins(); // Calculate distance and display winner
+        $('#CYN').html(''); // Kill builder
+        update();
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
+    });
+
+
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+    var color = d3.scaleOrdinal()
+        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
+    var color2 = d3.scaleOrdinal()
+        .range(["#353535", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
+
+    var radarChartOptions = { // Options for the small multiples
+        w: width * 0.3,
+        h: height * 0.3,
+        margin: margin,
+        dotRadius: 2,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color,
+        showLabel: false
+    };
+
+    var radarChartOptions2 = { // Options for the small multiples
+        w: width * 0.3,
+        h: height * 0.3,
+        margin: margin,
+        dotRadius: 2,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color2,
+        showLabel: false
+    };
+
+    var customRadarChartOptions = { // Options for the builder
+        w: width * 0.7,
+        h: height * 0.7,
+        dotRadius: 9,
+        margin: customMargin,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color,
+        showLabel: true,
+        enableDrag: true
+    };
+
+
+    RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
+
+    function whowins() { // Functions that compares the input with all existing nuggets to calculate the euclidean distances with each nugget
+        var i = 0;
+        var t = 0;
+        var result = 1.5;
+        var winner = "";
+        var winner_url = "";
+        var winner_url2 = "";
+        var winner_url3 = "";
+        var winner_url4 = "";
+        var winner_url5 = "";
+        var winner_urlimg = "";
+        var winner_urlimg2 = "";
+        var winner_urlimg3 = "";
+        var winner_urlimg4 = "";
+        var winner_urlimg5 = "";
+        var fullname = "";
+        var fullname2 = "";
+        var fullname3 = "";
+        var fullname4 = "";
+        var fullname5 = "";
+        var desc = "";
+        var desc2 = "";
+        var desc3 = "";
+        var desc4 = "";
+        var desc5 = "";
+        var nugget_ratio = 0;
+
+        distances = []; // Array to store the distances
+
+        nC = { // Input from user
+            'h': data_slider[0][0]["value"],
+            'd': data_slider[0][1]["value"],
+            'a': data_slider[0][2]["value"],
+            'f': data_slider[0][3]["value"],
+            'r': data_slider[0][4]["value"],
+            'o': data_slider[0][5]["value"]
+        };
+
+        data_full.forEach(function (d) { // For each nugget
+            n2 = { // Stores the nugget data
+                'h': d["data"][0][0]["value"],
+                'd': d["data"][0][1]["value"],
+                'a': d["data"][0][2]["value"],
+                'f': d["data"][0][3]["value"],
+                'r': d["data"][0][4]["value"],
+                'o': d["data"][0][5]["value"]
+            };
+
+            t = distance(nC, n2); // Calculate distance between input and nugget (distance function at the end of the script)
+
+            distances.push({ // Add result to the array
+                key: d["name"], // Nugget name
+                dist: t // Distance
+            });
+        });
+
+        //console.log(distances);
+
+        distances.sort(function (a, b) {
+            return d3.ascending(a.dist, b.dist); // Sort all the processed distances in ascending order
+        });
+
+        var incr = 2;
+        distances.forEach(function (d) {
+            var smSelector = $("[data-value=" + '"' + d.key + '"' + "]" + "[data-type=" + '"sm_rank"' + "]");
+            smSelector.attr("data-dist", d.dist); // Add the distance value into an attribute for each HTML nugget element
+
+            smSelector.addClass("hidenug").removeClass("shownug");
+            if (incr < 11) {
+                $("[data-value=" + '"' + d.key + '"' + "]").removeClass("hidenug").addClass("shownug");
+            }
+            incr += 1;
+        });
+
+        result = distances[0]["dist"]; // Smallest distance
+        winner = distances[0]["key"]; // Name of the closest nugget
+
+        for (var f = 0; f < distances.length; f++) {
+            if (data_full[f].name == distances[0]["key"]) { // Get the URL of the closest nugget
+                fullname = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[1]["key"]) {
+                fullname2 = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[2]["key"]) {
+                fullname3 = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[3]["key"]) {
+                fullname4 = data_full[f].fullname;
+            }
+            else if (data_full[f].name == distances[4]["key"]) {
+                fullname5 = data_full[f].fullname;
+            }
+        }
+
+        for (var d = 0; d < distances.length; d++) {
+            if (data_full[d].name == distances[0]["key"]) { // Get the URL of the closest nugget
+                desc = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[1]["key"]) { // Get the URL of the closest nugget
+                desc2 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[2]["key"]) { // Get the URL of the closest nugget
+                desc3 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[3]["key"]) { // Get the URL of the closest nugget
+                desc4 = data_full[d].desc;
+            }
+            else if (data_full[d].name == distances[4]["key"]) { // Get the URL of the closest nugget
+                desc5 = data_full[d].desc;
+            }
+        }
+
+        for (var e = 0; e < distances.length; e++) {
+            if (data_full[e].name == distances[0]["key"]) { // Get the URL of the closest nugget
+                winner_url = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[1]["key"]) { // Get the URL of the closest nugget
+                winner_url2 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[2]["key"]) { // Get the URL of the closest nugget
+                winner_url3 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[3]["key"]) { // Get the URL of the closest nugget
+                winner_url4 = data_full[e].url;
+            }
+            else if (data_full[e].name == distances[4]["key"]) { // Get the URL of the closest nugget
+                winner_url5 = data_full[e].url;
+            }
+        }
+        for (var g = 0; g < distances.length; g++) {
+            if (data_full[g].name == distances[0]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[1]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg2 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[2]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg3 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[3]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg4 = data_full[g].urlimg;
+            }
+            else if (data_full[g].name == distances[4]["key"]) { // Get the image URL of the closest nugget
+                winner_urlimg5 = data_full[g].urlimg;
+            }
+        }
+        nugget_ratio = Math.round(100 - result * 100); // Calculate a ratio, not used anymore
+
+
+        // A few conditions to display a different text based on the closeness of the closest nugget //
+        if (result > 1) {
+            $("#reaction").html("<p style='color:#f43131; font-size:20px'> Ça correspond pas DU TOUT, mais bon. 👇 ")
+        }
+        //Mais... arrête de faire n'importe quoi ! C'est pas DU TOUT une pépite en fait.
+        else if (result < 1 && result > 0.7) {
+            $("#reaction").html("<p style='color:#f47b30; font-size:20px'>Bon prend la mais on te garantit rien ! 👇")
+        }
+        else if (result < 0.7 && result > 0.4) {
+            $("#reaction").html("<p style='color:#e5db1b; font-size:20px'>Pas mal, tu devrais trouver ton bonheur ici ! 👇")
+        }
+        else if (result < 0.4 && result > 0.1) {
+            $("#reaction").html("<p style='color:#29c126; font-size:20px'>Cette pépite ressemble beaucoup à la tienne ! 👇")
+        }
+        else if (result < 0.1) {
+            $("#reaction").html("<p style='color:#30a8f4; font-size:20px'>OK, on a trouvé la pépite de tes rêves ! 👇")
+        }
+        $("#fullname").html(fullname);
+        $("#desc").html(desc);
+        $("#fullname2").html(fullname2);
+        $("#desc2").html(desc2);
+        $("#fullname3").html(fullname3);
+        $("#desc3").html(desc3);
+        $("#fullname4").html(fullname4);
+        $("#desc4").html(desc4);
+        $("#fullname5").html(fullname5);
+        $("#desc5").html(desc5);
+        $("#result").html("<br><a target=_blank href= " + winner_url + " ><img class=\"nugget_img\" src=" + winner_urlimg + "></a>");
+        $("#result2").html("<br><a target=_blank href= " + winner_url2 + " ><img class=\"secondaryimg\" src=" + winner_urlimg2 + "></a>");
+        $("#result3").html("<br><a target=_blank href= " + winner_url3 + " ><img class=\"secondaryimg\" src=" + winner_urlimg3 + "></a>");
+        $("#result4").html("<br><a target=_blank href= " + winner_url4 + " ><img class=\"secondaryimg\" src=" + winner_urlimg4 + "></a>");
+        $("#result5").html("<br><a target=_blank href= " + winner_url5 + " ><img class=\"secondaryimg\" src=" + winner_urlimg5 + "></a>");
+        //$("#ratio").html("Niveau de correspondance : " + nugget_ratio + "%"); // Not used anymore
+
+    }
+
+    function distance(nC, n2) { // Euclidean distance function, i don't entirely understand it, thanks Antoine.
+        var d = 0.0;
+        for (var prop in nC) {
+            d += (nC[prop] - n2[prop]) * (nC[prop] - n2[prop])
+        }
+        return Math.sqrt(d);
+    }
+</script>
+
+
+<script id="wappalyzer" src="chrome-extension://gppongmhjkpfnbhagpmjfkannfbllamg/js/inject.js"></script></body></html>

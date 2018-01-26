@@ -331,6 +331,9 @@ a {
     color: #F9F9F9;
     margin-top: 10px;
     border: none;
+    position: absolute;
+    top: 1%;
+    left: 95%;
 }
 
 #nuggetHelp:hover {
@@ -347,6 +350,9 @@ a {
 
 #logoLab {
     width: 100px;
+    position: absolute;
+    top: 1%;
+    left: 1%;
 }
 
 #myModal {
@@ -355,9 +361,4 @@ a {
     right: -60%;
 }
 
-#nuggetHelp {
-    position: absolute;
-    top: 1%;
-    left: 95%;
-}
 
