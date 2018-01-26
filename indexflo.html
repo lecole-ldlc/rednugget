@@ -64,7 +64,7 @@
 
 </div>
 
-<input type="submit" value="Pépite !" class="GetNugget" onclick=whowins()>
+<input type="submit" value="Pépite !" id="GetNugget" onclick=whowins()>
 
 
 <div class="row">
@@ -136,6 +136,13 @@
 
     var page = 1;
     var sm_ids = 1;
+
+    $("#GetNugget").on("click",function(){
+        page = 2;
+        console.log(page)
+    });
+
+
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
     //////////////////////////////////////////////////////////////

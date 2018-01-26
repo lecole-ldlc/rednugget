@@ -308,7 +308,7 @@ a {
     fill: rgba(0, 0, 0, 0.5) ;
 }
 
-.GetNugget {
+#GetNugget {
     font-size: 50px;
     border-radius: 20px;
     background-color: #f43131;
@@ -319,7 +319,7 @@ a {
     padding-right: 30px;
 }
 
-.GetNugget:hover {
+#GetNugget:hover {
     background-color: #F9F9F9;
     color: #f43131;
     border-color: #f43131;
