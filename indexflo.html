@@ -142,7 +142,7 @@
 
     $("#GetNugget").on("click", function () {
 
-        $.get("https://get.rednugget.fr/search.php?h=" + data_slider[0][0].value + "&d" + data_slider[0][1].value + "&a" + data_slider[0][2].value + "&f" + data_slider[0][3].value + "&r" + data_slider[0][4].value + "&o" + data_slider[0][5].value, function(data){
+        $.get("https://get.rednugget.fr/search.php?h=" + data_slider[0][0].value + "&d=" + data_slider[0][1].value + "&a=" + data_slider[0][2].value + "&f=" + data_slider[0][3].value + "&r=" + data_slider[0][4].value + "&o=" + data_slider[0][5].value, function(data){
             console.log(data);
         });
         console.log("SEND REQUEST TO " + "https://get.rednugget.fr/search.php?h=" + + data_slider[0][0].value + "&d" + data_slider[0][1].value + "&a" + data_slider[0][2].value + "&f" + data_slider[0][3].value + "&r" + data_slider[0][4].value + "&o" + data_slider[0][5].value);
