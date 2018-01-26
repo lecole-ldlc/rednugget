@@ -104,6 +104,7 @@
     var bouton_reflexion = true;
     var bouton_originalite = true;
 
+    var axiscount = 0;
 
     function topFunction() {
         $('body,html').animate({
@@ -418,20 +419,25 @@
         }
         return Math.sqrt(d);
     }
+
     function axisbuttons () {
         $("#humour").on("click", function () {
             if (bouton_humour == false)
             {
                 bouton_humour = true;
                 $( "#humour" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
             }
             else if (bouton_humour == true)
             {
+                if (axiscount<3){
                 bouton_humour = false;
                 $( "#humour" ).addClass("nocritere").removeClass("critere");
-
+                axiscount += 1;
+                }
             }
-            console.log(bouton_humour)
+            console.log(bouton_humour);
+            console.log(axiscount);
 
         });
 
@@ -441,29 +447,40 @@
             {
                 bouton_duree = true;
                 $( "#duree" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
+
             }
             else if (bouton_duree == true)
             {
-                bouton_duree = false;
-                $( "#duree" ).addClass("nocritere").removeClass("critere");
+                if (axiscount<3) {
+                    bouton_duree = false;
+                    $("#duree").addClass("nocritere").removeClass("critere");
+                    axiscount += 1;
+                }
             }
-            console.log(bouton_duree)
+            console.log(bouton_duree);
+            console.log(axiscount);
 
         });
+
 
         $("#abonnes").on("click", function () {
             if (bouton_abonnes == false)
             {
                 bouton_abonnes = true;
                 $( "#abonnes" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
             }
             else if (bouton_abonnes == true)
             {
-                bouton_abonnes = false;
+                if (axiscount<3){
+                    bouton_abonnes = false;
                 $( "#abonnes" ).addClass("nocritere").removeClass("critere");
-
+                axiscount += 1;
+                }
             }
-            console.log(bouton_abonnes)
+            console.log(bouton_abonnes);
+            console.log(axiscount);
 
         });
 
@@ -472,15 +489,19 @@
             {
                 bouton_frequence = true;
                 $( "#frequence" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
 
             }
             else if (bouton_frequence == true)
             {
-                bouton_frequence = false;
+                if (axiscount<3){
+                    bouton_frequence = false;
                 $( "#frequence" ).addClass("nocritere").removeClass("critere");
-
+                axiscount += 1;
+                }
             }
-            console.log(bouton_frequence)
+            console.log(bouton_frequence);
+            console.log(axiscount);
 
         });
 
@@ -489,15 +510,19 @@
             {
                 bouton_reflexion = true;
                 $( "#reflexion" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
 
             }
             else if (bouton_reflexion == true)
             {
-                bouton_reflexion = false;
+                if (axiscount<3){
+                    bouton_reflexion = false;
                 $( "#reflexion" ).addClass("nocritere").removeClass("critere");
-
+                axiscount += 1;
+                }
             }
-            console.log(bouton_reflexion)
+            console.log(bouton_reflexion);
+            console.log(axiscount);
 
         });
 
@@ -506,15 +531,19 @@
             {
                 bouton_originalite = true;
                 $( "#originalite" ).removeClass("nocritere").addClass("critere");
+                axiscount -= 1;
 
             }
             else if (bouton_originalite == true)
             {
-                bouton_originalite = false;
+                if (axiscount<3){
+                    bouton_originalite = false;
                 $( "#originalite" ).addClass("nocritere").removeClass("critere");
-
+                axiscount += 1;
+                }
             }
-            console.log(bouton_originalite)
+            console.log(bouton_originalite);
+            console.log(axiscount);
 
         });
     }
