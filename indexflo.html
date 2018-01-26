@@ -32,19 +32,45 @@
 </head>
 
 <body>
-<h1>NuggetLab</h1>
 
-<div class="row">
-    <div class="col-lg-1">
-        <button id="reset" class="btn btn-primary">Reset</button>
+<div><a href="https://rednugget.fr"><img id="logoLab" src="https://rednugget.fr/wp-content/uploads/2017/12/Nugget-Lab-Logo.png"></a></div>
+
+<!-- Button trigger modal -->
+<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Aide</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
+            </div>
+            <div class="modal-body">
+                vbzrgzgdzrgdgfhrgfbvddsvsvdvbsdvdsdsvdsvsdvfdsvdsvsdvsegrdf
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
     </div>
 </div>
-<br><br>
 
 <div class="row">
 
     <div class="col-sm-12 col-lg-12 text-center" id="CYN"></div>
 
+</div>
+
+<input type="submit" value="Pépite !" class="GetNugget" onclick=whowins()>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <button id="reset" class="btn btn-primary">Recommencer</button>
+    </div>
 </div>
 
 <script>
@@ -120,7 +146,7 @@
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
 
     var customMargin = {top: 30, right: 60, bottom: 80, left: 60},
-        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        width = Math.min(300, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
 
     //////////////////////////////////////////////////////////////
