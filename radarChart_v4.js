@@ -174,7 +174,7 @@ function RadarChart(id_sm, data, name, url, options) {
     //Append the labels at each axis
     if (cfg.showLabel) {
         axis.append("text")
-            .attr("class", "legend btn btn-primary critere")
+            .attr("class", "legend btn critere")
             .attr("id", function (d, i) {
                 if (i == 0) {
                     return "humour";
@@ -216,7 +216,58 @@ function RadarChart(id_sm, data, name, url, options) {
             .text(function (d) {
                 return d
             })
-            .call(wrap, cfg.wrapWidth);
+            .on("click", function (d, i) {
+                var en_cpt = enable_axes.filter(function(x){return x;}).length;
+                var current_status = enable_axes[i];
+                if (current_status && en_cpt <= 3){
+                    return;
+                }
+                enable_axes[i] = enable_axes[i] ? false : true;
+                if (enable_axes[i]) {
+                    $(this).removeClass("legend_disabled");
+                    $(this).addClass("legend_enabled");
+                } else {
+                    $(this).addClass("legend_disabled");
+                    $(this).removeClass("legend_enabled");
+                }
+                data_slider[0][i].value = 0.5;
+                circles.each(function (d, i) {
+                    if (enable_axes[i]){
+                        d3.select(this).attr("r", cfg.dotRadius);
+                    } else {
+                        d3.select(this).attr("r", 0);
+                    }
+                });
+
+                update_path(blobWrapper);
+            })
+            .on("mouseover", function (d,i) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .8);
+                tooltip.html(function(){
+                    if (enable_axes[i]){
+                        return "Cliquer pour désactiver ce critère"
+                    } else {
+                        return "Cliquer pour activer ce critère"
+                    }
+                })
+                    .style("left", d3.event.pageX + "px")
+                    .style("top", d3.event.pageY + "px");
+
+            })
+            .on("mousemove", function (d) {
+                tooltip
+                    .style("left", d3.event.pageX + "px")
+                    .style("top", d3.event.pageY + "px");
+
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+        //.call(wrap, cfg.wrapWidth);
     }
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
@@ -225,7 +276,7 @@ function RadarChart(id_sm, data, name, url, options) {
 
     //The radial line function
     var radarLine = d3.lineRadial()
-        .radius(function (d) {
+        .radius(function (d, i) {
             return rScale(d.value);
         })
         .angle(function (d, i) {
@@ -360,12 +411,8 @@ function RadarChart(id_sm, data, name, url, options) {
                     // console.log("oui2", data_slider[0][index].value)
                 }
             });
+
             update_path(blobWrapper);
-            if (page == 1) {
-                whowins();
-                update();
-            }
-            update();
         }
 
         //Release the drag listener on the node if you hit the min/max values
@@ -493,9 +540,6 @@ function RadarChart(id_sm, data, name, url, options) {
                 data_slider[0][3]["value"] = data[0][3]["value"];
                 data_slider[0][4]["value"] = data[0][4]["value"];
                 data_slider[0][5]["value"] = data[0][5]["value"];
-                console.log("WHOWINS !");
-                whowins();
-                update();
                 $('#CYN').html('');
                 RadarChart("#CYN", data_slider, "", null, customRadarChartOptions);
                 /*data_slider = [
