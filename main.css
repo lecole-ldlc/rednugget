@@ -117,7 +117,7 @@ a {
 }
 
 .legend:hover {
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .tooltip {
@@ -362,3 +362,26 @@ a {
 }
 
 
+.legend_disabled {
+    fill: #aaa!important;
+}
+
+.legend_enabled {
+    fill: #f43131!important;;
+}
+
+
+.tooltip_radar {
+    position: absolute;
+    text-align: center;
+    width: 220px;
+    height: 18px;
+    padding: 2px;
+    font-size: 10px;
+    background-color: #ccc;
+    border: 1px black;
+    border-radius: 3px;
+    margin-left: -25px;
+    margin-top: -25px;
+    pointer-events: none;
+}
