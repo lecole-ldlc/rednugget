@@ -344,7 +344,7 @@ function RadarChart(id_sm, data, name, url, options) {
 
             var ratioY = newY / oldY;
             //newValue = ((newY / oldY) * oldData.value).toFixed(2);
-            newValue = Math.abs(newY / radius).toFixed(2);
+            newValue = Math.abs(newY / radius);
             if (ratioY < 0) {
                 newValue = -newValue;
             }

@@ -208,6 +208,7 @@ header("Access-Control-Allow-Origin: *");
     <div class="col-sm-12 col-lg-4">
         <div id="CYN">
         </div>
+        <button id="GetNugget">Go !</button>
         <button id="reset" class="btn btn-primary">Recommencer</button>
     </div>
 
