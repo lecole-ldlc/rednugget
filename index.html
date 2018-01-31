@@ -32,14 +32,14 @@
 </head>
 
 <body>
+<div class="row" id="header">
+
 
 <div><a href="https://rednugget.fr"><img id="logoLab"
-                                         src="https://rednugget.fr/wp-content/uploads/2017/12/Nugget-Lab-Logo.png"></a>
+                                         src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
 </div>
 
-<!-- Button trigger modal -->
-<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Aide
-</button>
+
 
 
 <!-- Modal -->
@@ -51,8 +51,11 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
             </div>
-            <div class="modal-body">
-                vbzrgzgdzrgdgfhrgfbvddsvsvdvbsdvdsdsvdsvsdvfdsvdsvsdvsegrdf
+            <div class="modal-body help">
+                Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
+                Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
+                Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -61,20 +64,31 @@
     </div>
 </div>
 
+<div class="onesentence">
+    Dénicheurs de pépites YouTube
+</div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Aide
+</button>
+
+
 <div class="row">
 
     <div class="col-sm-12 col-lg-12 text-center" id="CYN"></div>
 
 </div>
 
-<button id="GetNugget">Go !</button>
+<button id="GetNugget">Rechercher</button>
 
 
 <div class="row">
     <div class="col-lg-12">
-        <button id="reset" class="btn btn-primary">Recommencer</button>
+        <button id="reset"><a><img class="refresh" src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png"></a></button>
+
     </div>
-</div>
 
 <script>
 
@@ -157,8 +171,8 @@
         width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
 
-    var customMargin = {top: 60, right: 60, bottom: 80, left: 60},
-        width = Math.min(300, window.innerWidth - 10) - margin.left - margin.right,
+    var customMargin = {top: 50, right: 60, bottom: 40, left: 60},
+        width = Math.min(270, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
 
     //////////////////////////////////////////////////////////////
