@@ -169,7 +169,7 @@ header("Access-Control-Allow-Origin: *");
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Nugget Lab</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../Applications/MAMP/htdocs/rednugget/favicon.ico">
 
 
     <!-- Google fonts & CSS-->
@@ -178,7 +178,7 @@ header("Access-Control-Allow-Origin: *");
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="../../../../Applications/MAMP/htdocs/rednugget/main.css" rel="stylesheet" type="text/css">
 
     <!-- D3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -195,7 +195,7 @@ header("Access-Control-Allow-Origin: *");
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <!-- RadarChart -->
-    <script src="radarChart_v4.js"></script>
+    <script src="../../../../Applications/MAMP/htdocs/rednugget/radarChart_v4.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -208,7 +208,7 @@ header("Access-Control-Allow-Origin: *");
     <div class="col-sm-12 col-lg-4">
         <div id="CYN">
         </div>
-        <button id="GetNugget">Go !</button>
+        <button id="GetNugget" class="btn btn-primary">Go !</button>
         <button id="reset" class="btn btn-primary">Recommencer</button>
     </div>
 
@@ -300,6 +300,40 @@ header("Access-Control-Allow-Origin: *");
         RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
     });
 
+    $("#reset").click(function () {
+        data_slider = [ // Default
+            [
+                {axis: "Humour", value: 0.5},
+                {axis: "Durée", value: 0.5},
+                {axis: "Abonnés", value: 0.5},
+                {axis: "Fréquence", value: 0.5},
+                {axis: "Réflexion", value: 0.5},
+                {axis: "Originalité", value: 0.5}
+            ]
+        ];
+        $('#CYN').html(''); // Kill builder
+        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        //console.log(data_slider)
+    });
+
+    $("#GetNugget").on("click", function () {
+        //var url = "https://get.rednugget.fr/search.php?";
+        var url = "http://localhost:8888/rednugget/search.php";
+        url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
+        url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
+        url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
+        url += "&f=" + (enable_axes[3] ? data_slider[0][3].value.toFixed(2) : "")
+        url += "&r=" + (enable_axes[4] ? data_slider[0][4].value.toFixed(2) : "")
+        url += "&o=" + (enable_axes[5] ? data_slider[0][5].value.toFixed(2) : "")
+        console.log(url);
+        window.location = url;
+    });
+
+    var tooltip = d3.select('body').append("div")
+        .attr("class", "tooltip_radar tooltip")
+        .style("opacity", 0);
+
+    var enable_axes = [true, true, true, true, true, true];
 </script>
 
 </body>
