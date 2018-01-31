@@ -109,7 +109,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
@@ -135,7 +134,6 @@
 
     //__________________________________________//
 
-    var page = 1;
     var sm_ids = 1;
 
     $("#GetNugget").on("click", function () {
@@ -190,7 +188,6 @@
     var tooltip = d3.select('body').append("div")
         .attr("class", "tooltip_radar tooltip")
         .style("opacity", 0);
-    console.log(tooltip);
 </script>
 </body>
 </html>

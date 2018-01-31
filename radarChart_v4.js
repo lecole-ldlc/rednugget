@@ -299,25 +299,11 @@ function RadarChart(id_sm, data, name, url, options) {
 
     var drag = d3.drag()
         .on("start", dragstarted)
-        .on("drag", move)
-        .on("end", dragend);
+        .on("drag", move);
 
     function dragstarted() {
         d3.select(this).raise().classed("active", true);
     }
-
-    function dragend() {
-        d3.select(".updatevalue.skill");
-        d3.select(".updatevalue.value").style("visibility", "hidden");
-        if (page == 2) { //Après avoir cliqué sur le bouton de recherche, on passe la var page à 2, pour autoriser le ondragend.
-            whowins(); // Calculate distance and display winner
-            $('#CYN').html(''); // Kill builder
-            update();
-            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        }
-
-    }
-
 
     function move(dobj, i) {
         this.parentNode.appendChild(this);

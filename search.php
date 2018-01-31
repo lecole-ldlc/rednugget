@@ -169,7 +169,7 @@ header("Access-Control-Allow-Origin: *");
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Nugget Lab</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../rednugget/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 
     <!-- Google fonts & CSS-->
@@ -178,7 +178,7 @@ header("Access-Control-Allow-Origin: *");
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-    <link href="../../../../rednugget/main.css" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet" type="text/css">
 
     <!-- D3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -195,7 +195,7 @@ header("Access-Control-Allow-Origin: *");
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <!-- RadarChart -->
-    <script src="../../../../rednugget/radarChart_v4.js"></script>
+    <script src="radarChart_v4.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -317,8 +317,7 @@ header("Access-Control-Allow-Origin: *");
     });
 
     $("#GetNugget").on("click", function () {
-        //var url = "https://get.rednugget.fr/search.php?";
-        var url = "http://localhost:8888/rednugget/search.php";
+        var url = "https://get.rednugget.fr/search.php?";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
