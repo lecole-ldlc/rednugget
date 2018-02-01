@@ -211,8 +211,12 @@ header("Access-Control-Allow-Origin: *");
     <div class="col-sm-12 col-lg-4">
         <div id="CYN">
         </div>
-        <button id="GetNugget" class="btn btn-primary">Go !</button>
-        <button id="reset" class="btn btn-primary">Recommencer</button>
+        <button id="GetNugget" class="btn btn-primary">Rechercher</button>
+        <div class="row">
+            <div class="col-lg-12"><img id="reset" class="refresh"
+                                           src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
+            </div>
+        </div>
     </div>
 
     <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
@@ -223,9 +227,11 @@ header("Access-Control-Allow-Origin: *");
                 ?>
                 <div class="row">
                     <div style="float: left; margin-right: 50px">
-                        <p id="result<?php if ($pos < 1) {
+                        <p id="result<?php if ($pos >= 1) {
                             echo($pos);
-                        } ?>">
+                        } ?>" class="result result<?php if ($pos == 1) {
+                            echo("1");
+                        }?>">
                             <br>
                             <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
                                         class="nugget_img"
@@ -321,7 +327,7 @@ header("Access-Control-Allow-Origin: *");
 
     $("#GetNugget").on("click", function () {
         var url = "search.php";
-       // var url = "https://get.rednugget.fr/search.php?";
+        // var url = "https://get.rednugget.fr/search.php?";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")

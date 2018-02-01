@@ -105,7 +105,8 @@ a {
 }
 
 #reset:hover {
-    background-color: rgba(53, 53, 53, 0.5);
+    /*background-color: rgba(53, 53, 53, 0.5);*/
+    cursor: pointer;
 }
 
 /* ##################################################################### */
@@ -190,11 +191,22 @@ a {
     text-align: center;
 }
 
-#result {
+#result1 {
     font-size: 20px !important;
     text-align: left;
     padding-top: 10px;
     padding-left: 50px;
+}
+
+.result {
+    font-size: 12px !important;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 50px;
+}
+
+#result1 img {
+    width: 400px !important;
 }
 
 #ratio {
@@ -216,7 +228,7 @@ a {
 }
 
 .nugget_img {
-    width: 400px;
+    width: 300px;
     transition: width 0.5s;
 }
 
@@ -264,6 +276,7 @@ a {
     padding: 5px 0;
     position: absolute;
     z-index: 1;
+    bottom: 125%;
     bottom: 125%;
     left: 50%;
     margin-left: -60px;
@@ -424,3 +437,18 @@ a {
 .modal-title {
     font-size: 30px;
 }
+
+.refresh{
+    border-radius:50%;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    -ms-transition: -ms-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+}
+
+.refresh:hover{
+    transform:rotate(-360deg);
+    -ms-transform:rotate(-360deg);
+    -webkit-transform:rotate(-360deg);
+    border-bottom-color: white;
+}
+
