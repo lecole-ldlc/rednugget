@@ -214,7 +214,7 @@ header("Access-Control-Allow-Origin: *");
         </div>
         <button id="GetNugget" class="btn btn-primary">Rechercher</button>
         <div class="row">
-            <div class="col-lg-12"><img id="reset" class="refresh"
+            <div class="col-lg-12"><img style="outline: none;" id="reset" class="refresh"
                                            src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
             </div>
         </div>
@@ -229,7 +229,6 @@ header("Access-Control-Allow-Origin: *");
                 ?>
                 <div class="row card-1">
                     <div style="float: left; margin-right: 50px">
-                        <a class="btn ranking"><i>oui</i></a>
                         <p id="result<?php if ($pos >= 1) {
                             echo($pos);
                         } ?>" class="result result<?php if ($pos == 1) {
