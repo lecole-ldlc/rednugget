@@ -25,7 +25,7 @@ class Channel
     public $subscribers = 0.0;
     public $frequency = 0.0;
     public $humor = 0.0;
-    public $reflection = 0.0;
+    public $reflexion = 0.0;
     public $originality = 0.0;
     public $tags = array();
 
@@ -57,7 +57,7 @@ class Channel
 
 $params = array("d" => null, "s" => null, "f" => null, "h" => null, "r" => null, "o" => null);
 $params_enable = array("d" => true, "s" => true, "f" => true, "h" => true, "r" => true, "o" => true);
-$params_indir = array("d" => "duration", "s" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflection", "o" => "originality");
+$params_indir = array("d" => "duration", "s" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflexion", "o" => "originality");
 $tags = array();
 
 foreach ($params as $p => $v) {
@@ -137,7 +137,7 @@ while ($row = $result->fetch_assoc()) {
     $all_channels[$c->id] = $c;
 }
 
-$result = $conn->query("SELECT ID_channel_name, AVG(humor_rating), AVG(reflection_rating), AVG(originality_rating) FROM rednugget_rating WHERE 1 GROUP BY ID_channel_name");
+$result = $conn->query("SELECT ID_channel_name, AVG(humor_rating), AVG(reflexion_rating), AVG(originality_rating) FROM rednugget_rating WHERE 1 GROUP BY ID_channel_name");
 if (!$result) {
     die($conn->error);
 }
@@ -145,7 +145,7 @@ while ($row = $result->fetch_array()) {
     $id = $row[0];
     $c = $all_channels[$id];
     $c->humor = $row[1];
-    $c->reflection = $row[2];
+    $c->reflexion = $row[2];
     $c->originality = $row[3];
     $c->distance = compute_distance($c);
 }
@@ -317,8 +317,8 @@ header("Access-Control-Allow-Origin: *");
     });
 
     $("#GetNugget").on("click", function () {
-        //var url = "https://get.rednugget.fr/search.php?";
-        var url = "http://localhost:8888/rednugget/search.php";
+        var url = "https://get.rednugget.fr/search.php?";
+        //var url = "http://localhost:8888/rednugget/search.php";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
