@@ -209,13 +209,15 @@ header("Access-Control-Allow-Origin: *");
 <div class="row">
 
     <div class="col-sm-12 col-lg-4">
-        <div id="CYN">
+        <div class="sticky-scroll-box">
+        <div id="CYN" style="margin-top: 20px">
         </div>
         <button id="GetNugget" class="btn btn-primary">Rechercher</button>
         <div class="row">
             <div class="col-lg-12"><img id="reset" class="refresh"
                                            src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
             </div>
+        </div>
         </div>
     </div>
 
@@ -249,8 +251,11 @@ header("Access-Control-Allow-Origin: *");
             ?>
         </div>
     </div>
-
 </div>
+
+<footer>
+    <div class="copyright"</div>
+</footer>
 
 <script>
 
@@ -344,6 +349,21 @@ header("Access-Control-Allow-Origin: *");
 
     var enable_axes = [true, true, true, true, true, true];
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var top = $('.sticky-scroll-box').offset().top;
+        $(window).scroll(function (event) {
+            var y = $(this).scrollTop();
+            if (y >= top)
+                $('.sticky-scroll-box').addClass('fixed');
+            else
+                $('.sticky-scroll-box').removeClass('fixed');
+            $('.sticky-scroll-box').width($('.sticky-scroll-box').parent().width());
+        });
+    });
+</script>
+
 
 </body>
 </html>

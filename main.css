@@ -17,6 +17,7 @@ p {
 }
 
 h1 {
+    margin-top: 0;
     font-family: Dosis;
     padding-bottom: 20px;
     padding-top: 10px;
@@ -450,5 +451,23 @@ a {
     -ms-transform:rotate(-360deg);
     -webkit-transform:rotate(-360deg);
     border-bottom-color: white;
+}
+
+.fixed {
+    position:fixed;
+    top:0;
+    z-index:99999;
+}
+footer {
+    width: 100%;
+    display: inline-block;
+    margin-top: 100px;
+    height: 70px;
+    background-color: #999;
+}
+
+.copyright {
+    width: 50%;
+    float: left;
 }
 
