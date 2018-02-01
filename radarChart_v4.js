@@ -217,9 +217,11 @@ function RadarChart(id_sm, data, name, url, options) {
                 return d
             })
             .on("click", function (d, i) {
-                var en_cpt = enable_axes.filter(function(x){return x;}).length;
+                var en_cpt = enable_axes.filter(function (x) {
+                    return x;
+                }).length;
                 var current_status = enable_axes[i];
-                if (current_status && en_cpt <= 3){
+                if (current_status && en_cpt <= 3) {
                     return;
                 }
                 enable_axes[i] = enable_axes[i] ? false : true;
@@ -232,7 +234,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 }
                 data_slider[0][i].value = 0.5;
                 circles.each(function (d, i) {
-                    if (enable_axes[i]){
+                    if (enable_axes[i]) {
                         d3.select(this).attr("r", cfg.dotRadius);
                     } else {
                         d3.select(this).attr("r", 0);
@@ -241,12 +243,12 @@ function RadarChart(id_sm, data, name, url, options) {
 
                 update_path(blobWrapper);
             })
-            .on("mouseover", function (d,i) {
+            .on("mouseover", function (d, i) {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .8);
-                tooltip.html(function(){
-                    if (enable_axes[i]){
+                tooltip.html(function () {
+                    if (enable_axes[i]) {
                         return "Cliquer pour désactiver ce critère"
                     } else {
                         return "Cliquer pour activer ce critère"

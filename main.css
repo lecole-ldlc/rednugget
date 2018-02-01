@@ -246,7 +246,6 @@ a {
     margin-left: 50px;
 }
 
-
 /* ##################################################################### */
 /* Tooltip w3Schools */
 
@@ -299,13 +298,12 @@ a {
     display: none;
 }
 
-
 .critere {
-    fill: #f43131 ;
+    fill: #f43131;
 }
 
 .nocritere {
-    fill: rgba(0, 0, 0, 0.5) ;
+    fill: rgba(0, 0, 0, 0.5);
 }
 
 #GetNugget {
@@ -361,15 +359,13 @@ a {
     right: -60%;
 }
 
-
 .legend_disabled {
-    fill: #aaa!important;
+    fill: #aaa !important;
 }
 
 .legend_enabled {
-    fill: #f43131!important;;
+    fill: #f43131 !important;;
 }
-
 
 .tooltip_radar {
     position: absolute;
