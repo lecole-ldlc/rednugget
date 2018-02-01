@@ -25,7 +25,7 @@ class Channel
     public $subscribers = 0.0;
     public $frequency = 0.0;
     public $humor = 0.0;
-    public $reflection = 0.0;
+    public $reflexion = 0.0;
     public $originality = 0.0;
     public $tags = array();
 
@@ -55,9 +55,9 @@ class Channel
     }
 }
 
-$params = array("d" => null, "s" => null, "f" => null, "h" => null, "r" => null, "o" => null);
-$params_enable = array("d" => true, "s" => true, "f" => true, "h" => true, "r" => true, "o" => true);
-$params_indir = array("d" => "duration", "s" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflection", "o" => "originality");
+$params = array("d" => null, "a" => null, "f" => null, "h" => null, "r" => null, "o" => null);
+$params_enable = array("d" => true, "a" => true, "f" => true, "h" => true, "r" => true, "o" => true);
+$params_indir = array("d" => "duration", "a" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflexion", "o" => "originality");
 $tags = array();
 
 foreach ($params as $p => $v) {
@@ -137,7 +137,7 @@ while ($row = $result->fetch_assoc()) {
     $all_channels[$c->id] = $c;
 }
 
-$result = $conn->query("SELECT ID_channel_name, AVG(humor_rating), AVG(reflection_rating), AVG(originality_rating) FROM rednugget_rating WHERE 1 GROUP BY ID_channel_name");
+$result = $conn->query("SELECT ID_channel_name, AVG(humor_rating), AVG(reflexion_rating), AVG(originality_rating) FROM rednugget_rating WHERE 1 GROUP BY ID_channel_name");
 if (!$result) {
     die($conn->error);
 }
@@ -145,7 +145,7 @@ while ($row = $result->fetch_array()) {
     $id = $row[0];
     $c = $all_channels[$id];
     $c->humor = $row[1];
-    $c->reflection = $row[2];
+    $c->reflexion = $row[2];
     $c->originality = $row[3];
     $c->distance = compute_distance($c);
 }
@@ -166,10 +166,13 @@ header("Access-Control-Allow-Origin: *");
 ?>
 
 <html>
+<style>.xdebug-error {
+        display:none;
+    }</style>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Nugget Lab</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../rednugget/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 
     <!-- Google fonts & CSS-->
@@ -178,7 +181,7 @@ header("Access-Control-Allow-Origin: *");
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-    <link href="../../../../rednugget/main.css" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet" type="text/css">
 
     <!-- D3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -195,7 +198,7 @@ header("Access-Control-Allow-Origin: *");
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <!-- RadarChart -->
-    <script src="../../../../rednugget/radarChart_v4.js"></script>
+    <script src="radarChart_v4.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -206,10 +209,16 @@ header("Access-Control-Allow-Origin: *");
 <div class="row">
 
     <div class="col-sm-12 col-lg-4">
-        <div id="CYN">
+        <div class="sticky-scroll-box">
+        <div id="CYN" style="margin-top: 20px">
         </div>
-        <button id="GetNugget" class="btn btn-primary">Go !</button>
-        <button id="reset" class="btn btn-primary">Recommencer</button>
+        <button id="GetNugget" class="btn btn-primary">Rechercher</button>
+        <div class="row">
+            <div class="col-lg-12"><img id="reset" class="refresh"
+                                           src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
+            </div>
+        </div>
+        </div>
     </div>
 
     <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
@@ -220,9 +229,11 @@ header("Access-Control-Allow-Origin: *");
                 ?>
                 <div class="row">
                     <div style="float: left; margin-right: 50px">
-                        <p id="result<?php if ($pos > 1) {
+                        <p id="result<?php if ($pos >= 1) {
                             echo($pos);
-                        } ?>">
+                        } ?>" class="result result<?php if ($pos == 1) {
+                            echo("1");
+                        }?>">
                             <br>
                             <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
                                         class="nugget_img"
@@ -240,8 +251,11 @@ header("Access-Control-Allow-Origin: *");
             ?>
         </div>
     </div>
-
 </div>
+
+<footer>
+    <div class="copyright"</div>
+</footer>
 
 <script>
 
@@ -257,7 +271,7 @@ header("Access-Control-Allow-Origin: *");
         [
             {axis: "Humour", value: <?php echo($params["h"]) ?>},
             {axis: "Durée", value: <?php echo($params["d"]) ?>},
-            {axis: "Abonnés", value: <?php echo($params["s"]) ?>},
+            {axis: "Abonnés", value: <?php echo($params["a"]) ?>},
             {axis: "Fréquence", value: <?php echo($params["f"]) ?>},
             {axis: "Réflexion", value: <?php echo($params["r"]) ?>},
             {axis: "Originalité", value: <?php echo($params["o"]) ?>}
@@ -317,8 +331,8 @@ header("Access-Control-Allow-Origin: *");
     });
 
     $("#GetNugget").on("click", function () {
-        //var url = "https://get.rednugget.fr/search.php?";
-        var url = "http://localhost:8888/rednugget/search.php";
+        var url = "search.php";
+        // var url = "https://get.rednugget.fr/search.php?";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
@@ -335,6 +349,21 @@ header("Access-Control-Allow-Origin: *");
 
     var enable_axes = [true, true, true, true, true, true];
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var top = $('.sticky-scroll-box').offset().top;
+        $(window).scroll(function (event) {
+            var y = $(this).scrollTop();
+            if (y >= top)
+                $('.sticky-scroll-box').addClass('fixed');
+            else
+                $('.sticky-scroll-box').removeClass('fixed');
+            $('.sticky-scroll-box').width($('.sticky-scroll-box').parent().width());
+        });
+    });
+</script>
+
 
 </body>
 </html>

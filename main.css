@@ -326,13 +326,10 @@ a {
     border-color: #f43131;
 }
 
-
-/*button help */
-
 #nuggetHelp {
     border-radius: 50px;
     background-color: #f43131;
-    color: #f9F9F9;
+    color: #F9F9F9;
     border: none;
     position: absolute;
     top: 1%;
@@ -341,32 +338,10 @@ a {
 
 #nuggetHelp:hover {
     border-radius: 20px;
-    background-color: #f5F5F5;
+    background-color: #F9F9F9;
     color: #f43131;
     border: none;
 }
-
-/*button blog */
-
-
-#bloglink {
-    border-radius: 50px;
-    background-color: #f43131;
-    color: #f9F9F9;
-    font-size: 18px;
-    border: none;
-    position: absolute;
-    top: 1%;
-    left: 85%;
-}
-
-#bloglink:hover {
-    border-radius: 20px;
-    background-color: #f5F5F5;
-    color: #f43131;
-    border: none;
-}
-
 
 #reset {
     border-radius: 70px;
@@ -436,9 +411,6 @@ a {
     background-color: #f5f5f5;
 }
 
-
-/* Help-box */
-
 .help {
     font-size: 15px;
     text-align: left;
@@ -449,29 +421,10 @@ a {
     border-top: none;
 }
 
-.modal-header {
-    border-bottom: none;
-}
-
 .btn-default {
     border-radius: 50px;
 }
 
 .modal-title {
     font-size: 30px;
-}
-
-.modal-dialog {
-    padding-right: 30px;
-}
-
-.row {
-    margin: 0;
-}
-
-.arrow {
-    position: absolute;
-    top: 15%;
-    left: 2%;
-    width: 150px;
 }
