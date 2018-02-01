@@ -214,7 +214,7 @@ header("Access-Control-Allow-Origin: *");
         </div>
         <button id="GetNugget" class="btn btn-primary">Rechercher</button>
         <div class="row">
-            <div class="col-lg-12"><img style="outline: none;" id="reset" class="refresh"
+            <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
                                            src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
             </div>
         </div>
@@ -252,6 +252,7 @@ header("Access-Control-Allow-Origin: *");
             ?>
         </div>
     </div>
+
 </div>
 
 <footer>
@@ -349,6 +350,13 @@ header("Access-Control-Allow-Origin: *");
         .style("opacity", 0);
 
     var enable_axes = [true, true, true, true, true, true];
+
+    function rotate() {
+        $('#reset').addClass('rotated');
+        setTimeout(function () {
+            $('#reset').removeClass('rotated');
+        }, 700);
+    }
 </script>
 
 <script type="text/javascript">

@@ -242,6 +242,7 @@ function RadarChart(id_sm, data, name, url, options) {
                 });
 
                 update_path(blobWrapper);
+
             })
             .on("mouseover", function (d, i) {
                 tooltip.transition()

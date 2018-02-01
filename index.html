@@ -35,26 +35,24 @@
 <div class="row" id="header">
 
 
-<div><a href="https://rednugget.fr"><img id="logoLab"
-                                         src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
-</div>
+    <div><a href="https://rednugget.fr"><img id="logoLab" src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
+    </div>
 
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
-            </div>
-            <div class="modal-body help">
-                Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
-                Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
-                Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
+                </div>
+                <div class="modal-body help">
+                    Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
+                    Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
+                    Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
 
             </div>
             <div class="modal-footer">
@@ -89,15 +87,23 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <button style="outline: none;" id="reset"><a><img class="refresh" src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png"></a></button>
+        <button style="outline: none;" id="reset"><a><img class="refresh" onclick="rotate()" src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png"></a></button>
 
     </div>
+</div>
 
     <footer>
         <div class="copyright"</div>
 </footer>
 
 <script>
+
+    function rotate() {
+        $('#reset').addClass('rotated');
+        setTimeout(function () {
+            $('#reset').removeClass('rotated');
+        }, 700);
+    }
 
     function topFunction() {
         $('body,html').animate({
@@ -130,7 +136,6 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
