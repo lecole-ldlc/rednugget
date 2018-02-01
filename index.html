@@ -35,37 +35,38 @@
 <div class="row" id="header">
 
 
-    <div><a href="https://rednugget.fr"><img id="logoLab"
-                                             src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
-    </div>
+<div><a href="https://rednugget.fr"><img id="logoLab"
+                                         src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
+</div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
-                </div>
-                <div class="modal-body help">
-                    Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
-                    Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
-                    Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
+            </div>
+            <div class="modal-body help">
+                Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
+                Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
+                Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="onesentence">
-        Dénicheurs de pépites YouTube
-    </div>
+<div class="onesentence">
+    Dénicheurs de pépites YouTube
+</div>
 </div>
 
 
@@ -85,11 +86,9 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <button id="reset"><a><img class="refresh"
-                                   src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png"></a></button>
+        <button id="reset"><a><img class="refresh" src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png"></a></button>
 
     </div>
-</div>
 
 <script>
 
@@ -124,6 +123,7 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
+        whowins(); // Calculate distance and display winner
         $('#CYN').html(''); // Kill builder
         RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
         //console.log(data_slider)
@@ -149,6 +149,7 @@
 
     //__________________________________________//
 
+    var page = 1;
     var sm_ids = 1;
 
     $("#GetNugget").on("click", function () {
@@ -203,6 +204,7 @@
     var tooltip = d3.select('body').append("div")
         .attr("class", "tooltip_radar tooltip")
         .style("opacity", 0);
+    console.log(tooltip);
 </script>
 </body>
 </html>
