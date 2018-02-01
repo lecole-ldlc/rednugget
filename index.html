@@ -77,43 +77,34 @@
 
 <div class="row">
 
-    <div class="col-sm-12 col-lg-12 text-center" id="CYN"></div>
 
-</div>
-
-<button id="GetNugget">Rechercher</button>
+    <!--arrow-->
+    <img class="arrow" src="https://rednugget.fr/wp-content/uploads/2018/02/arrow-blog.png">
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <button id="reset"><a><img class="refresh" src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png"></a></button>
+        <div class="col-sm-12 col-lg-12 text-center" id="CYN"></div>
 
     </div>
 
-<script>
+    <button id="GetNugget">Rechercher</button>
 
-    function topFunction() {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 400);
-    }
 
-    var enable_axes = [true, true, true, true, true, true];
-    // Array that stores the input from the user
-    var data_slider = [
-        [
-            {axis: "Humour", value: 0.5},
-            {axis: "Durée", value: 0.5},
-            {axis: "Abonnés", value: 0.5},
-            {axis: "Fréquence", value: 0.5},
-            {axis: "Réflexion", value: 0.5},
-            {axis: "Originalité", value: 0.5}
-        ]
-    ];
+    <div class="row">
+        <div class="col-lg-12">
+            <button id="reset"><a><img class="refresh" src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png"></a></button>
+        </div>
 
-    // Function to reset the slider data to default when a button is clicked
-    $("#reset").click(function () {
-        data_slider = [ // Default
+    <script>
+
+        function topFunction() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+        }
+
+        var enable_axes = [true, true, true, true, true, true];
+        // Array that stores the input from the user
+        var data_slider = [
             [
                 {axis: "Humour", value: 0.5},
                 {axis: "Durée", value: 0.5},
@@ -123,88 +114,101 @@
                 {axis: "Originalité", value: 0.5}
             ]
         ];
-        whowins(); // Calculate distance and display winner
-        $('#CYN').html(''); // Kill builder
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
-        //console.log(data_slider)
-    });
+
+        // Function to reset the slider data to default when a button is clicked
+        $("#reset").click(function () {
+            data_slider = [ // Default
+                [
+                    {axis: "Humour", value: 0.5},
+                    {axis: "Durée", value: 0.5},
+                    {axis: "Abonnés", value: 0.5},
+                    {axis: "Fréquence", value: 0.5},
+                    {axis: "Réflexion", value: 0.5},
+                    {axis: "Originalité", value: 0.5}
+                ]
+            ];
+            whowins(); // Calculate distance and display winner
+            $('#CYN').html(''); // Kill builder
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+            //console.log(data_slider)
+        });
 
 
-    $(document).ready(function () {
-        data_slider = [ // Default
-            [
-                {axis: "Humour", value: 0.5},
-                {axis: "Durée", value: 0.5},
-                {axis: "Abonnés", value: 0.5},
-                {axis: "Fréquence", value: 0.5},
-                {axis: "Réflexion", value: 0.5},
-                {axis: "Originalité", value: 0.5}
-            ]
-        ];
-        $('#CYN').html(''); // Kill builder
-        RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
+        $(document).ready(function () {
+            data_slider = [ // Default
+                [
+                    {axis: "Humour", value: 0.5},
+                    {axis: "Durée", value: 0.5},
+                    {axis: "Abonnés", value: 0.5},
+                    {axis: "Fréquence", value: 0.5},
+                    {axis: "Réflexion", value: 0.5},
+                    {axis: "Originalité", value: 0.5}
+                ]
+            ];
+            $('#CYN').html(''); // Kill builder
+            RadarChart("#CYN", data_slider, "", "", customRadarChartOptions); // Redraw builder
 
-    });
-
-
-    //__________________________________________//
-
-    var page = 1;
-    var sm_ids = 1;
-
-    $("#GetNugget").on("click", function () {
-        var url = "https://get.rednugget.fr/search.php?";
-        url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
-        url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
-        url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
-        url += "&f=" + (enable_axes[3] ? data_slider[0][3].value.toFixed(2) : "")
-        url += "&r=" + (enable_axes[4] ? data_slider[0][4].value.toFixed(2) : "")
-        url += "&o=" + (enable_axes[5] ? data_slider[0][5].value.toFixed(2) : "")
-        console.log(url);
-        window.location = url;
-    });
-
-    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-
-    //////////////////////////////////////////////////////////////
-    //////////////////////// Set-Up //////////////////////////////
-    //////////////////////////////////////////////////////////////
-    var margin = {top: 5, right: 5, bottom: 10, left: 5},
-        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
-
-    var customMargin = {top: 50, right: 60, bottom: 40, left: 60},
-        width = Math.min(270, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
-
-    //////////////////////////////////////////////////////////////
-    ////////////////////////// Data //////////////////////////////
-    //////////////////////////////////////////////////////////////
-    //////////////////// Draw the Chart //////////////////////////
-    //////////////////////////////////////////////////////////////
-    var color = d3.scaleOrdinal()
-        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
-
-    var customRadarChartOptions = { // Options for the builder
-        w: width * 1.5,
-        h: height * 1.6,
-        dotRadius: 9,
-        margin: customMargin,
-        maxValue: 0.5,
-        levels: 5,
-        roundStrokes: true,
-        color: color,
-        showLabel: true,
-        enableDrag: true
-    };
+        });
 
 
-    RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
+        //__________________________________________//
 
-    var tooltip = d3.select('body').append("div")
-        .attr("class", "tooltip_radar tooltip")
-        .style("opacity", 0);
-    console.log(tooltip);
-</script>
-</body>
-</html>
+        var page = 1;
+        var sm_ids = 1;
+
+        $("#GetNugget").on("click", function () {
+            var url = "https://get.rednugget.fr/search.php?";
+            url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
+            url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
+            url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
+            url += "&f=" + (enable_axes[3] ? data_slider[0][3].value.toFixed(2) : "")
+            url += "&r=" + (enable_axes[4] ? data_slider[0][4].value.toFixed(2) : "")
+            url += "&o=" + (enable_axes[5] ? data_slider[0][5].value.toFixed(2) : "")
+            console.log(url);
+            window.location = url;
+        });
+
+        /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+        //////////////////////////////////////////////////////////////
+        //////////////////////// Set-Up //////////////////////////////
+        //////////////////////////////////////////////////////////////
+        var margin = {top: 5, right: 5, bottom: 10, left: 5},
+            width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+            height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for small multiples
+
+        var customMargin = {top: 50, right: 60, bottom: 40, left: 60},
+            width = Math.min(270, window.innerWidth - 10) - margin.left - margin.right,
+            height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20); // Configuration for Builder
+
+        //////////////////////////////////////////////////////////////
+        ////////////////////////// Data //////////////////////////////
+        //////////////////////////////////////////////////////////////
+        //////////////////// Draw the Chart //////////////////////////
+        //////////////////////////////////////////////////////////////
+        var color = d3.scaleOrdinal()
+            .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
+
+        var customRadarChartOptions = { // Options for the builder
+            w: width * 1.5,
+            h: height * 1.6,
+            dotRadius: 9,
+            margin: customMargin,
+            maxValue: 0.5,
+            levels: 5,
+            roundStrokes: true,
+            color: color,
+            showLabel: true,
+            enableDrag: true
+        };
+
+
+        RadarChart("#CYN", data_slider, "", null, customRadarChartOptions); // Create the builder
+
+        var tooltip = d3.select('body').append("div")
+            .attr("class", "tooltip_radar tooltip")
+            .style("opacity", 0);
+        console.log(tooltip);
+    </script>
+    </body>
+    </html>
