@@ -55,9 +55,9 @@ class Channel
     }
 }
 
-$params = array("d" => null, "s" => null, "f" => null, "h" => null, "r" => null, "o" => null);
-$params_enable = array("d" => true, "s" => true, "f" => true, "h" => true, "r" => true, "o" => true);
-$params_indir = array("d" => "duration", "s" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflexion", "o" => "originality");
+$params = array("d" => null, "a" => null, "f" => null, "h" => null, "r" => null, "o" => null);
+$params_enable = array("d" => true, "a" => true, "f" => true, "h" => true, "r" => true, "o" => true);
+$params_indir = array("d" => "duration", "a" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflexion", "o" => "originality");
 $tags = array();
 
 foreach ($params as $p => $v) {
@@ -166,6 +166,9 @@ header("Access-Control-Allow-Origin: *");
 ?>
 
 <html>
+<style>.xdebug-error {
+        display:none;
+    }</style>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Nugget Lab</title>
@@ -220,7 +223,7 @@ header("Access-Control-Allow-Origin: *");
                 ?>
                 <div class="row">
                     <div style="float: left; margin-right: 50px">
-                        <p id="result<?php if ($pos > 1) {
+                        <p id="result<?php if ($pos < 1) {
                             echo($pos);
                         } ?>">
                             <br>
@@ -257,7 +260,7 @@ header("Access-Control-Allow-Origin: *");
         [
             {axis: "Humour", value: <?php echo($params["h"]) ?>},
             {axis: "Durée", value: <?php echo($params["d"]) ?>},
-            {axis: "Abonnés", value: <?php echo($params["s"]) ?>},
+            {axis: "Abonnés", value: <?php echo($params["a"]) ?>},
             {axis: "Fréquence", value: <?php echo($params["f"]) ?>},
             {axis: "Réflexion", value: <?php echo($params["r"]) ?>},
             {axis: "Originalité", value: <?php echo($params["o"]) ?>}
@@ -317,7 +320,8 @@ header("Access-Control-Allow-Origin: *");
     });
 
     $("#GetNugget").on("click", function () {
-        var url = "https://get.rednugget.fr/search.php?";
+        var url = "search.php";
+       // var url = "https://get.rednugget.fr/search.php?";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
