@@ -221,14 +221,15 @@ header("Access-Control-Allow-Origin: *");
         </div>
     </div>
 
-    <div class="col-lg-8" style="border-left: 1px solid rgba(0,0,0,0.1); padding-top: 0px; padding-left: 0px;">
+    <div class="col-lg-8" style=" padding-top: 0px; padding-left: 0px;">
         <div>
             <?php
             $pos = 1;
             foreach ($channels as $key => $value) {
                 ?>
-                <div class="row">
+                <div class="row card-1">
                     <div style="float: left; margin-right: 50px">
+                        <a class="btn ranking"><i>oui</i></a>
                         <p id="result<?php if ($pos >= 1) {
                             echo($pos);
                         } ?>" class="result result<?php if ($pos == 1) {
@@ -240,6 +241,7 @@ header("Access-Control-Allow-Origin: *");
                                         src="<?php echo($value->post_thumbnail_URL) ?>"></a>
                         </p>
                     </div>
+
                     <div>
                         <h3 id="fullname" style="margin-top: 10px"><?php echo($value->channel_fullname) ?></h3><br>
                         <p id="desc"><?php echo($value->channel_description) ?></p><br>
