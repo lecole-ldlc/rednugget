@@ -237,7 +237,7 @@ function RadarChart(id_sm, data, name, url, options) {
                     if (enable_axes[i]) {
                         d3.select(this).attr("r", cfg.dotRadius);
                     } else {
-                        d3.select(this).attr("r", 0);
+                        d3.select(this).attr("r", 1);
                     }
                 });
 
@@ -302,10 +302,17 @@ function RadarChart(id_sm, data, name, url, options) {
 
     var drag = d3.drag()
         .on("start", dragstarted)
-        .on("drag", move);
+        .on("drag", move)
+        .on("end", drageend);
+
+    function drageend() {
+        d3.select(this).raise().classed("active", false);
+        d3.select("#CYN").classed("active", false);
+    }
 
     function dragstarted() {
         d3.select(this).raise().classed("active", true);
+        d3.select("#CYN").classed("active", true);
     }
 
     function move(dobj, i) {

@@ -522,3 +522,16 @@ footer {
 body {
     text-shadow: none;
 }
+
+.radarCircle {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.radarCircle.active, #CYN.active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
