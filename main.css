@@ -463,6 +463,9 @@ a {
     z-index: 99999;
 }
 
+.sticky-scroll-box {
+}
+
 footer {
     width: 100%;
     display: inline-block;

@@ -16,7 +16,7 @@ define('DB_CHARSET', 'utf8mb4');
  * Time: 09:31
  */
 
-$limit = 5;
+$limit = 10;
 
 class Channel
 {
@@ -248,16 +248,16 @@ header("Access-Control-Allow-Origin: *");
 
 <div class="row">
 
-    <div class="col-sm-12 col-lg-4">
-        <div class="sticky-scroll-box">
-            <div id="CYN" style="margin-top: 20px">
+    <div class="col-sm-12 col-lg-4" style="margin-top: 20px">
+        <div class="sticky-scroll-box" style="padding-top: 50px">
+        <div id="CYN">
+        </div>
+        <button id="GetNugget" class="btn btn-primary">Rechercher</button>
+        <div class="row">
+            <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
+                                           src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png">
             </div>
-            <button id="GetNugget" class="btn btn-primary">Rechercher</button>
-            <div class="row">
-                <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
-                                            src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
-                </div>
-            </div>
+        </div>
         </div>
     </div>
 
@@ -414,10 +414,12 @@ header("Access-Control-Allow-Origin: *");
         var top = $('.sticky-scroll-box').offset().top;
         $(window).scroll(function (event) {
             var y = $(this).scrollTop();
-            if (y >= top)
+            if (y >= top) {
                 $('.sticky-scroll-box').addClass('fixed');
-            else
+            }
+            else{
                 $('.sticky-scroll-box').removeClass('fixed');
+            }
             $('.sticky-scroll-box').width($('.sticky-scroll-box').parent().width());
         });
     });
