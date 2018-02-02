@@ -134,6 +134,7 @@ while ($row = $result->fetch_assoc()) {
     $c->channel_twitterURL = $row["channel_twitterURL"];
     $c->channel_snapchatURL = $row["channel_snapchatURL"];
     $c->channel_instagramURL = $row["channel_instagramURL"];
+    $c->channel_tipeeeURL = $row["channel_tipeeeURL"];
     $c->channel_websiteURL = $row["channel_websiteURL"];
     $c->channel_description = $row["channel_description"];
     $c->distance = 1000;
@@ -202,7 +203,9 @@ header("Access-Control-Allow-Origin: *");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <!-- RadarChart -->
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
     <script src="radarChart_v4.js"></script>
 </head>
 
@@ -229,7 +232,6 @@ header("Access-Control-Allow-Origin: *");
                     Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
                     Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
                     Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
-
                 </div>
                 <div class="modal-footer">
                     <button style="outline: none;" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -250,14 +252,14 @@ header("Access-Control-Allow-Origin: *");
 
     <div class="col-sm-12 col-lg-4" style="margin-top: 20px">
         <div class="sticky-scroll-box" style="padding-top: 50px">
-        <div id="CYN">
-        </div>
-        <button id="GetNugget" class="btn btn-primary">Rechercher</button>
-        <div class="row">
-            <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
-                                           src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png">
+            <div id="CYN">
             </div>
-        </div>
+            <button id="GetNugget" class="btn btn-primary">Rechercher</button>
+            <div class="row">
+                <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
+                                            src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -270,23 +272,43 @@ header("Access-Control-Allow-Origin: *");
 
                 foreach ($channels as $key => $value) {
                     ?>
-                    <div class="row card-1">
-                        <div style="float: left; margin-right: 50px">
-                            <p id="result<?php if ($pos >= 1) {
-                                echo($pos);
-                            } ?>" class="result result<?php if ($pos == 1) {
-                                echo("1");
-                            } ?>">
-                                <br>
-                                <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
-                                            class="nugget_img"
-                                            src="<?php echo($value->post_thumbnail_URL) ?>"></a>
-                            </p>
-                        </div>
+                    <div class="card-1">
+                        <div class="row">
+                            <div style="float: left; margin-right: 50px">
+                                <p id="result<?php if ($pos >= 1) {
+                                    echo($pos);
+                                } ?>" class="result result<?php if ($pos == 1) {
+                                    echo("1");
+                                } ?>">
+                                    <br>
+                                    <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
+                                                class="nugget_img"
+                                                src="<?php echo($value->post_thumbnail_URL) ?>"></a>
+                                </p>
+                            </div>
 
-                        <div>
-                            <h3 id="fullname" style="margin-top: 10px"><?php echo($value->channel_fullname) ?></h3><br>
-                            <p id="desc"><?php echo($value->channel_description) ?></p><br>
+                            <div>
+                                <h3 id="fullname" style="margin-top: 10px"><?php echo($value->channel_fullname) ?></h3><br>
+                                <p id="desc"><?php echo($value->channel_description) ?></p><br>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align: left; margin-left: 50px;">
+                            <div style="float: left;">
+                                <i class="fa fa-users" style="margin-bottom: 20px; float: left;"></i>
+                                <p style="margin-left: 40px;" class="count"><?php echo($value->channel_subscribers)?></p>
+                            </div>
+                            <div style="margin-left: 30px; float: left;">
+                                <i class="fa fa-eye" style="margin-bottom: 20px; float: left;"></i>
+                                <p style="margin-left: 40px;" class="count"><?php echo($value->channel_views)?></p>
+                            </div>
+                            <div style="margin-left: 30px; float: left;">
+                                <i class="fa fa-video" style="margin-bottom: 20px; float: left;"></i>
+                                <p style="margin-left: 40px;" class="count"><?php echo($value->channel_video_count)?></p>
+                            </div>
+<!--                            <div style="margin-left: 30px; float: left;">-->
+<!--                                <i class="fa fa-calendar" style="margin-bottom: 20px; float: left;"></i>-->
+<!--                                    <p style="margin-left: 40px;">--><?php //echo($value->channel_creationdate)?><!--</p>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <?php
@@ -294,10 +316,10 @@ header("Access-Control-Allow-Origin: *");
                 }
             } else {
                 ?>
-            <div class="row card-1">
-                ERREUR ! Vous devez sélectionner au moins 3 critère.
-            </div>
-            <?php
+                <div class="row card-1">
+                    ERREUR ! Vous devez sélectionner au moins 3 critère.
+                </div>
+                <?php
             }
             ?>
         </div>
@@ -311,6 +333,18 @@ header("Access-Control-Allow-Origin: *");
 </footer>
 
 <script>
+
+    $('.count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 1000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
 
     function topFunction() {
         $('body,html').animate({
@@ -424,6 +458,8 @@ header("Access-Control-Allow-Origin: *");
         });
     });
 </script>
+
+<script src="https://use.fontawesome.com/012625b9c3.js"></script>
 
 
 </body>

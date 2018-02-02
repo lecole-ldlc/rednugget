@@ -525,3 +525,7 @@ footer {
 body {
     text-shadow: none;
 }
+
+.fa {
+    font-size: 25px !important;
+}
