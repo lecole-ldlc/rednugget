@@ -46,6 +46,7 @@ class Channel
     public $channel_twitterURL = "";
     public $channel_snapchatURL = "";
     public $channel_instagramURL = "";
+    public $channel_tipeeeURL = "";
     public $channel_websiteURL = "";
     public $distance = 1000;
 
@@ -173,7 +174,7 @@ header("Access-Control-Allow-Origin: *");
 
 <html>
 <style>.xdebug-error {
-        display: none;
+        display:none;
     }</style>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -309,6 +310,18 @@ header("Access-Control-Allow-Origin: *");
 <!--                                <i class="fa fa-calendar" style="margin-bottom: 20px; float: left;"></i>-->
 <!--                                    <p style="margin-left: 40px;">--><?php //echo($value->channel_creationdate)?><!--</p>-->
 <!--                            </div>-->
+<!--                            <div style="margin-left: 30px; float: left;">-->
+<!--                                <p style="float: left;">FB :</p>-->
+<!--                                <a href="--><?php //echo($value->channel_facebookURL)?><!--" target="_blank"><i class="fa fa-star" style="margin-bottom: 20px; float: left;"></i></a>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 30px; float: left;">-->
+<!--                                <p style="float: left;">TW :</p>-->
+<!--                                <a href="--><?php //echo($value->channel_twitterURL)?><!--" target="_blank"><i class="fa fa-star" style="margin-bottom: 20px; float: left;"></i></a>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 30px; float: left;">-->
+<!--                                <p style="float: left;">TP :</p>-->
+<!--                                <a href="--><?php //echo($value->channel_tipeeeURL)?><!--" target="_blank"><i class="fa fa-star" style="margin-bottom: 20px; float: left;"></i></a>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <?php
@@ -328,8 +341,12 @@ header("Access-Control-Allow-Origin: *");
 </div>
 
 <footer>
-    <div class="copyright"
-    </div>
+    <div class="copyright"></div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+    <a href="https://www.facebook.com/RedNuggetBlog/" ><i style="font-size: 20px;" class="fa fa-facebook fb"></i></a>
+    <a href="https://twitter.com/rednugget_blog"><i style="font-size: 20px;" class="fa fa-twitter tt"></i></a>
 </footer>
 
 <script>

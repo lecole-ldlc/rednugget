@@ -472,7 +472,7 @@ footer {
     display: inline-block;
     margin-top: 100px;
     height: 70px;
-    background-color: #999;
+    background-color: #f5F5F5;
 }
 
 .copyright {
@@ -547,4 +547,51 @@ body {
 .errorCpt {
     margin-top: 20%;
     font-size: 36px;
+}
+
+.fb {
+    text-align: center;
+    color: #555555;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 35px;
+    transition: all 0.2s ease-in-out;
+}
+
+.tt {
+    text-align: center;
+    color: #555555;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 35px;
+    transition: all 0.2s ease-in-out;
+}
+
+.tt:hover {
+    text-align: center;
+    color: #F43131;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 35px;
+    transition: all 0.2s ease-in-out;
+}
+.fb:hover {
+    text-align: center;
+    color: #F43131;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 35px;
+    transition: all 0.2s ease-in-out;
 }
