@@ -241,7 +241,7 @@ header("Access-Control-Allow-Origin: *");
     </div>
 
     <div class="onesentence">
-        Dénicheurs de pépites YouTube
+        Découvre les pépites de YouTube !
     </div>
 </div>
 
