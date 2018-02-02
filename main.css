@@ -329,7 +329,7 @@ a {
     background-color: #f43131;
     color: #F9F9F9;
     margin-bottom: 10px;
-    border: none;
+    border-color: #f43131;
     padding-left: 30px;
     padding-right: 30px;
 }

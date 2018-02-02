@@ -247,16 +247,18 @@ function RadarChart(id_sm, data, name, url, options) {
             .on("mouseover", function (d, i) {
                 tooltip.transition()
                     .duration(200)
-                    .style("opacity", .8);
+                    .style("opacity", .8)
+                    .style("font-size", "12px")
+                    .style("font-family", "Exo");
                 tooltip.html(function () {
                     if (enable_axes[i]) {
-                        return "Cliquer pour désactiver ce critère"
+                        return "Clique pour désactiver si tu t'en fous."
                     } else {
-                        return "Cliquer pour activer ce critère"
+                        return "Clique pour activer si ça t'intéresse."
                     }
                 })
-                    .style("left", d3.event.pageX + "px")
-                    .style("top", d3.event.pageY + "px");
+                    .style("left", d3.event.pageX + "30px")
+                    .style("top", d3.event.pageY + "10px");
 
             })
             .on("mousemove", function (d) {
@@ -267,7 +269,7 @@ function RadarChart(id_sm, data, name, url, options) {
             })
             .on("mouseout", function (d) {
                 tooltip.transition()
-                    .duration(500)
+                    .duration(200)
                     .style("opacity", 0);
             });
         //.call(wrap, cfg.wrapWidth);
