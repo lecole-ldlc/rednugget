@@ -203,8 +203,43 @@ header("Access-Control-Allow-Origin: *");
 
 <body cz-shortcut-listen="true">
 
-<h1>NuggetLab</h1>
-<hr style="border-top: 1px solid rgba(0,0,0,0.1); padding-bottom: 0px; margin-bottom: 0px; padding-top: 0px; margin-top: 0px">
+<div class="row" id="header">
+
+
+    <div><a href="https://rednugget.fr"><img id="logoLab" src="https://rednugget.fr/wp-content/uploads/2017/10/Logo_final5.png"></a>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
+                </div>
+                <div class="modal-body help">
+                    Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
+                    Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
+                    Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
+
+                </div>
+                <div class="modal-footer">
+                    <button style="outline: none;" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="onesentence">
+        Dénicheurs de pépites YouTube
+    </div>
+</div>
+
+<button id="nuggetHelp" type="button" class="btn btn-primary btn-lg" style="outline: none;" data-toggle="modal" data-target="#myModal">Aide
+</button>
 
 <div class="row">
 
@@ -215,7 +250,7 @@ header("Access-Control-Allow-Origin: *");
         <button id="GetNugget" class="btn btn-primary">Rechercher</button>
         <div class="row">
             <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
-                                           src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
+                                           src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png">
             </div>
         </div>
         </div>
