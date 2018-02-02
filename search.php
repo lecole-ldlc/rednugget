@@ -281,7 +281,7 @@ header("Access-Control-Allow-Origin: *");
                                     echo("1");
                                 } ?>">
                                     <br>
-                                    <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
+                                    <a target="_blank" href="<?php echo($value->channel_URL) ?>"><img
                                                 class="nugget_img"
                                                 src="<?php echo($value->post_thumbnail_URL) ?>"></a>
                                 </p>
@@ -304,6 +304,11 @@ header("Access-Control-Allow-Origin: *");
                             <div style="margin-left: 30px; float: left;">
                                 <i class="fa fa-video" style="margin-bottom: 20px; float: left;"></i>
                                 <p style="margin-left: 40px;" class="count"><?php echo($value->channel_video_count)?></p>
+                            </div>
+                            <div style="margin-left: 30px; float: right; margin-right: 100px;">
+                                <i class="fa fa-book" style="margin-bottom: 20px; float: left; margin-right: 10px;"></i>
+                                <a href="<?php echo($value->post_URL)?>" target="_blank"><p style="float: left; margin-right: 5px ;">Lien vers l'article</p></a>
+
                             </div>
 <!--                            <div style="margin-left: 30px; float: left;">-->
 <!--                                <i class="fa fa-calendar" style="margin-bottom: 20px; float: left;"></i>-->
