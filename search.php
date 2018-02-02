@@ -350,8 +350,8 @@ header("Access-Control-Allow-Origin: *");
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
-    <a href="https://www.facebook.com/RedNuggetBlog/" ><i style="font-size: 20px;" class="fa fa-facebook fb"></i></a>
-    <a href="https://twitter.com/rednugget_blog"><i style="font-size: 20px;" class="fa fa-twitter tt"></i></a>
+    <a target="_blank" href="https://www.facebook.com/RedNuggetBlog/" ><i style="font-size: 20px;" class="fa fa-facebook fb"></i></a>
+    <a target="_blank" href="https://twitter.com/rednugget_blog"><i style="font-size: 20px;" class="fa fa-twitter tt"></i></a>
 </footer>
 
 <script>
