@@ -344,17 +344,18 @@ a {
     border-radius: 50px;
     background-color: #f43131;
     color: #F9F9F9;
-    border: none;
+    border-color: #f43131;
     position: absolute;
     top: 1%;
     left: 95%;
+    margin-top: 30px;
 }
 
 #nuggetHelp:hover {
     border-radius: 20px;
     background-color: #F9F9F9;
     color: #f43131;
-    border: none;
+    border-color: #f43131;
 }
 
 #reset {
@@ -541,4 +542,9 @@ body {
 
 .fa {
     font-size: 25px !important;
+}
+
+.errorCpt {
+    margin-top: 20%;
+    font-size: 36px;
 }

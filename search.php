@@ -316,10 +316,10 @@ header("Access-Control-Allow-Origin: *");
                 }
             } else {
                 ?>
-                <div class="row card-1">
-                    ERREUR ! Vous devez sélectionner au moins 3 critère.
-                </div>
-                <?php
+            <div class="errorCpt">
+                ERREUR !</br> Vous devez sélectionner au moins 3 critère.
+            </div>
+            <?php
             }
             ?>
         </div>
