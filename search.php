@@ -317,7 +317,7 @@ header("Access-Control-Allow-Origin: *");
             } else {
                 ?>
             <div class="errorCpt">
-                ERREUR !</br> Vous devez sélectionner au moins 3 critère.
+                ERREUR !</br> Tu dois sélectionner au moins 3 critères !
             </div>
             <?php
             }
@@ -334,17 +334,23 @@ header("Access-Control-Allow-Origin: *");
 
 <script>
 
-    $('.count').each(function () {
-        $(this).prop('Counter',0).animate({
-            Counter: $(this).text()
-        }, {
+    $('.Count').each(function() {
+        var $this = $(this);
+        jQuery({Counter: 0}).animate({Counter: $this.text()}, {
             duration: 1000,
             easing: 'swing',
-            step: function (now) {
-                $(this).text(Math.ceil(now));
+            step: function() {
+                var num = Math.ceil(this.Counter).toString();
+                if(Number(num) > 999){
+                    while (/(\d+)(\d{3})/.test(num)) {
+                        num = num.replace(/(\d+)(\d{3})/, '$1' + ' ' + '$2');
+                    }
+                }
+                $this.text(num);
             }
         });
     });
+
 
     function topFunction() {
         $('body,html').animate({
@@ -439,7 +445,7 @@ header("Access-Control-Allow-Origin: *");
         $('#reset').addClass('rotated');
         setTimeout(function () {
             $('#reset').removeClass('rotated');
-        }, 700);
+        }, 600);
     }
 </script>
 
