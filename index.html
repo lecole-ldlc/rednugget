@@ -171,7 +171,7 @@
     var sm_ids = 1;
 
     $("#GetNugget").on("click", function () {
-        var url = "https://get.rednugget.fr/search.php?";
+        var url = "search.php";
         url += "?h=" + (enable_axes[0] ? data_slider[0][0].value.toFixed(2) : "")
         url += "&d=" + (enable_axes[1] ? data_slider[0][1].value.toFixed(2) : "")
         url += "&a=" + (enable_axes[2] ? data_slider[0][2].value.toFixed(2) : "")
