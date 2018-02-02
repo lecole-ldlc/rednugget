@@ -59,10 +59,11 @@ $params = array("d" => null, "a" => null, "f" => null, "h" => null, "r" => null,
 $params_enable = array("d" => true, "a" => true, "f" => true, "h" => true, "r" => true, "o" => true);
 $params_indir = array("d" => "duration", "a" => "subscribers", "f" => "frequency", "h" => "humor", "r" => "reflexion", "o" => "originality");
 $tags = array();
-
+$en_cpt = 0;
 foreach ($params as $p => $v) {
     if (isset($_GET[$p])) {
         $params[$p] = floatval($_GET[$p]);
+        $en_cpt++;
     } else {
         $params_enable[$p] = false;
         $params[$p] = 0.5;
@@ -92,7 +93,10 @@ function compute_distance($c)
             $tot += pow($c->$f - $v, 2);
         }
     }
-    return $tot;
+
+    //echo "Compute distance for " . $c->channel_name . " " . sqrt($tot) . "<br/>";
+
+    return sqrt($tot);
 }
 
 function comp_channels($a, $b)
@@ -112,7 +116,7 @@ while ($row = $result->fetch_assoc()) {
     $c->id = $row["ID"];
     $c->duration = floatval($row["duration_rating"]);
     $c->subscribers = floatval($row["subscribers_rating"]);
-
+    $c->frequency = floatval($row["frequency_rating"]);
 
     $c->channel_fullname = $row["channel_fullname"];
     $c->channel_name = $row["channel_name"];
@@ -144,9 +148,9 @@ if (!$result) {
 while ($row = $result->fetch_array()) {
     $id = $row[0];
     $c = $all_channels[$id];
-    $c->humor = $row[1];
-    $c->reflexion = $row[2];
-    $c->originality = $row[3];
+    $c->humor = $row[1] / 10.0;
+    $c->reflexion = $row[2] / 10.0;
+    $c->originality = $row[3] / 10.0;
     $c->distance = compute_distance($c);
 }
 
@@ -163,11 +167,12 @@ usort($all_channels, comp_channels);
 $channels = array_splice($all_channels, 0, $limit);
 
 header("Access-Control-Allow-Origin: *");
+
 ?>
 
 <html>
 <style>.xdebug-error {
-        display:none;
+        display: none;
     }</style>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -245,14 +250,14 @@ header("Access-Control-Allow-Origin: *");
 
     <div class="col-sm-12 col-lg-4">
         <div class="sticky-scroll-box">
-        <div id="CYN" style="margin-top: 20px">
-        </div>
-        <button id="GetNugget" class="btn btn-primary">Rechercher</button>
-        <div class="row">
-            <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
-                                           src="https://rednugget.fr/wp-content/uploads/2018/02/refresh4.png">
+            <div id="CYN" style="margin-top: 20px">
             </div>
-        </div>
+            <button id="GetNugget" class="btn btn-primary">Rechercher</button>
+            <div class="row">
+                <div class="col-lg-12"><img style="outline: none;" id="reset" onclick="rotate()" class="refresh"
+                                            src="https://rednugget.fr/wp-content/uploads/2018/01/refresh2.png">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -260,29 +265,39 @@ header("Access-Control-Allow-Origin: *");
         <div>
             <?php
             $pos = 1;
-            foreach ($channels as $key => $value) {
-                ?>
-                <div class="row card-1">
-                    <div style="float: left; margin-right: 50px">
-                        <p id="result<?php if ($pos >= 1) {
-                            echo($pos);
-                        } ?>" class="result result<?php if ($pos == 1) {
-                            echo("1");
-                        }?>">
-                            <br>
-                            <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
-                                        class="nugget_img"
-                                        src="<?php echo($value->post_thumbnail_URL) ?>"></a>
-                        </p>
-                    </div>
+            if ($en_cpt > 2) {
 
-                    <div>
-                        <h3 id="fullname" style="margin-top: 10px"><?php echo($value->channel_fullname) ?></h3><br>
-                        <p id="desc"><?php echo($value->channel_description) ?></p><br>
+
+                foreach ($channels as $key => $value) {
+                    ?>
+                    <div class="row card-1">
+                        <div style="float: left; margin-right: 50px">
+                            <p id="result<?php if ($pos >= 1) {
+                                echo($pos);
+                            } ?>" class="result result<?php if ($pos == 1) {
+                                echo("1");
+                            } ?>">
+                                <br>
+                                <a target="_blank" href="<?php echo($value->post_URL) ?>"><img
+                                            class="nugget_img"
+                                            src="<?php echo($value->post_thumbnail_URL) ?>"></a>
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 id="fullname" style="margin-top: 10px"><?php echo($value->channel_fullname) ?></h3><br>
+                            <p id="desc"><?php echo($value->channel_description) ?></p><br>
+                        </div>
                     </div>
-                </div>
-                <?php
-                $pos++;
+                    <?php
+                    $pos++;
+                }
+            } else {
+                ?>
+            <div class="row card-1">
+                ERREUR ! Vous devez sélectionner au moins 3 critère.
+            </div>
+            <?php
             }
             ?>
         </div>
@@ -291,7 +306,8 @@ header("Access-Control-Allow-Origin: *");
 </div>
 
 <footer>
-    <div class="copyright"</div>
+    <div class="copyright"
+    </div>
 </footer>
 
 <script>
@@ -301,6 +317,7 @@ header("Access-Control-Allow-Origin: *");
             scrollTop: 0
         }, 400);
     }
+
     var sm_ids = 1;
 
     // Array that stores the input from the user
