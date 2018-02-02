@@ -114,9 +114,9 @@ if (!$result) {
 while ($row = $result->fetch_assoc()) {
     $c = new Channel();
     $c->id = $row["ID"];
-    $c->duration = floatval($row["duration_rating"]);
-    $c->subscribers = floatval($row["subscribers_rating"]);
-    $c->frequency = floatval($row["frequency_rating"]);
+    $c->duration = floatval($row["duration_rating"])/10.0;
+    $c->subscribers = floatval($row["subscribers_rating"])/10.0;
+    $c->frequency = floatval($row["frequency_rating"])/10.0;
 
     $c->channel_fullname = $row["channel_fullname"];
     $c->channel_name = $row["channel_name"];
