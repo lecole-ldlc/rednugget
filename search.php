@@ -329,9 +329,7 @@ header("Access-Control-Allow-Origin: *");
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
     var color = d3.scaleOrdinal()
-        .range(["#f43131", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]); // Only the first color is relevant for now
-    var color2 = d3.scaleOrdinal()
-        .range(["#353535", "#353535", "#f9f9f9", "#14649F", "#6F835A", "#8B7E66", "#8B2252"]);
+        .range(["#f43131", "#353535"]); // Only the first color is relevant for now
 
 
     var customRadarChartOptions = { // Options for the builder
