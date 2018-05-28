@@ -2,7 +2,7 @@
 define('DB_NAME', 'get_rednugget');
 define('DB_USER', 'antoine_GRN');
 define('DB_PASSWORD', 'C~rvm162');
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'localhost:3306');
 define('DB_CHARSET', 'utf8mb4');
 
 ?>
