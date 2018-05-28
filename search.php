@@ -9,14 +9,9 @@ define('DB_CHARSET', 'utf8mb4');
 
 <?php
 
-/**
- * Created by PhpStorm.
- * User: antoine
- * Date: 25/01/18
- * Time: 09:31
- */
-
 $limit = 10;
+
+//DB last update: 05/28/2018
 
 class Channel
 {
@@ -230,9 +225,9 @@ header("Access-Control-Allow-Origin: *");
                     <h4 class="modal-title" id="myModalLabel">Comment ça marche ?</h4>
                 </div>
                 <div class="modal-body help">
-                    Etape 1 - Déplace les curseurs selons tes envies de chaîne YouTube. </br>
+                    Etape 1 - Déplace les curseurs selon tes envies.</br>
                     Etape 2 - Ensuite, clique sur le bouton “Rechercher”.<br>
-                    Etape 3 - Sers-toi un Coca et des pop-corn et commence à binge-watch les pépites en résutats.
+                    Etape 3 - Sers-toi un Coca et des pop-corns et commence à binge-watch les pépites en résutats.
                 </div>
                 <div class="modal-footer">
                     <button style="outline: none;" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -263,7 +258,6 @@ header("Access-Control-Allow-Origin: *");
             </div>
         </div>
     </div>
-
     <div class="col-lg-8" style=" padding-top: 0px; padding-left: 0px;">
         <div>
             <?php
